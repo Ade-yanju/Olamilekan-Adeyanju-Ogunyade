@@ -1,70 +1,117 @@
-# Getting Started with Create React App
+# Personal Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A responsive, animated single-page portfolio built with React, Framer Motion, and Lucide icons. Showcases your bio, skills, projects (mobile & web), and contact links, with a smoothly-animated gradient header/footer and fully responsive layout.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 📦 Features
 
-### `npm start`
+- **React** functional components & hooks
+- **Framer Motion** for staggered fade-in animations & hover effects
+- **Lucide-React** SVG icon library
+- **CSS-in-JS** with inline styles + embedded `<style>` for responsive/grid layouts
+- **Gradient background** animations using CSS `@keyframes`
+- **Responsive** across desktop, tablet, and mobile breakpoints
+- **Project cards** link out to live demos
+- **Contact icons** open mail, LinkedIn, and GitHub in new tabs
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🚀 Getting Started
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [Node.js ≥14.x](https://nodejs.org)
+- [npm ≥6.x](https://npmjs.com) or [Yarn ≥1.x](https://yarnpkg.com)
 
-### `npm run build`
+### Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **Clone** this repo
+   bash
+   git clone https://github.com/yourusername/portfolio.git
+   cd portfolio
+2. Install dependencies
+   npm install
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   # or
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   yarn install
 
-### `npm run eject`
+3. Add your assets
+   Place your images in src/assets/ using these filenames (or update imports accordingly):
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   profile.jpg
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   omi-health.jpg
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+   du-alumni.jpg
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+   ibadan-jollof.jpg
 
-## Learn More
+   raffle-draw.jpg
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+4. Run locally
+   npm start
+   # or
+   yarn start
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+🗂 Project Structure
+portfolio/
+├── public/
+│ └── index.html
+├── src/
+│ ├── assets/
+│ │ ├── profile.jpg
+│ │ ├── omi-health.jpg
+│ │ ├── du-alumni.jpg
+│ │ ├── ibadan-jollof.jpg
+│ │ └── raffle-draw.jpg
+│ ├── components/
+│ │ └── Portfolio.jsx
+│ ├── App.js
+│ └── index.js
+├── package.json
+└── README.md
 
-### Code Splitting
+Portfolio.jsx
+Main single-page component. Defines all sections (About, Skills, Projects, Contact) with inline styles, CSS keyframes, and Framer Motion animations.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+App.js
+Entry point that renders <Portfolio />.
 
-### Analyzing the Bundle Size
+index.js
+Bootstraps React into #root.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+⚙️ Customization
+Colors
+Edit the primary, primaryDark, accent, textDark, and bgLight hex values at the top of Portfolio.jsx.
 
-### Making a Progressive Web App
+Content
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Change your name, tagline, and About Me text in the header/about section.
 
-### Advanced Configuration
+Update the skills array for your technology stack.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Add/remove projects by modifying mobileProjects and webProjects arrays: give each a title, img import, desc, and link.
 
-### Deployment
+Icons
+Swap any Lucide icons by importing other names from lucide-react.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+🖥️ Deployment
+Build for production and deploy to any static‐hosting service (Netlify, Vercel, GitHub Pages, etc.):
 
-### `npm run build` fails to minify
+bash
+Copy
+Edit
+npm run build
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# or
+
+yarn build
+Host the contents of the generated build/ folder.
+
+🙏 Contributing
+Feel free to open issues or pull requests for improvements—animations, accessibility, performance, you name it!
+
+📄 License
+This project is open-source under the MIT License.
