@@ -277,7 +277,7 @@ const Portfolio = () => {
             Firebase, Cloudinary, REST APIs, Expo, and UI/UX principles. built
             production-grade healthcare apps and delivered personal tools like a
             raffle draw system. Eager to contribute to high-impact teams through
-            a remote internship.
+            internship or employment.
           </p>
         </motion.section>
 
