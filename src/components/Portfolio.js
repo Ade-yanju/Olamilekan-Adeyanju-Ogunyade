@@ -1,10 +1,17 @@
 // src/components/Portfolio.jsx
 import React from "react";
 import profileImage from "../assets/profile.jpg";
+
+// Project images
 import omiHealthImg from "../assets/omi-health.jpg";
 import duAlumniImg from "../assets/du-alumni.jpg";
 import ibadanJollofImg from "../assets/ibadan-jollof.jpg";
 import raffleDrawImg from "../assets/raffle-draw.jpg";
+
+// Education logos (add these files in /assets/)
+import alxLogo from "../assets/alx-logo.png";
+import duLogo from "../assets/du-logo.png";
+
 import {
   Code,
   User,
@@ -17,6 +24,7 @@ import {
   Database,
   Server,
   FileSpreadsheet,
+  GraduationCap,
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -96,12 +104,107 @@ const Portfolio = () => {
       color: primaryDark,
     },
     projectDescription: { fontSize: "0.9em", color: "#4b5563" },
+
+    // Subsections
+    subsection: { marginTop: "30px" },
+    subsectionTitle: {
+      fontSize: "1.3em",
+      margin: "0 0 12px",
+      color: textDark,
+      display: "flex",
+      alignItems: "center",
+      gap: "8px",
+    },
+
+    // Education styles
+    eduGrid: {
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+      gap: "20px",
+    },
+    eduCard: {
+      backgroundColor: "#fff",
+      border: "1px solid #e5e7eb",
+      borderRadius: "12px",
+      padding: "18px",
+      display: "grid",
+      gridTemplateColumns: "64px 1fr",
+      gap: "16px",
+      alignItems: "center",
+      boxShadow: "0 4px 12px rgba(0,0,0,0.04)",
+    },
+    eduLogo: {
+      width: "64px",
+      height: "64px",
+      objectFit: "contain",
+      borderRadius: "8px",
+      background: "#f8fafc",
+      border: "1px solid #eef2f7",
+    },
+    eduOrg: {
+      margin: 0,
+      fontSize: "1.05em",
+      fontWeight: 700,
+      color: primaryDark,
+    },
+    eduProg: { margin: "2px 0 10px", fontSize: "0.95em", color: "#0f172a" },
+    eduBadgeRow: {
+      display: "flex",
+      alignItems: "center",
+      gap: "10px",
+      marginBottom: "6px",
+      flexWrap: "wrap",
+    },
+    eduMeta: { margin: 0, fontSize: "0.9em", color: "#475569" },
+
+    // Badge (base)
+    statusBadge: {
+      display: "inline-flex",
+      alignItems: "center",
+      padding: "4px 10px",
+      fontSize: "0.8em",
+      fontWeight: 700,
+      borderRadius: "999px",
+      border: "1px solid transparent",
+      letterSpacing: "0.2px",
+    },
+
     footer: {
       textAlign: "center",
       padding: "20px",
       fontSize: "0.8em",
       color: "#fff",
     },
+  };
+
+  // Helper to color the status badge
+  const getStatusBadgeStyle = (status) => {
+    const s = (status || "").toLowerCase().trim();
+    // Green for "completed"
+    if (s.includes("completed")) {
+      return {
+        ...styles.statusBadge,
+        backgroundColor: "#ecfdf5",
+        color: "#166534",
+        borderColor: "#86efac",
+      };
+    }
+    // Yellow for "in progress" or "currently studying"
+    if (s.includes("in progress") || s.includes("currently")) {
+      return {
+        ...styles.statusBadge,
+        backgroundColor: "#fefce8",
+        color: "#854d0e",
+        borderColor: "#fde68a",
+      };
+    }
+    // Fallback (neutral)
+    return {
+      ...styles.statusBadge,
+      backgroundColor: "#f1f5f9",
+      color: "#0f172a",
+      borderColor: "#e2e8f0",
+    };
   };
 
   const mobileProjects = [
@@ -132,6 +235,35 @@ const Portfolio = () => {
       link: "https://simple-raffle-draw.vercel.app/",
     },
   ];
+
+  // Education entries (edit freely)
+  const education = [
+    {
+      org: "ALX Africa",
+      program: "AWS Cloud Computing (Nanodegree / Program)",
+      period: "June 2025 - Present",
+      status: "Currently studying", // will appear yellow
+      location: "Remote",
+      logo: alxLogo,
+    },
+    {
+      org: "Dominion University, Ibadan",
+      program: "B.Sc. Software Engineering",
+      period: "October 2021 - August 2025",
+      status: "Completed", // will appear green
+      location: "Ibadan, Nigeria",
+      logo: duLogo,
+    },
+    {
+      org: "ALX Africa",
+      program: "ALX AI Starter",
+      period: "May 2025 - June 2025",
+      status: "Completed", // will appear green
+      location: "Remote",
+      logo: alxLogo,
+    },
+  ];
+
   const skills = [
     { name: "JavaScript", icon: Code },
     { name: "React", icon: Layers },
@@ -188,7 +320,7 @@ const Portfolio = () => {
           justify-content: center;
         }
         .projects-grid {
-          display: grid;
+          display: grid,
           grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
           gap: 25px;
         }
@@ -236,13 +368,14 @@ const Portfolio = () => {
             <User size={36} /> Olamilekan Adeyanju Ogunyade
           </h1>
           <p style={styles.tagline}>
-            Software Engineer | Front-End Developer | Mobile App Developer |
-            Currently studying AWS Cloud Computing at ALX
+            Software Engineer | Front-End Developer | Mobile App Developer |{" "}
+            <strong>Currently studying AWS Cloud Computing at ALX</strong>
           </p>
           <nav className="nav">
             {[
               { href: "#about", icon: Code, label: "About" },
               { href: "#skills", icon: Layers, label: "Skills" },
+              { href: "#education", icon: GraduationCap, label: "Education" },
               { href: "#projects", icon: Briefcase, label: "Projects" },
               { href: "#contact", icon: Mail, label: "Contact" },
             ].map(({ href, icon: Icon, label }) => (
@@ -274,7 +407,7 @@ const Portfolio = () => {
             Versatile and committed web & mobile app developer specialising in
             React and React Native with real-world experience building
             user-focused applications for mobile and web. Proficient in
-            Firebase, Cloudinary, REST APIs, Expo, and UI/UX principles. built
+            Firebase, Cloudinary, REST APIs, Expo, and UI/UX principles. Built
             production-grade healthcare apps and delivered personal tools like a
             raffle draw system. Eager to contribute to high-impact teams through
             internship or employment.
@@ -298,6 +431,52 @@ const Portfolio = () => {
               <motion.span key={name} style={styles.skillItem} {...linkHover}>
                 <Icon size={16} /> {name}
               </motion.span>
+            ))}
+          </div>
+        </motion.section>
+
+        {/* Education */}
+        <motion.section
+          id="education"
+          style={styles.section}
+          variants={itemVariants}
+        >
+          <motion.h2
+            style={styles.sectionTitle}
+            className="section-title"
+            variants={itemVariants}
+          >
+            <GraduationCap size={28} /> Education
+          </motion.h2>
+
+          <div style={styles.eduGrid}>
+            {education.map((e) => (
+              <motion.div
+                key={e.org + e.program}
+                style={styles.eduCard}
+                {...linkHover}
+              >
+                <img
+                  src={e.logo}
+                  alt={`${e.org} logo`}
+                  style={styles.eduLogo}
+                  loading="lazy"
+                />
+                <div>
+                  <h3 style={styles.eduOrg}>{e.org}</h3>
+                  <p style={styles.eduProg}>{e.program}</p>
+
+                  {/* Badge + meta row */}
+                  <div style={styles.eduBadgeRow}>
+                    <span style={getStatusBadgeStyle(e.status)}>
+                      {e.status}
+                    </span>
+                    <span style={styles.eduMeta}>
+                      {e.period} • {e.location}
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
             ))}
           </div>
         </motion.section>
