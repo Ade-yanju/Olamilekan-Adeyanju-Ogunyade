@@ -7,6 +7,7 @@ import omiHealthImg from "../assets/omi-health.jpg";
 import duAlumniImg from "../assets/du-alumni.jpg";
 import ibadanJollofImg from "../assets/ibadan-jollof.jpg";
 import raffleDrawImg from "../assets/raffle-draw.jpg";
+import hillstarImg from "../assets/hillstar.png";
 
 // Education logos (add these files in /assets/)
 import alxLogo from "../assets/alx-logo.png";
@@ -233,6 +234,12 @@ const Portfolio = () => {
       img: raffleDrawImg,
       desc: "Website for free and fair raffle draw.",
       link: "https://simple-raffle-draw.vercel.app/",
+    },
+    {
+      title: "Real-Estate for HillStar",
+      img: hillstarImg,
+      desc: "Real-estate listing website for HillStar Real Estate.",
+      link: "https://hillstar-realestate.vercel.app/",
     },
   ];
 
