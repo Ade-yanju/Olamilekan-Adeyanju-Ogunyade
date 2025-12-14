@@ -61,7 +61,7 @@ const EngineeringGrid = () => (
     position="fixed"
     inset={0}
     zIndex={0}
-    opacity={0.07}
+    opacity={0.06}
     pointerEvents="none"
     style={{
       backgroundImage: `
@@ -75,29 +75,7 @@ const EngineeringGrid = () => (
   />
 );
 
-const CodeBackdrop = () => (
-  <Box
-    position="fixed"
-    inset={0}
-    zIndex={0}
-    opacity={0.035}
-    pointerEvents="none"
-    fontFamily="mono"
-    fontSize="12px"
-    whiteSpace="pre"
-    color="white"
-    maskImage="radial-gradient(circle at 50% 30%, black 45%, transparent 75%)"
-  >
-{`const ship = () => {
-  designSystems();
-  optimizePerformance();
-  testEdgeCases();
-  deployToProduction();
-};`}
-  </Box>
-);
-
-/* ===================== SCROLL SECTION ===================== */
+/* ===================== SECTION WRAPPER ===================== */
 const Section = ({ id, children }) => {
   const ref = React.useRef(null);
   const { scrollYProgress } = useScroll({
@@ -124,7 +102,7 @@ const Section = ({ id, children }) => {
   );
 };
 
-/* ===================== HERO (RHS IMAGE) ===================== */
+/* ===================== HERO (IMAGE ON RHS) ===================== */
 const Hero = () => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -144,14 +122,13 @@ const Hero = () => {
       }}
     >
       <EngineeringGrid />
-      <CodeBackdrop />
 
-      <Container maxW="7xl" position="relative" zIndex={2}>
+      <Container maxW="7xl" position="relative" zIndex={1}>
         <SimpleGrid
+          columns={{ base: 1, md: 2 }}
           minH="100vh"
-          columns={{ base: 1, lg: 2 }}
-          spacing={16}
           alignItems="center"
+          spacing={16}
         >
           {/* LEFT — TEXT */}
           <Stack spacing={8}>
@@ -160,7 +137,7 @@ const Hero = () => {
             </Heading>
 
             <Text fontSize="xl" maxW="2xl" color="gray.300">
-              Software Engineer crafting elegant, scalable web and mobile
+              Software Engineer building elegant, scalable web and mobile
               products with strong frontend systems thinking and real-world
               impact.
             </Text>
@@ -175,10 +152,10 @@ const Hero = () => {
               >
                 View Work
               </Button>
+
               <Button
                 variant="outline"
                 size="lg"
-                borderColor="whiteAlpha.300"
                 as="a"
                 href="#contact"
               >
@@ -191,23 +168,22 @@ const Hero = () => {
             </Text>
           </Stack>
 
-          {/* RIGHT — IMAGE */}
+          {/* RIGHT — LARGE IMAGE */}
           <MotionBox
             style={{ x: imgX, y: imgY }}
-            whileHover={{ scale: 1.03 }}
+            whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.4 }}
           >
             <Image
               src={profileImage}
               alt="Olamilekan Adeyanju"
               w="100%"
-              maxW="420px"
-              mx="auto"
-              rounded="xl"
+              maxH="520px"
               objectFit="cover"
+              rounded="2xl"
               border="1px solid"
               borderColor="whiteAlpha.200"
-              boxShadow="0 40px 120px rgba(0,0,0,0.65)"
+              boxShadow="0 40px 120px rgba(0,0,0,0.6)"
             />
           </MotionBox>
         </SimpleGrid>
