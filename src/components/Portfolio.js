@@ -1,17 +1,11 @@
-// src/components/Portfolio.js
 /* ============================================================
-   Part 1/6
-   - imports
-   - assets
-   - Chakra + Framer Motion wrappers
-   - global variants
-   - animation utilities & helpers
+   Portfolio.js — Part 1/6
+   Imports + Motion wrappers + Helper animations
 =============================================================== */
 
 import React, { useEffect, useRef, useState, useMemo } from "react";
-import { useTheme as useNextTheme } from "next-themes";
 
-/* ---- Assets (raster) ---- */
+/* ================== ASSETS ================== */
 import profileImage from "../assets/profile.jpg";
 import omiHealthImg from "../assets/omi-health.jpg";
 import duAlumniImg from "../assets/du-alumni.jpg";
@@ -21,7 +15,6 @@ import hillstarImg from "../assets/hillstar.png";
 import alxLogo from "../assets/alx-logo.png";
 import duLogo from "../assets/du-logo.png";
 
-/* ---- Assets (SVG logos) ---- */
 import reactLogo from "../assets/react.svg";
 import expoLogo from "../assets/expo.svg";
 import firebaseLogo from "../assets/firebase.svg";
@@ -29,7 +22,7 @@ import nodeLogo from "../assets/nodejs.svg";
 import cloudinaryLogo from "../assets/cloudinary.svg";
 import githubLogo from "../assets/github.svg";
 
-/* ---- Chakra UI v3 ---- */
+/* ================== CHAKRA UI ================== */
 import {
   Box,
   Container,
@@ -50,7 +43,7 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 
-/* ---- Framer Motion ---- */
+/* ================== FRAMER MOTION ================== */
 import {
   motion,
   useMotionValue,
@@ -60,7 +53,7 @@ import {
   useInView,
 } from "framer-motion";
 
-/* ---- Icons ---- */
+/* ================== ICONS ================== */
 import {
   Mail,
   Github,
@@ -80,146 +73,167 @@ import {
   Rocket,
 } from "lucide-react";
 
-/* ---- Color Mode Toggle ---- */
+/* ================== COLOR MODE BUTTON ================== */
 import { ColorModeIconButton } from "../color-mode";
 
-/* ============================================================
-   MOTION WRAPPERS
-=============================================================== */
+/* ================== MOTION WRAPPERS ================== */
 const MotionBox = motion(Box);
 const MotionFlex = motion(Flex);
 const MotionImage = motion(Image);
 const MotionText = motion(Text);
 
-/* ============================================================
-   GLOBAL VARIANTS
-=============================================================== */
+/* ================== GLOBAL VARIANTS ================== */
 const containerVariants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: { staggerChildren: 0.12, when: "beforeChildren" },
+    transition: { staggerChildren: 0.12 },
   },
 };
 
-/* ============================================================
-   SPLIT TEXT
-=============================================================== */
-const SplitText = ({ children, delay = 0, duration = 0.04 }) => {
-  const letters = Array.from(children?.toString() ?? "");
+/* ================== HELPERS ================== */
+
+/* ---- Split text animation ---- */
+const SplitText = ({ children, delay = 0, duration = 0.03 }) => {
+  const letters = String(children).split("");
   return (
-    <chakra.span display="inline-block" whiteSpace="pre">
-      {letters.map((char, i) => (
+    <chakra.span whiteSpace="pre">
+      {letters.map((l, i) => (
         <motion.span
           key={i}
           initial={{ y: "100%", opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: delay + i * duration }}
-          style={{ display: "inline-block", whiteSpace: "pre" }}
+          style={{ display: "inline-block" }}
         >
-          {char}
+          {l}
         </motion.span>
       ))}
     </chakra.span>
   );
 };
 
-/* ============================================================
-   REVEAL
-=============================================================== */
-const Reveal = ({ children, y = 30, once = true }) => {
+/* ---- Reveal on scroll ---- */
+const Reveal = ({ children, y = 30 }) => {
   const ref = useRef(null);
-  const inView = useInView(ref, { once, amount: 0.15 });
-
+  const inView = useInView(ref, { once: true });
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y, filter: "blur(4px)" }}
-      animate={inView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      initial={{ opacity: 0, y }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, ease: "easeOut" }}
     >
       {children}
     </motion.div>
   );
 };
 
-/* ============================================================
-   PARTICLES — FIXED (next-themes, no Chakra color mode)
-=============================================================== */
-const Particles = ({ enabled = true, density = 0.0009 }) => {
-  const canvasRef = useRef(null);
-  const { theme } = useNextTheme();
+/* ---- Gradient stroke text ---- */
+const StrokeText = ({ children }) => (
+  <chakra.span
+    bgGradient="linear(to-r, pink.400, purple.400)"
+    bgClip="text"
+    fontWeight="bold"
+  >
+    {children}
+  </chakra.span>
+);
 
-  useEffect(() => {
-    if (!enabled) return;
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext("2d");
-    let w = (canvas.width = window.innerWidth);
-    let h = (canvas.height = window.innerHeight);
-
-    const count = Math.max(20, Math.min(120, Math.floor(w * h * density)));
-    const particles = new Array(count).fill(null).map(() => ({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: (Math.random() - 0.5) * 0.4,
-      r: Math.random() * 2 + 0.6,
-      a: 0.25 + Math.random() * 0.6,
-    }));
-
-    const color =
-      theme === "dark" ? "200,160,255" : "60,60,60";
-
-    let raf;
-    const draw = () => {
-      ctx.clearRect(0, 0, w, h);
-      particles.forEach((p) => {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0) p.x = w;
-        if (p.x > w) p.x = 0;
-        if (p.y < 0) p.y = h;
-        if (p.y > h) p.y = 0;
-
-        ctx.beginPath();
-        ctx.fillStyle = `rgba(${color},${p.a})`;
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fill();
-      });
-      raf = requestAnimationFrame(draw);
-    };
-
-    draw();
-    return () => cancelAnimationFrame(raf);
-  }, [enabled, density, theme]);
-
+/* ---- Magnetic hover ---- */
+const Magnetic = ({ children }) => {
+  const x = useSpring(0);
+  const y = useSpring(0);
   return (
-    <canvas
-      ref={canvasRef}
-      style={{
-        position: "fixed",
-        inset: 0,
-        pointerEvents: "none",
-        zIndex: 1,
-        opacity: 0.25,
+    <MotionBox
+      style={{ x, y }}
+      onMouseMove={(e) => {
+        x.set((e.nativeEvent.offsetX - 50) * 0.15);
+        y.set((e.nativeEvent.offsetY - 20) * 0.15);
       }}
-    />
+      onMouseLeave={() => {
+        x.set(0);
+        y.set(0);
+      }}
+      display="inline-block"
+    >
+      {children}
+    </MotionBox>
   );
 };
 
-/* ================= END OF PART 1 / 6 ================= */
+/* ---- Floating decorative blob ---- */
+const FloatingBlob = ({ x, y, size = 240, delay = 0 }) => (
+  <MotionBox
+    position="absolute"
+    top={y}
+    left={x}
+    w={`${size}px`}
+    h={`${size}px`}
+    bg="whiteAlpha.300"
+    rounded="full"
+    filter="blur(70px)"
+    animate={{ y: [0, -20, 0] }}
+    transition={{ duration: 12, repeat: Infinity, delay }}
+    pointerEvents="none"
+  />
+);
+
+/* ---- Simple parallax ---- */
+const Parallax = ({ children }) => {
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  useEffect(() => {
+    const move = (e) => {
+      mx.set(e.clientX / 40);
+      my.set(e.clientY / 40);
+    };
+    window.addEventListener("mousemove", move);
+    return () => window.removeEventListener("mousemove", move);
+  }, [mx, my]);
+
+  return <MotionBox style={{ x: mx, y: my }}>{children}</MotionBox>;
+};
+
+/* ---- Cursor follower ---- */
+const FollowCursor = () => {
+  const x = useSpring(-100);
+  const y = useSpring(-100);
+
+  useEffect(() => {
+    const move = (e) => {
+      x.set(e.clientX);
+      y.set(e.clientY);
+    };
+    window.addEventListener("mousemove", move);
+    return () => window.removeEventListener("mousemove", move);
+  }, [x, y]);
+
+  return (
+    <MotionBox
+      position="fixed"
+      style={{ x, y }}
+      w="10px"
+      h="10px"
+      bg="pink.400"
+      rounded="full"
+      pointerEvents="none"
+      zIndex={2000}
+    />
+  );
+};
 /* ============================================================
-   Part 2/6 — Data Arrays + UI Blocks + Advanced TechCube
+   Portfolio.js — Part 2/6
+   Data + UI Blocks + TechCube
 =============================================================== */
 
-/* ================== DATA ARRAYS ================== */
+/* ================== DATA ================== */
+
 const MOBILE_PROJECTS = [
   {
     title: "OMI-Health",
     img: omiHealthImg,
-    desc: "Bilingual healthcare app for Omi-Adio residents in Ibadan.",
+    desc: "Bilingual healthcare mobile app for Omi-Adio residents in Ibadan.",
     link: "https://expo.dev/artifacts/eas/s8LgczG1J7EgAwLrMLdLno.apk",
   },
 ];
@@ -228,25 +242,25 @@ const WEB_PROJECTS = [
   {
     title: "DU Alumni",
     img: duAlumniImg,
-    desc: "Platform connecting Dominion University alumni.",
+    desc: "Alumni engagement platform for Dominion University.",
     link: "https://du-alumni-steel.vercel.app/",
   },
   {
     title: "Ibadan Jollof",
     img: ibadanJollofImg,
-    desc: "Food ordering website for Jollof rice.",
+    desc: "Food ordering website for Jollof rice lovers.",
     link: "https://ib-jollof.vercel.app/",
   },
   {
     title: "Simple Raffle Draw",
     img: raffleDrawImg,
-    desc: "Fair and transparent raffle draw system.",
+    desc: "Fair and transparent raffle draw web tool.",
     link: "https://simple-raffle-draw.vercel.app/",
   },
   {
     title: "HillStar Real Estate",
     img: hillstarImg,
-    desc: "Property listing platform for HillStar.",
+    desc: "Real estate listing website for HillStar.",
     link: "https://hillstar-realestate.vercel.app/",
   },
 ];
@@ -255,26 +269,18 @@ const EDUCATION = [
   {
     org: "ALX Africa",
     program: "AWS Cloud Computing",
-    period: "June 2025 – Present",
-    status: "Currently studying",
+    period: "2025 – Present",
+    status: "In Progress",
     location: "Remote",
     logo: alxLogo,
   },
   {
-    org: "Dominion University, Ibadan",
+    org: "Dominion University",
     program: "B.Sc. Software Engineering",
     period: "2021 – 2025",
     status: "Completed",
     location: "Ibadan, Nigeria",
     logo: duLogo,
-  },
-  {
-    org: "ALX Africa",
-    program: "ALX AI Starter",
-    period: "May – June 2025",
-    status: "Completed",
-    location: "Remote",
-    logo: alxLogo,
   },
 ];
 
@@ -282,25 +288,40 @@ const SKILLS = [
   { name: "JavaScript", icon: Code },
   { name: "React", icon: Layers },
   { name: "React Native", icon: Layers },
-  { name: "Python", icon: Code },
   { name: "Firebase", icon: Database },
-  { name: "Cloudinary", icon: Cloud },
   { name: "NodeJS", icon: Server },
-  { name: "Git / GitHub", icon: Github },
+  { name: "Cloudinary", icon: Cloud },
+  { name: "Git & GitHub", icon: Github },
   { name: "Excel", icon: FileSpreadsheet },
 ];
 
+/* ================== TECH CUBE FACES ================== */
+
+const WEB_FACES = [
+  { label: "React", logo: reactLogo },
+  { label: "Expo", logo: expoLogo },
+  { label: "Firebase", logo: firebaseLogo },
+  { label: "NodeJS", logo: nodeLogo },
+  { label: "Cloudinary", logo: cloudinaryLogo },
+  { label: "GitHub", logo: githubLogo },
+];
+
+const MOBILE_FACES = WEB_FACES.map((f, i) =>
+  i === 0 ? { ...f, label: "React Native" } : f
+);
+
 /* ================== SECTION HEADING ================== */
+
 const SectionHeading = ({ icon: Icon, title, kicker }) => (
-  <Reveal y={20}>
+  <Reveal>
     <HStack spacing={3} mb={2}>
-      <Box as={Icon} size="28" color="pink.500" />
+      <Box as={Icon} color="pink.500" />
       <Heading size="lg">
         <SplitText>{title}</SplitText>
       </Heading>
     </HStack>
     {kicker && (
-      <Text color="gray.600" maxW="2xl" mb={6}>
+      <Text color="gray.600" _dark={{ color: "gray.300" }} mb={6}>
         {kicker}
       </Text>
     )}
@@ -308,40 +329,25 @@ const SectionHeading = ({ icon: Icon, title, kicker }) => (
 );
 
 /* ================== PROJECT CARD ================== */
+
 const ProjectCard = ({ title, img, desc, link }) => (
-  <Reveal y={30}>
+  <Reveal>
     <MotionBox
       whileHover={{ y: -6, scale: 1.03 }}
-      transition={{ type: "spring", stiffness: 220 }}
+      transition={{ duration: 0.25 }}
       bg="white"
-      rounded="2xl"
-      overflow="hidden"
+      _dark={{ bg: "gray.800" }}
+      rounded="xl"
       shadow="lg"
-      border="1px solid"
-      borderColor="pink.200"
+      overflow="hidden"
     >
       <ChakraLink href={link} isExternal _hover={{ textDecoration: "none" }}>
-        <MotionImage
-          src={img}
-          alt={title}
-          h="200px"
-          w="100%"
-          objectFit="cover"
-          whileHover={{ scale: 1.1 }}
-          transition={{ duration: 0.4 }}
-        />
-        <Box p={5}>
-          <Heading size="md" mb={2}>
-            {title}
-          </Heading>
-          <Text fontSize="sm" color="gray.600">
+        <Image src={img} alt={title} h="200px" w="100%" objectFit="cover" />
+        <Box p={4}>
+          <Heading size="md">{title}</Heading>
+          <Text fontSize="sm" mt={2}>
             {desc}
           </Text>
-          <HStack mt={4} color="pink.500">
-            <Sparkles size={16} />
-            <Text fontWeight="semibold">View project</Text>
-            <ChevronRight size={18} />
-          </HStack>
         </Box>
       </ChakraLink>
     </MotionBox>
@@ -349,291 +355,198 @@ const ProjectCard = ({ title, img, desc, link }) => (
 );
 
 /* ================== EDUCATION CARD ================== */
-const EducationCard = ({ logo, org, program, period, status, location }) => {
-  const color =
-    status.toLowerCase().includes("completed") ? "green" : "yellow";
 
-  return (
-    <Reveal y={25}>
-      <MotionFlex
-        whileHover={{ y: -4, scale: 1.02 }}
-        bg="white"
-        rounded="2xl"
-        p={4}
-        gap={4}
-        align="center"
-        shadow="md"
-        border="1px solid"
-        borderColor="pink.200"
-      >
-        <Image src={logo} boxSize="60px" rounded="lg" />
-        <Box flex="1">
-          <Heading size="sm">{org}</Heading>
-          <Text fontSize="sm">{program}</Text>
-          <HStack mt={2} spacing={3}>
-            <Badge colorScheme={color}>{status}</Badge>
-            <Text fontSize="sm" color="gray.600">
-              {period} • {location}
-            </Text>
-          </HStack>
-        </Box>
-      </MotionFlex>
-    </Reveal>
-  );
-};
-
-/* ================== SOCIAL BUTTON ================== */
-const SocialButton = ({ href, label, icon }) => (
-  <ChakraLink href={href} isExternal>
-    <MotionBox whileHover={{ y: -4 }}>
-      <Button
-        leftIcon={icon}
-        rounded="full"
-        variant="outline"
-        colorScheme="pink"
-      >
-        {label}
-      </Button>
-    </MotionBox>
-  </ChakraLink>
+const EducationCard = ({ logo, org, program, period, status, location }) => (
+  <Reveal>
+    <HStack
+      spacing={4}
+      p={4}
+      bg="white"
+      _dark={{ bg: "gray.800" }}
+      rounded="xl"
+      shadow="md"
+      align="center"
+    >
+      <Image src={logo} alt={org} boxSize="60px" />
+      <Box>
+        <Heading size="sm">{org}</Heading>
+        <Text fontSize="sm">{program}</Text>
+        <Text fontSize="xs" color="gray.500">
+          {period} • {location}
+        </Text>
+        <Badge mt={1} colorScheme="green">
+          {status}
+        </Badge>
+      </Box>
+    </HStack>
+  </Reveal>
 );
 
 /* ================== TECH CUBE ================== */
-const TechCube = ({ title, faces, autoSpeed = 0.25 }) => {
-  const rotX = useMotionValue(-20);
-  const rotY = useMotionValue(0);
+
+const TechCube = ({ faces }) => {
+  const rotateY = useMotionValue(0);
 
   useEffect(() => {
-    let raf;
-    const spin = () => {
-      rotY.set((rotY.get() + autoSpeed) % 360);
-      raf = requestAnimationFrame(spin);
-    };
-    spin();
-    return () => cancelAnimationFrame(raf);
-  }, [rotY, autoSpeed]);
+    const controls = animate(rotateY, 360, {
+      duration: 18,
+      repeat: Infinity,
+      ease: "linear",
+    });
+    return () => controls.stop();
+  }, [rotateY]);
 
   return (
-    <Container maxW="6xl" py={16}>
-      <Heading textAlign="center" mb={8}>
-        {title}
-      </Heading>
-      <MotionBox
-        mx="auto"
-        w="360px"
-        h="360px"
-        perspective="1200px"
-        style={{ rotateX: rotX, rotateY: rotY }}
-      >
-        {faces.map((f, i) => (
-          <Box
-            key={i}
-            position="absolute"
-            inset={0}
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            rounded="2xl"
-            bg={f.bg}
-            transform={`rotateY(${i * 60}deg) translateZ(180px)`}
-          >
-            <VStack>
-              <Image src={f.logo} maxH="80px" />
-              <Text fontWeight="bold">{f.label}</Text>
-            </VStack>
-          </Box>
-        ))}
-      </MotionBox>
-    </Container>
+    <MotionBox
+      mx="auto"
+      w="260px"
+      h="260px"
+      style={{ rotateY }}
+      transformStyle="preserve-3d"
+    >
+      {faces.map((f, i) => (
+        <Box
+          key={i}
+          position="absolute"
+          inset={0}
+          m="auto"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          bg="white"
+          _dark={{ bg: "gray.700" }}
+          rounded="xl"
+          transform={`rotateY(${i * 60}deg) translateZ(130px)`}
+        >
+          <VStack>
+            <Image src={f.logo} boxSize="60px" />
+            <Text>{f.label}</Text>
+          </VStack>
+        </Box>
+      ))}
+    </MotionBox>
   );
 };
-
-/* ================= END OF PART 2 / 6 ================= */
 /* ============================================================
-   Part 3/6 — Hero Section (Advanced, Stable)
+   Portfolio.js — Part 3/6
+   Hero Section (PortfolioHero)
 =============================================================== */
 
-/* ================== ANIMATED SEPARATOR ================== */
-const AnimatedSeparator = () => (
-  <svg
-    width="100%"
-    height="48"
-    viewBox="0 0 1200 48"
-    preserveAspectRatio="none"
-    aria-hidden
-  >
-    <path
-      d="M0,40 C200,0 400,40 600,24 C800,8 1000,40 1200,20 L1200,48 L0,48 Z"
-      fill="url(#grad)"
-      opacity="0.08"
-    />
-    <defs>
-      <linearGradient id="grad" x1="0" x2="1">
-        <stop offset="0%" stopColor="#ec4899" />
-        <stop offset="100%" stopColor="#14b8a6" />
-      </linearGradient>
-    </defs>
-  </svg>
-);
-
-/* ================== HERO SECTION ================== */
-const HeroSection = () => {
-  const marquee =
-    "React • React Native • Firebase • Cloudinary • NodeJS • Expo • UI/UX • REST APIs • Git/GitHub • ";
-
+const PortfolioHero = () => {
   return (
     <Box
       as="header"
       position="relative"
       minH="100vh"
-      bgGradient="linear(to-br, pink.400, teal.400)"
       overflow="hidden"
+      bgGradient="linear(to-br, pink.500, purple.600)"
     >
-      {/* PARTICLES */}
-      <Particles enabled density={0.0009} />
+      {/* Floating decorative blobs */}
+      <FloatingBlob x="6%" y="10%" size={260} />
+      <FloatingBlob x="70%" y="20%" size={220} delay={1} />
+      <FloatingBlob x="45%" y="70%" size={300} delay={0.5} />
 
-      {/* FLOATING BLOBS */}
-      <FloatingBlob x="8%" y="12%" size={260} />
-      <FloatingBlob x="78%" y="20%" size={200} delay={0.8} />
-      <FloatingBlob x="50%" y="70%" size={320} delay={1.2} />
-
-      {/* COLOR MODE TOGGLE */}
-      <Box position="fixed" top={4} right={4} zIndex={1000}>
+      {/* Color mode toggle */}
+      <Box position="fixed" top={4} right={4} zIndex={3000}>
         <Magnetic>
           <ColorModeIconButton />
         </Magnetic>
       </Box>
 
-      <Container maxW="6xl" pt={24} position="relative" zIndex={2}>
-        <Parallax factor={24}>
-          <VStack spacing={6} textAlign="center">
-            {/* PROFILE IMAGE */}
+      <Container maxW="6xl" position="relative" zIndex={5}>
+        <Parallax>
+          <MotionFlex
+            minH="100vh"
+            direction="column"
+            align="center"
+            justify="center"
+            textAlign="center"
+            color="white"
+            px={4}
+            variants={containerVariants}
+            initial="hidden"
+            animate="show"
+          >
+            {/* Profile image */}
             <MotionImage
               src={profileImage}
-              alt="Profile"
+              alt="Olamilekan Adeyanju"
               boxSize={{ base: "110px", md: "150px" }}
               rounded="full"
               border="4px solid white"
-              initial={{ scale: 0.9, opacity: 0 }}
+              mb={6}
+              initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.6 }}
             />
 
-            {/* NAME */}
-            <Reveal>
-              <Heading size="2xl" color="white">
-                <SplitText delay={0.2}>
-                  Olamilekan Adeyanju Ogunyade
-                </SplitText>
-              </Heading>
-            </Reveal>
+            {/* Name */}
+            <Heading size="2xl" mb={4}>
+              <SplitText delay={0.2}>
+                Olamilekan Adeyanju Ogunyade
+              </SplitText>
+            </Heading>
 
-            {/* TITLE */}
-            <Reveal delay={0.4}>
-              <Text fontSize="xl" color="whiteAlpha.900" maxW="3xl">
-                <SplitText delay={0.6} duration={0.02}>
-                  Software Engineer • Frontend Developer • Mobile App Developer
-                </SplitText>{" "}
-                •{" "}
-                <chakra.span fontWeight="bold">
-                  <StrokeText>
-                    AWS Cloud Computing @ ALX
-                  </StrokeText>
-                </chakra.span>
-              </Text>
-            </Reveal>
+            {/* Subtitle */}
+            <Text fontSize={{ base: "lg", md: "xl" }} maxW="3xl" mb={6}>
+              <SplitText delay={0.6}>
+                Software Engineer • Frontend & Mobile Developer
+              </SplitText>{" "}
+              <StrokeText>• AWS Cloud (ALX)</StrokeText>
+            </Text>
 
-            {/* NAV BUTTONS */}
-            <Reveal delay={0.8}>
-              <Wrap justify="center" spacing={4}>
-                {[
-                  { label: "About", href: "#about", icon: <User size={16} /> },
-                  { label: "Skills", href: "#skills", icon: <Code size={16} /> },
-                  {
-                    label: "Education",
-                    href: "#education",
-                    icon: <GraduationCap size={16} />,
-                  },
-                  {
-                    label: "Projects",
-                    href: "#projects",
-                    icon: <Briefcase size={16} />,
-                  },
-                  {
-                    label: "Contact",
-                    href: "#contact",
-                    icon: <Mail size={16} />,
-                  },
-                ].map((item, i) => (
-                  <WrapItem key={item.label}>
-                    <Magnetic strength={0.2}>
-                      <Button
-                        as="a"
-                        href={item.href}
-                        leftIcon={item.icon}
-                        colorScheme="pink"
-                        rounded="full"
-                        size="sm"
-                      >
-                        <SplitText delay={0.9 + i * 0.05}>
-                          {item.label}
-                        </SplitText>
-                      </Button>
-                    </Magnetic>
-                  </WrapItem>
-                ))}
-              </Wrap>
-            </Reveal>
-
-            {/* MARQUEE */}
-            <Reveal delay={1.2}>
-              <Box
-                w="100%"
-                overflow="hidden"
-                whiteSpace="nowrap"
-                fontWeight="semibold"
-                color="whiteAlpha.900"
-              >
-                <MotionText
-                  animate={{ x: ["0%", "-50%"] }}
-                  transition={{
-                    repeat: Infinity,
-                    duration: 20,
-                    ease: "linear",
-                  }}
-                >
-                  {marquee.repeat(10)}
-                </MotionText>
-              </Box>
-            </Reveal>
-          </VStack>
+            {/* Navigation buttons */}
+            <Wrap justify="center" spacing={4} mt={4}>
+              {[
+                { label: "About", href: "#about" },
+                { label: "Skills", href: "#skills" },
+                { label: "Education", href: "#education" },
+                { label: "Projects", href: "#projects" },
+                { label: "Contact", href: "#contact" },
+              ].map((item, idx) => (
+                <WrapItem key={item.label}>
+                  <Magnetic>
+                    <Button
+                      as="a"
+                      href={item.href}
+                      colorScheme="pink"
+                      variant="solid"
+                      rounded="full"
+                      px={6}
+                      boxShadow="lg"
+                      whileHover={{ y: -3 }}
+                    >
+                      <SplitText delay={0.9 + idx * 0.05}>
+                        {item.label}
+                      </SplitText>
+                    </Button>
+                  </Magnetic>
+                </WrapItem>
+              ))}
+            </Wrap>
+          </MotionFlex>
         </Parallax>
       </Container>
-
-      {/* SEPARATOR */}
-      <Box mt={20}>
-        <AnimatedSeparator />
-      </Box>
     </Box>
   );
 };
-
-/* ================= END OF PART 3 / 6 ================= */
 /* ============================================================
-   Part 4/6 — About • Skills • Education • Cube Switcher
+   Portfolio.js — Part 4/6
+   About • Skills • Education • Cube Switcher
 =============================================================== */
 
 /* ================== ABOUT SECTION ================== */
+
 const AboutSection = () => (
-  <Box as="section" id="about" py={{ base: 16, md: 24 }}>
+  <Box as="section" id="about" py={{ base: 16, md: 20 }}>
     <Container maxW="5xl">
       <SectionHeading
         icon={User}
         title="About Me"
-        kicker="Focused on building reliable, performant products with clean UX."
+        kicker="Focused on building scalable, user-centric web and mobile products."
       />
 
-      <Reveal y={30} delay={0.15}>
+      <Reveal>
         <Text
           fontSize={{ base: "md", md: "lg" }}
           lineHeight="tall"
@@ -641,12 +554,10 @@ const AboutSection = () => (
           _dark={{ color: "gray.300" }}
           maxW="3xl"
         >
-          I am a versatile software engineer specialising in React and React
-          Native, with hands-on experience building user-focused mobile and web
-          applications. I work extensively with Firebase, Cloudinary, REST APIs,
-          Expo, and modern UI systems. I enjoy turning complex ideas into simple,
-          intuitive digital products and contributing to teams that value clean
-          engineering and measurable impact.
+          I am a passionate software engineer specializing in React and React
+          Native with hands-on experience building production-ready web and
+          mobile applications. I enjoy translating ideas into clean, functional
+          user experiences while maintaining performance and scalability.
         </Text>
       </Reveal>
     </Container>
@@ -654,46 +565,42 @@ const AboutSection = () => (
 );
 
 /* ================== SKILLS SECTION ================== */
+
 const SkillsSection = () => (
   <Box
     as="section"
     id="skills"
-    py={{ base: 16, md: 24 }}
+    py={{ base: 16, md: 20 }}
     bg="white"
     _dark={{ bg: "gray.900" }}
-    borderTop="1px solid"
-    borderBottom="1px solid"
-    borderColor="pink.200"
-    _dark={{ borderColor: "pink.900" }}
   >
-    <Container maxW="5xl">
+    <Container maxW="6xl">
       <SectionHeading
         icon={Code}
         title="Skills"
-        kicker="Tools and technologies I use to ship production-ready software."
+        kicker="Technologies and tools I work with regularly."
       />
 
       <Wrap spacing={4}>
-        {SKILLS.map(({ name, icon: IconComp }, idx) => (
+        {SKILLS.map(({ name, icon: Icon }, idx) => (
           <WrapItem key={name}>
-            <Reveal y={18} delay={idx * 0.05}>
+            <Reveal y={20}>
               <MotionBox
                 px={4}
-                py={2.5}
+                py={2}
                 rounded="full"
-                bg="teal.50"
-                _dark={{ bg: "teal.900" }}
-                color="teal.800"
-                _dark={{ color: "teal.200" }}
+                bg="pink.50"
+                _dark={{ bg: "pink.900" }}
+                color="pink.700"
+                _dark={{ color: "pink.200" }}
                 fontWeight="semibold"
-                display="inline-flex"
+                display="flex"
                 alignItems="center"
                 gap={2}
-                whileHover={{ y: -3, scale: 1.06 }}
-                transition={{ duration: 0.18 }}
+                whileHover={{ y: -4, scale: 1.05 }}
               >
-                <Box as={IconComp} size="16" />
-                <SplitText duration={0.02}>{name}</SplitText>
+                <Icon size={16} />
+                <SplitText delay={idx * 0.02}>{name}</SplitText>
               </MotionBox>
             </Reveal>
           </WrapItem>
@@ -704,14 +611,15 @@ const SkillsSection = () => (
 );
 
 /* ================== EDUCATION SECTION ================== */
+
 const EducationSection = () => (
-  <Box as="section" id="education" py={{ base: 16, md: 24 }}>
+  <Box as="section" id="education" py={{ base: 16, md: 20 }}>
     <Container maxW="6xl">
       <SectionHeading icon={GraduationCap} title="Education" />
 
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
         {EDUCATION.map((edu, idx) => (
-          <EducationCard key={`${edu.org}-${idx}`} {...edu} />
+          <EducationCard key={idx} {...edu} />
         ))}
       </SimpleGrid>
     </Container>
@@ -719,104 +627,86 @@ const EducationSection = () => (
 );
 
 /* ================== TECH CUBE SWITCHER ================== */
+
 const CubeSwitcher = ({ whichCube, setWhichCube }) => (
-  <Box as="section" id="tech-stack" py={{ base: 12, md: 18 }}>
-    <Container maxW="6xl" textAlign="center">
-      <Reveal y={20}>
-        <HStack justify="center" spacing={4} mb={6}>
-          <Magnetic strength={0.2}>
-            <Button
-              size="sm"
-              colorScheme={whichCube === "web" ? "pink" : "gray"}
-              rounded="full"
-              onClick={() => setWhichCube("web")}
-              _hover={{ transform: "translateY(-3px)" }}
-            >
-              <SplitText duration={0.02}>Web Stack</SplitText>
-            </Button>
-          </Magnetic>
+  <Box as="section" py={{ base: 12, md: 16 }} textAlign="center">
+    <Reveal>
+      <HStack justify="center" spacing={4} mb={8}>
+        <Magnetic>
+          <Button
+            size="sm"
+            colorScheme={whichCube === "web" ? "pink" : "gray"}
+            rounded="full"
+            onClick={() => setWhichCube("web")}
+          >
+            Web Stack
+          </Button>
+        </Magnetic>
 
-          <Magnetic strength={0.2}>
-            <Button
-              size="sm"
-              colorScheme={whichCube === "mobile" ? "pink" : "gray"}
-              rounded="full"
-              onClick={() => setWhichCube("mobile")}
-              _hover={{ transform: "translateY(-3px)" }}
-            >
-              <SplitText duration={0.02}>Mobile Stack</SplitText>
-            </Button>
-          </Magnetic>
-        </HStack>
-      </Reveal>
-    </Container>
+        <Magnetic>
+          <Button
+            size="sm"
+            colorScheme={whichCube === "mobile" ? "pink" : "gray"}
+            rounded="full"
+            onClick={() => setWhichCube("mobile")}
+          >
+            Mobile Stack
+          </Button>
+        </Magnetic>
+      </HStack>
+    </Reveal>
 
-    {/* Render correct cube */}
-    {whichCube === "web" ? (
-      <TechCube
-        title="Technology Stack • Web"
-        faces={WEB_FACES}
-        autoSpeed={0.25}
-      />
-    ) : (
-      <TechCube
-        title="Technology Stack • Mobile"
-        faces={MOBILE_FACES}
-        autoSpeed={0.25}
-      />
-    )}
-
-    <AnimatedSeparator />
+    <Reveal>
+      {whichCube === "web" ? (
+        <TechCube faces={WEB_FACES} />
+      ) : (
+        <TechCube faces={MOBILE_FACES} />
+      )}
+    </Reveal>
   </Box>
 );
-
-/* ================= END OF PART 4 / 6 ================= */
 /* ============================================================
-   Part 5/6 — Projects + Contact
+   Portfolio.js — Part 5/6
+   Projects + Contact Sections
 =============================================================== */
 
 /* ================== PROJECTS SECTION ================== */
+
 const ProjectsSection = () => (
   <Box
     as="section"
     id="projects"
-    py={{ base: 16, md: 24 }}
+    py={{ base: 16, md: 20 }}
     bg="white"
     _dark={{ bg: "gray.900" }}
-    borderTop="1px solid"
-    borderBottom="1px solid"
-    borderColor="pink.200"
-    _dark={{ borderColor: "pink.900" }}
   >
     <Container maxW="6xl">
       <SectionHeading
         icon={Briefcase}
         title="Projects"
-        kicker="Selected work across mobile and web platforms."
+        kicker="Selected projects showcasing real-world problem solving."
       />
 
-      {/* ===== Mobile Projects ===== */}
-      <VStack align="stretch" spacing={5} mb={14}>
+      {/* Mobile projects */}
+      <VStack align="stretch" spacing={6} mb={12}>
         <Heading size="md">
-          <SplitText delay={0.1}>Mobile Applications</SplitText>
+          <SplitText>Mobile Applications</SplitText>
         </Heading>
 
-        <SimpleGrid columns={{ base: 1, sm: 2, lg: 3 }} spacing={6}>
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
           {MOBILE_PROJECTS.map((project, idx) => (
             <ProjectCard key={idx} {...project} />
           ))}
         </SimpleGrid>
       </VStack>
 
-      <AnimatedSeparator />
-
-      {/* ===== Web Projects ===== */}
-      <VStack align="stretch" spacing={5} mt={14}>
+      {/* Web projects */}
+      <VStack align="stretch" spacing={6}>
         <Heading size="md">
-          <SplitText delay={0.15}>Web Applications</SplitText>
+          <SplitText>Web Applications</SplitText>
         </Heading>
 
-        <SimpleGrid columns={{ base: 1, sm: 2, lg: 3 }} spacing={6}>
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
           {WEB_PROJECTS.map((project, idx) => (
             <ProjectCard key={idx} {...project} />
           ))}
@@ -827,94 +717,92 @@ const ProjectsSection = () => (
 );
 
 /* ================== CONTACT SECTION ================== */
+
 const ContactSection = () => (
-  <Box as="section" id="contact" py={{ base: 16, md: 24 }}>
+  <Box as="section" id="contact" py={{ base: 16, md: 20 }}>
     <Container maxW="5xl" textAlign="center">
       <SectionHeading
         icon={Mail}
         title="Contact"
-        kicker="Let’s build something useful, fast, and beautiful."
+        kicker="Let’s connect and build something impactful together."
       />
 
-      <Reveal y={20} delay={0.25}>
+      <Reveal>
         <Stack
           direction={{ base: "column", sm: "row" }}
           spacing={6}
           justify="center"
-          mt={6}
+          mt={8}
         >
-          <SocialButton
-            href="mailto:adeyanjuolamilekan080@gmail.com"
-            label="Email"
-            brand="email"
-            icon={<Mail size={20} />}
-          />
+          <Magnetic>
+            <Button
+              as="a"
+              href="mailto:adeyanjuolamilekan080@gmail.com"
+              leftIcon={<Mail size={18} />}
+              colorScheme="pink"
+              rounded="full"
+            >
+              Email
+            </Button>
+          </Magnetic>
 
-          <SocialButton
-            href="https://www.linkedin.com/in/ogunyade-olamilekan-91807223a/"
-            label="LinkedIn"
-            brand="linkedin"
-            icon={<Linkedin size={20} />}
-          />
+          <Magnetic>
+            <Button
+              as="a"
+              href="https://www.linkedin.com/in/ogunyade-olamilekan-91807223a/"
+              leftIcon={<Linkedin size={18} />}
+              colorScheme="blue"
+              rounded="full"
+              target="_blank"
+            >
+              LinkedIn
+            </Button>
+          </Magnetic>
 
-          <SocialButton
-            href="https://github.com/Ade-yanju"
-            label="GitHub"
-            brand="github"
-            icon={<Github size={20} />}
-          />
+          <Magnetic>
+            <Button
+              as="a"
+              href="https://github.com/Ade-yanju"
+              leftIcon={<Github size={18} />}
+              colorScheme="gray"
+              rounded="full"
+              target="_blank"
+            >
+              GitHub
+            </Button>
+          </Magnetic>
         </Stack>
       </Reveal>
-
-      <Box mt={12}>
-        <AnimatedSeparator />
-      </Box>
     </Container>
   </Box>
 );
-
-/* ================= END OF PART 5 / 6 ================= */
 /* ============================================================
-   Part 6/6 — Footer + Final Assembly + Export
+   Portfolio.js — Part 6/6
+   Footer + Final Assembly (SINGLE DEFAULT EXPORT)
 =============================================================== */
 
 /* ================== FOOTER ================== */
+
 const FooterSection = () => (
   <Box
     as="footer"
-    py={10}
+    py={8}
     textAlign="center"
-    bgGradient="linear(to-r, teal.100, pink.100)"
-    _dark={{ bgGradient: "linear(to-r, teal.900, pink.900)" }}
-    borderTop="1px solid"
-    borderColor="pink.200"
-    _dark={{ borderColor: "pink.800" }}
+    bg="gray.100"
+    _dark={{ bg: "gray.800" }}
   >
-    <Reveal y={20}>
-      <Text
-        fontSize="sm"
-        bgGradient="linear(to-r, teal.400, pink.400)"
-        bgClip="text"
-        fontWeight="bold"
-        letterSpacing="wide"
-      >
-        © {new Date().getFullYear()} Olamilekan Adeyanju Ogunyade — Designed &
-        Built with ❤️ using React, Chakra UI, and Framer Motion.
+    <Reveal>
+      <Text fontSize="sm" color="gray.600" _dark={{ color: "gray.300" }}>
+        © {new Date().getFullYear()} Olamilekan Adeyanju Ogunyade.  
+        Built with React, Chakra UI & Framer Motion.
       </Text>
     </Reveal>
   </Box>
 );
 
 /* ============================================================
-   FINAL PORTFOLIO ASSEMBLY
+   FINAL PORTFOLIO COMPONENT (ONE EXPORT ONLY)
 =============================================================== */
-
-/**
- * IMPORTANT:
- * - Hero section lives in `PortfolioHero`
- * - Sections are composed below
- * - Single default export (NO DUPLICATES)
- */
 
 export default function Portfolio() {
   const [whichCube, setWhichCube] = useState("web");
@@ -933,8 +821,11 @@ export default function Portfolio() {
       {/* ===== EDUCATION ===== */}
       <EducationSection />
 
-      {/* ===== TECH CUBE ===== */}
-      <CubeSwitcher whichCube={whichCube} setWhichCube={setWhichCube} />
+      {/* ===== TECH CUBE SWITCHER ===== */}
+      <CubeSwitcher
+        whichCube={whichCube}
+        setWhichCube={setWhichCube}
+      />
 
       {/* ===== PROJECTS ===== */}
       <ProjectsSection />
@@ -947,5 +838,3 @@ export default function Portfolio() {
     </>
   );
 }
-
-/* ================= END OF FILE ================= */
