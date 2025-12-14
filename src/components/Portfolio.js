@@ -112,19 +112,25 @@ const Section = ({ id, children }) => {
   const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
-    <MotionBox ref={ref} as="section" id={id} py={{ base: 24, md: 32 }} style={{ y, opacity }}>
+    <MotionBox
+      ref={ref}
+      as="section"
+      id={id}
+      py={{ base: 24, md: 32 }}
+      style={{ y, opacity }}
+    >
       {children}
     </MotionBox>
   );
 };
 
-/* ===================== HERO ===================== */
+/* ===================== HERO (RHS IMAGE) ===================== */
 const Hero = () => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const bgX = useTransform(mouseX, [-100, 100], [-20, 20]);
-  const bgY = useTransform(mouseY, [-100, 100], [-20, 20]);
+  const imgX = useTransform(mouseX, [-100, 100], [-12, 12]);
+  const imgY = useTransform(mouseY, [-100, 100], [-12, 12]);
 
   return (
     <Box
@@ -140,43 +146,71 @@ const Hero = () => {
       <EngineeringGrid />
       <CodeBackdrop />
 
-      <MotionBox
-        position="absolute"
-        inset={0}
-        style={{ x: bgX, y: bgY }}
-        bg="radial-gradient(circle at 30% 20%, rgba(45,212,191,0.18), transparent 60%)"
-      />
+      <Container maxW="7xl" position="relative" zIndex={2}>
+        <SimpleGrid
+          minH="100vh"
+          columns={{ base: 1, lg: 2 }}
+          spacing={16}
+          alignItems="center"
+        >
+          {/* LEFT — TEXT */}
+          <Stack spacing={8}>
+            <Heading size="2xl" lineHeight="1.05">
+              Olamilekan Adeyanju Ogunyade
+            </Heading>
 
-      <Container maxW="6xl" position="relative">
-        <Stack minH="100vh" justify="center" spacing={10}>
-          <Image
-            src={profileImage}
-            boxSize="128px"
-            rounded="full"
-            border="2px solid"
-            borderColor="whiteAlpha.300"
-          />
+            <Text fontSize="xl" maxW="2xl" color="gray.300">
+              Software Engineer crafting elegant, scalable web and mobile
+              products with strong frontend systems thinking and real-world
+              impact.
+            </Text>
 
-          <Heading size="2xl">Olamilekan Adeyanju Ogunyade</Heading>
+            <HStack spacing={4}>
+              <Button
+                colorScheme="teal"
+                size="lg"
+                rightIcon={<ArrowUpRight size={18} />}
+                as="a"
+                href="#work"
+              >
+                View Work
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                borderColor="whiteAlpha.300"
+                as="a"
+                href="#contact"
+              >
+                Contact
+              </Button>
+            </HStack>
 
-          <Text fontSize="xl" maxW="2xl" color="gray.300">
-            Software Engineer crafting elegant, scalable web and mobile products
-            with strong frontend systems thinking and real-world impact.
-          </Text>
+            <Text fontSize="sm" color="gray.400">
+              React · React Native · Frontend Systems · Cloud-backed Products
+            </Text>
+          </Stack>
 
-          <HStack spacing={4}>
-            <Button colorScheme="teal" size="lg" rightIcon={<ArrowUpRight size={18} />} href="#work">
-              View Work
-            </Button>
-            <Button variant="outline" size="lg" href="#contact">
-              Contact
-            </Button>
-          </HStack>
-
-          <Text fontSize="sm" color="gray.400">
-            React · React Native · Frontend Systems · Cloud-backed Products
-          </Text>
-        </Stack>
+          {/* RIGHT — IMAGE */}
+          <MotionBox
+            style={{ x: imgX, y: imgY }}
+            whileHover={{ scale: 1.03 }}
+            transition={{ duration: 0.4 }}
+          >
+            <Image
+              src={profileImage}
+              alt="Olamilekan Adeyanju"
+              w="100%"
+              maxW="420px"
+              mx="auto"
+              rounded="xl"
+              objectFit="cover"
+              border="1px solid"
+              borderColor="whiteAlpha.200"
+              boxShadow="0 40px 120px rgba(0,0,0,0.65)"
+            />
+          </MotionBox>
+        </SimpleGrid>
       </Container>
     </Box>
   );
