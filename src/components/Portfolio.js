@@ -26,6 +26,8 @@ import profileImage from "../assets/profile.jpg";
 import omiHealthImg from "../assets/omi-health.jpg";
 import duAlumniImg from "../assets/du-alumni.jpg";
 import ibadanJollofImg from "../assets/ibadan-jollof.jpg";
+import VodiumImg from "../assets/Vodium-logo.png";
+import HillstarImg from "../assets/hillstar.png";
 
 /* ===================== MOTION ===================== */
 const MotionBox = motion(Box);
@@ -33,10 +35,10 @@ const MotionBox = motion(Box);
 /* ===================== DATA ===================== */
 const PROJECTS = [
   {
-    title: "OMI Health",
+    title: "OMI Health (Android)",
     desc: "A bilingual mobile healthcare platform enabling remote consultations, appointment scheduling, and healthcare access for underserved communities.",
     img: omiHealthImg,
-    link: "#",
+    link: "https://expo.dev/artifacts/eas/s8LgczG1J7EgAwLrMLdLno.apk",
     tech: "React Native · Firebase · Expo",
   },
   {
@@ -47,11 +49,18 @@ const PROJECTS = [
     tech: "React · Firebase · Cloudinary",
   },
   {
-    title: "Ibadan Jollof",
-    desc: "A focused food-ordering web product built for speed, conversion, and simplicity.",
-    img: ibadanJollofImg,
-    link: "https://ib-jollof.vercel.app/",
-    tech: "React · UI/UX · Payments",
+    title: "Vodium (Android)",
+    desc: "Vodium is a fintech-enabled mobile application that combines digital wallet services, biometric authentication, analytics, events access, and a concierge experience in a single platform.",
+    img: VodiumImg,
+    link: "#",
+    tech: "Expo· ReactNative · Fintech Platform · UI/UX · Payments",
+  },
+    {
+    title: "Hillstar",
+    desc: "A React single‑page application (SPA) for Hillstar Nigeria Ltd covering Real Estate, Hospitality, Renewable Energy, Procurement, and Telecom. The site highlights listings, embedded tour videos, brochures (PDF), and a lightweight admin experience that publishes content to Cloudinary using an unsigned preset and a JSON manifest per section.",
+    img: HillstarImg,
+    link: "https://hillstar-realestate.vercel.app/",
+    tech: "React",
   },
 ];
 
