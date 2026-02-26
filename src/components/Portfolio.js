@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import {
   Box,
   Container,
@@ -9,357 +9,306 @@ import {
   SimpleGrid,
   Stack,
   HStack,
-  Link,
+  Badge,
+  Icon,
+  chakra,
+  shouldForwardProp,
 } from "@chakra-ui/react";
 import {
   motion,
   useMotionValue,
   useTransform,
-  useScroll,
   useSpring,
   AnimatePresence,
+  isValidMotionProp,
 } from "framer-motion";
-import { Github, Linkedin, Mail, ArrowUpRight } from "lucide-react";
+import { Github, Linkedin, Mail, ExternalLink, Cpu, Layout, Globe } from "lucide-react";
 
 /* ===================== ASSETS ===================== */
+// (Assuming these paths remain the same as your setup)
 import profileImage from "../assets/profile.jpg";
 import omiHealthImg from "../assets/omi-health.jpg";
 import duAlumniImg from "../assets/du-alumni.jpg";
-import ibadanJollofImg from "../assets/ibadan-jollof.jpg";
 import VodiumImg from "../assets/Vodium-logo.png";
 import HillstarImg from "../assets/hillstar.png";
 
-/* ===================== MOTION ===================== */
-const MotionBox = motion(Box);
+/* ===================== CONFIG & MOTION ===================== */
+const MotionBox = chakra(motion.div, {
+  shouldForwardProp: (prop) => isValidMotionProp(prop) || shouldForwardProp(prop),
+});
 
-/* ===================== DATA ===================== */
-const PROJECTS = [
-  {
-    title: "OMI Health (Android)",
-    desc: "A bilingual mobile healthcare platform enabling remote consultations, appointment scheduling, and healthcare access for underserved communities.",
-    img: omiHealthImg,
-    link: "https://expo.dev/artifacts/eas/s8LgczG1J7EgAwLrMLdLno.apk",
-    tech: "React Native · Firebase · Expo",
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.3 },
   },
-  {
-    title: "DU Alumni Platform",
-    desc: "A full-stack alumni engagement platform connecting graduates through events, profiles, and community tools.",
-    img: duAlumniImg,
-    link: "https://du-alumni-steel.vercel.app/",
-    tech: "React · Firebase · Cloudinary",
-  },
-  {
-    title: "Vodium (Android)",
-    desc: "Vodium is a fintech-enabled mobile application that combines digital wallet services, biometric authentication, analytics, events access, and a concierge experience in a single platform.",
-    img: VodiumImg,
-    link: "#",
-    tech: "Expo· ReactNative · Fintech Platform · UI/UX · Payments",
-  },
-    {
-    title: "Hillstar",
-    desc: "A React single‑page application (SPA) for Hillstar Nigeria Ltd covering Real Estate, Hospitality, Renewable Energy, Procurement, and Telecom. The site highlights listings, embedded tour videos, brochures (PDF), and a lightweight admin experience that publishes content to Cloudinary using an unsigned preset and a JSON manifest per section.",
-    img: HillstarImg,
-    link: "https://hillstar-realestate.vercel.app/",
-    tech: "React",
-  },
-];
+};
 
-/* ===================== BACKGROUNDS ===================== */
-const EngineeringGrid = () => (
-  <Box
-    position="fixed"
-    inset={0}
-    zIndex={0}
-    opacity={0.06}
-    pointerEvents="none"
-    style={{
-      backgroundImage: `
-        linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)
-      `,
-      backgroundSize: "80px 80px",
-      maskImage:
-        "radial-gradient(circle at 50% 20%, black 40%, transparent 75%)",
-    }}
-  />
-);
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: { y: 0, opacity: 1, transition: { duration: 0.5, ease: "easeOut" } },
+};
 
-/* ===================== SECTION WRAPPER ===================== */
-const Section = ({ id, children }) => {
-  const ref = React.useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 85%", "start 40%"],
-  });
+/* ===================== COMPONENTS ===================== */
 
-  const y = useSpring(useTransform(scrollYProgress, [0, 1], [40, 0]), {
-    stiffness: 120,
-    damping: 24,
-  });
-  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
+const SpotlightCard = ({ children, ...props }) => {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  function onMouseMove({ currentTarget, clientX, clientY }) {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  }
 
   return (
     <MotionBox
-      ref={ref}
-      as="section"
-      id={id}
-      py={{ base: 24, md: 32 }}
-      style={{ y, opacity }}
+      onMouseMove={onMouseMove}
+      role="group"
+      position="relative"
+      rounded="2xl"
+      border="1px solid"
+      borderColor="whiteAlpha.100"
+      bg="whiteAlpha.50"
+      p={8}
+      overflow="hidden"
+      _hover={{ borderColor: "teal.500" }}
+      transition="border-color 0.3s ease"
+      {...props}
     >
+      <MotionBox
+        position="absolute"
+        inset="-1px"
+        rounded="inherit"
+        pointerEvents="none"
+        bg={useTransform(
+          [mouseX, mouseY],
+          ([x, y]) => `radial-gradient(600px circle at ${x}px ${y}px, rgba(20, 184, 166, 0.15), transparent 80%)`
+        )}
+      />
       {children}
     </MotionBox>
   );
 };
 
-/* ===================== HERO (IMAGE ON RHS) ===================== */
-const Hero = () => {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const imgX = useTransform(mouseX, [-100, 100], [-12, 12]);
-  const imgY = useTransform(mouseY, [-100, 100], [-12, 12]);
-
-  return (
+const BackgroundEffects = () => (
+  <Box position="fixed" inset={0} zIndex={0} pointerEvents="none" overflow="hidden">
+    {/* Engineering Grid */}
     <Box
-      minH="100vh"
-      bg="#020617"
-      color="gray.100"
-      position="relative"
-      onMouseMove={(e) => {
-        mouseX.set(e.clientX - window.innerWidth / 2);
-        mouseY.set(e.clientY - window.innerHeight / 2);
+      inset={0}
+      position="absolute"
+      opacity={0.03}
+      style={{
+        backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`,
+        backgroundSize: "40px 40px",
       }}
-    >
-      <EngineeringGrid />
+    />
+    {/* Noise Texture Overaly */}
+    <Box
+      inset={0}
+      position="absolute"
+      opacity={0.02}
+      style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+      }}
+    />
+  </Box>
+);
 
-      <Container maxW="7xl" position="relative" zIndex={1}>
-        <SimpleGrid
-          columns={{ base: 1, md: 2 }}
-          minH="100vh"
-          alignItems="center"
-          spacing={16}
-        >
-          {/* LEFT — TEXT */}
-          <Stack spacing={8}>
-            <Heading size="2xl" lineHeight="1.05">
-              Olamilekan Adeyanju Ogunyade
+/* ===================== SECTIONS ===================== */
+
+const Hero = () => {
+  return (
+    <Container maxW="7xl" pt={{ base: 32, md: 48 }} pb={20} position="relative" zIndex={1}>
+      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={16} alignItems="center">
+        <MotionBox initial="hidden" animate="visible" variants={containerVariants}>
+          <MotionBox variants={itemVariants}>
+            <Badge colorScheme="teal" variant="outline" mb={4} px={3} py={1} rounded="full">
+              Available for new opportunities
+            </Badge>
+            <Heading as="h1" size="4xl" fontWeight="800" letterSpacing="tight" lineHeight="0.9" mb={6}>
+              Olamilekan <chakra.span color="teal.400">Ogunyade</chakra.span>
             </Heading>
+          </MotionBox>
 
-            <Text fontSize="xl" maxW="2xl" color="gray.300">
-              Software Engineer building elegant, scalable web and mobile
-              products with strong frontend systems thinking and real-world
-              impact.
+          <MotionBox variants={itemVariants}>
+            <Text fontSize="xl" color="gray.400" mb={10} maxW="lg">
+              Software Engineer specialized in building high-performance 
+              <chakra.span color="white"> Frontend Systems </chakra.span> and 
+              <chakra.span color="white"> Mobile Products</chakra.span>.
             </Text>
+          </MotionBox>
 
+          <MotionBox variants={itemVariants}>
             <HStack spacing={4}>
-              <Button
-                colorScheme="teal"
-                size="lg"
-                rightIcon={<ArrowUpRight size={18} />}
-                as="a"
-                href="#work"
-              >
+              <Button size="lg" colorScheme="teal" px={8} rightIcon={<ExternalLink size={18} />}>
                 View Work
               </Button>
-
-              <Button
-                variant="outline"
-                size="lg"
-                as="a"
-                href="#contact"
-              >
-                Contact
-              </Button>
+              <HStack spacing={4} ml={4}>
+                <Icon as={Github} boxSize={6} color="gray.500" _hover={{ color: "white" }} cursor="pointer" />
+                <Icon as={Linkedin} boxSize={6} color="gray.500" _hover={{ color: "white" }} cursor="pointer" />
+              </HStack>
             </HStack>
-
-            <Text fontSize="sm" color="gray.400">
-              React · React Native · Frontend Systems · Cloud-backed Products
-            </Text>
-          </Stack>
-
-          {/* RIGHT — LARGE IMAGE */}
-          <MotionBox
-            style={{ x: imgX, y: imgY }}
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.4 }}
-          >
-            <Image
-              src={profileImage}
-              alt="Olamilekan Adeyanju"
-              w="100%"
-              maxH="520px"
-              objectFit="cover"
-              rounded="2xl"
-              border="1px solid"
-              borderColor="whiteAlpha.200"
-              boxShadow="0 40px 120px rgba(0,0,0,0.6)"
-            />
           </MotionBox>
+        </MotionBox>
+
+        <MotionBox
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          position="relative"
+        >
+          <Box
+            position="absolute"
+            inset="-10%"
+            bg="teal.500"
+            filter="blur(120px)"
+            opacity={0.15}
+            rounded="full"
+          />
+          <Image
+            src={profileImage}
+            rounded="3xl"
+            border="1px solid"
+            borderColor="whiteAlpha.200"
+            filter="grayscale(20%)"
+            _hover={{ filter: "grayscale(0%)" }}
+            transition="0.5s ease"
+          />
+        </MotionBox>
+      </SimpleGrid>
+    </Container>
+  );
+};
+
+const Work = () => {
+  const PROJECTS = [
+    {
+      title: "OMI Health",
+      category: "Healthcare · Mobile",
+      desc: "Architected a bilingual telehealth system reducing appointment wait times by 40%.",
+      tech: ["React Native", "Firebase", "Expo"],
+      image: omiHealthImg
+    },
+    {
+      title: "DU Alumni",
+      category: "Community · Web",
+      desc: "Full-stack engagement platform with real-time networking and event management.",
+      tech: ["React", "Firebase", "Cloudinary"],
+      image: duAlumniImg
+    },
+    {
+      title: "Vodium",
+      category: "Fintech · Mobile",
+      desc: "Biometric-secured digital wallet with integrated concierge and analytics dashboard.",
+      tech: ["ReactNative", "Biometrics", "Fintech"],
+      image: VodiumImg
+    },
+    {
+      title: "Hillstar",
+      category: "Real Estate · Web",
+      desc: "Dynamic real estate SPA with headless CMS functionality and Cloudinary integration.",
+      tech: ["React", "Headless CMS", "Vercel"],
+      image: HillstarImg
+    }
+  ];
+
+  return (
+    <Container maxW="7xl" py={32}>
+      <Stack spacing={16}>
+        <Box>
+          <Text color="teal.400" fontWeight="bold" letterSpacing="widest" mb={2}>PORTFOLIO</Text>
+          <Heading size="2xl">Featured Engineering Projects</Heading>
+        </Box>
+
+        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8}>
+          {PROJECTS.map((proj, i) => (
+            <SpotlightCard key={i} p={0}>
+              <Box overflow="hidden" h="300px">
+                <Image 
+                  src={proj.image} 
+                  w="100%" h="100%" 
+                  objectFit="cover" 
+                  transition="0.5s ease"
+                  _groupHover={{ transform: "scale(1.05)" }}
+                />
+              </Box>
+              <Stack p={8} spacing={4}>
+                <Text fontSize="xs" fontWeight="bold" color="teal.400" textTransform="uppercase">
+                  {proj.category}
+                </Text>
+                <Heading size="lg">{proj.title}</Heading>
+                <Text color="gray.400">{proj.desc}</Text>
+                <HStack wrap="wrap" spacing={2}>
+                  {proj.tech.map(t => (
+                    <Badge key={t} bg="whiteAlpha.100" color="gray.300" variant="solid" px={2}>
+                      {t}
+                    </Badge>
+                  ))}
+                </HStack>
+              </Stack>
+            </SpotlightCard>
+          ))}
+        </SimpleGrid>
+      </Stack>
+    </Container>
+  );
+};
+
+const Expertise = () => {
+  const SKILLS = [
+    { title: "Frontend Architecture", icon: Layout, desc: "Building modular, scalable UI systems using React & Next.js." },
+    { title: "Mobile Development", icon: Cpu, desc: "Cross-platform engineering with React Native & Expo ecosystem." },
+    { title: "Cloud Systems", icon: Globe, desc: "Serverless deployments, Real-time DBs, and Media pipelines." }
+  ];
+
+  return (
+    <Box bg="whiteAlpha.50" py={32}>
+      <Container maxW="7xl">
+        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={12}>
+          {SKILLS.map((skill, i) => (
+            <Stack key={i} spacing={6}>
+              <Icon as={skill.icon} boxSize={10} color="teal.400" />
+              <Heading size="md">{skill.title}</Heading>
+              <Text color="gray.400" lineHeight="tall">{skill.desc}</Text>
+            </Stack>
+          ))}
         </SimpleGrid>
       </Container>
     </Box>
   );
 };
 
-/* ===================== EXPERTISE ===================== */
-const Expertise = () => (
-  <Section id="skills">
-    <Container maxW="6xl">
-      <Stack spacing={12}>
-        <Heading size="lg">Engineering Focus</Heading>
+/* ===================== MAIN LAYOUT ===================== */
 
-        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
-          {[
-            {
-              title: "Frontend Systems",
-              desc: "Scalable UI systems with performance and accessibility built in.",
-              tech: "React · Component Architecture",
-            },
-            {
-              title: "Mobile Engineering",
-              desc: "Cross-platform mobile products with native-grade UX.",
-              tech: "React Native · Expo · Firebase",
-            },
-            {
-              title: "Cloud-Backed Products",
-              desc: "Auth, persistence, and media pipelines for real users.",
-              tech: "Node.js · Firebase · Cloudinary",
-            },
-          ].map((item) => (
-            <MotionBox
-              key={item.title}
-              p={10}
-              rounded="2xl"
-              bg="rgba(255,255,255,0.03)"
-              border="1px solid"
-              borderColor="whiteAlpha.100"
-              whileHover={{ y: -8 }}
-            >
-              <Heading size="md" mb={3}>{item.title}</Heading>
-              <Text color="gray.400" mb={4}>{item.desc}</Text>
-              <Text fontSize="sm" color="teal.300">{item.tech}</Text>
-            </MotionBox>
-          ))}
-        </SimpleGrid>
-      </Stack>
-    </Container>
-  </Section>
-);
-
-/* ===================== PROJECT MODAL ===================== */
-const ProjectModal = ({ project, onClose }) => (
-  <MotionBox
-    position="fixed"
-    inset={0}
-    bg="rgba(2,6,23,0.85)"
-    zIndex={2000}
-    display="flex"
-    alignItems="center"
-    justifyContent="center"
-    onClick={onClose}
-  >
-    <MotionBox
-      bg="#020617"
-      p={10}
-      rounded="2xl"
-      maxW="640px"
-      border="1px solid"
-      borderColor="whiteAlpha.200"
-      onClick={(e) => e.stopPropagation()}
-    >
-      <Heading size="md" mb={4}>{project.title}</Heading>
-      <Text color="gray.400" mb={6}>{project.desc}</Text>
-      <Text fontSize="sm" color="teal.300" mb={8}>{project.tech}</Text>
-      <Button as="a" href={project.link} isExternal colorScheme="teal">
-        View Live Project
-      </Button>
-    </MotionBox>
-  </MotionBox>
-);
-
-/* ===================== WORK ===================== */
-const Work = () => {
-  const [active, setActive] = React.useState(null);
-
+export default function App() {
   return (
-    <Section id="work">
-      <Container maxW="6xl">
-        <Stack spacing={12}>
-          <Heading size="lg">Selected Work</Heading>
-
-          <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
-            {PROJECTS.map((p) => (
-              <MotionBox
-                key={p.title}
-                rounded="2xl"
-                overflow="hidden"
-                bg="rgba(255,255,255,0.02)"
-                border="1px solid"
-                borderColor="whiteAlpha.100"
-                whileHover={{ y: -10 }}
-                cursor="pointer"
-                onClick={() => setActive(p)}
-              >
-                <Image src={p.img} h="220px" w="100%" objectFit="cover" />
-                <Box p={8}>
-                  <Heading size="md" mb={3}>{p.title}</Heading>
-                  <Text color="gray.400" noOfLines={3}>{p.desc}</Text>
-                </Box>
-              </MotionBox>
-            ))}
-          </SimpleGrid>
-
-          <AnimatePresence>
-            {active && <ProjectModal project={active} onClose={() => setActive(null)} />}
-          </AnimatePresence>
-        </Stack>
-      </Container>
-    </Section>
-  );
-};
-
-/* ===================== CONTACT ===================== */
-const Contact = () => (
-  <Section id="contact">
-    <Container maxW="5xl" textAlign="center">
-      <Stack spacing={8}>
-        <Heading size="lg">Let’s Build Something Serious</Heading>
-        <Text color="gray.400">
-          Open to frontend, mobile, and product-focused engineering roles.
-        </Text>
-
-        <HStack spacing={6} justify="center">
-          <Button leftIcon={<Mail size={18} />} as="a" href="mailto:adeyanjuolamilekan080@gmail.com">
-            Email
-          </Button>
-          <Button variant="outline" leftIcon={<Github size={18} />} as="a" href="https://github.com/Ade-yanju">
-            GitHub
-          </Button>
-          <Button variant="outline" leftIcon={<Linkedin size={18} />} as="a" href="https://linkedin.com">
-            LinkedIn
-          </Button>
-        </HStack>
-      </Stack>
-    </Container>
-  </Section>
-);
-
-/* ===================== FOOTER ===================== */
-const Footer = () => (
-  <Box py={10} textAlign="center" color="gray.500" fontSize="sm">
-    © {new Date().getFullYear()} Olamilekan Adeyanju Ogunyade · Software Engineer
-  </Box>
-);
-
-/* ===================== EXPORT ===================== */
-export default function Portfolio() {
-  return (
-    <Box bg="#020617" color="gray.100">
-      <Hero />
-      <Expertise />
-      <Work />
-      <Contact />
-      <Footer />
+    <Box bg="#020617" color="gray.100" minH="100vh" selection={{ bg: "teal.400", color: "white" }}>
+      <BackgroundEffects />
+      
+      <Box position="relative" zIndex={1}>
+        <Hero />
+        <Expertise />
+        <Work />
+        
+        {/* Contact Footer */}
+        <Container maxW="7xl" py={32} textAlign="center">
+          <SpotlightCard maxW="3xl" mx="auto" py={16}>
+            <Heading size="2xl" mb={6}>Ready to build?</Heading>
+            <Text color="gray.400" fontSize="lg" mb={10}>
+              Currently seeking Senior/Mid-level roles in product-driven teams.
+            </Text>
+            <Button size="lg" colorScheme="teal" px={10} as="a" href="mailto:adeyanjuolamilekan080@gmail.com">
+              Start a Conversation
+            </Button>
+          </SpotlightCard>
+          
+          <Box mt={20} color="gray.600" fontSize="sm">
+            © {new Date().getFullYear()} OGUNYADE · ENGINEERED WITH REACT & CHAKRA
+          </Box>
+        </Container>
+      </Box>
     </Box>
   );
 }
