@@ -67,7 +67,7 @@ export default function EngineeringDashboard() {
   const [logs, setLogs] = useState([
     {
       cmd: "sys_boot",
-      res: "Olamilekan Ogunyade Engineering Core v5.0.0-PROD initialized.",
+      res: "Joshua Ogunyade Engineering Core v5.0.0-PROD initialized.",
     },
     { cmd: "env_check", res: "Identity Verified: Software Architect." },
   ]);
@@ -217,7 +217,7 @@ export default function EngineeringDashboard() {
               <HStack color="teal.500" mb={3} spacing={3}>
                 <Activity size={18} />
                 <Text fontSize="xs" fontWeight="black" letterSpacing="0.4em">
-                  SOFTWARE_ENGINEER
+                  SYSTEM_ENGINEER
                 </Text>
               </HStack>
               <Heading
@@ -226,7 +226,7 @@ export default function EngineeringDashboard() {
                 lineHeight="0.85"
                 fontWeight="900"
               >
-                OLAMILEKAN <br />
+                JOSHUA <br />
                 <chakra.span
                   color="teal.500"
                   textShadow="0 0 25px rgba(20, 184, 166, 0.3)"
