@@ -68,7 +68,7 @@ export default function EngineeringDashboard() {
   const [logs, setLogs] = useState([
     {
       cmd: "sys_boot",
-      res: "Joshua Ogunyade Engineering Core v5.0.0-PROD initialized.",
+      res: "Olamilekan Ogunyade Engineering Core v5.0.0-PROD initialized.",
     },
     { cmd: "env_check", res: "Identity Verified: Software Architect." },
   ]);
@@ -227,7 +227,7 @@ export default function EngineeringDashboard() {
                 lineHeight="0.85"
                 fontWeight="900"
               >
-                JOSHUA <br />
+                OLAMILEKAN <br />
                 <chakra.span
                   color="teal.500"
                   textShadow="0 0 25px rgba(20, 184, 166, 0.3)"
