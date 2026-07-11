@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Olamilekan O.",
+  "name": "Olamilekan Ogunyade — Full-Stack Software Engineer",
+  "description": "Portfolio of Ogunyade Olamilekan Adeyanju — full-stack software engineer (React, Next.js, React Native, Node.js, Laravel).",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +21,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#060608",
+  "background_color": "#f8f7f4"
 }

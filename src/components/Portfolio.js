@@ -351,106 +351,109 @@ const SECTIONS = [
   "contact",
 ];
 const TICKER_ITEMS = [
-  "React.js",
-  "Next.js",
-  "React Native",
-  "Expo",
-  "Node.js",
-  "Firebase",
+  "Next.js 14",
   "TypeScript",
+  "React Native",
+  "Node.js",
+  "NestJS",
+  "Laravel",
+  "PostgreSQL · Prisma",
+  "MongoDB",
+  "Redis",
+  "Docker",
+  "GitHub Actions CI/CD",
+  "Paystack",
+  "WhatsApp Cloud API",
   "Tailwind CSS",
-  "Framer Motion",
-  "Vercel",
-  "GraphQL",
-  "Cloudinary",
-  "EAS Build",
-  "Figma → Code",
+  "PWA",
 ];
 
 /* ── PROJECT TABS ── */
 const PROJECTS_BY_TAB = {
+  Fullstack: {
+    featured: {
+      index: "[FS_01] — FLAGSHIP · FINTECH SAAS",
+      name: "Vodium Ledger",
+      desc: "Multi-tenant BNPL & credit-tracking SaaS — organizations, branches and role-based access behind wildcard-subdomain, white-label storefronts. Self-service checkout with WhatsApp-OTP, digital credit agreements, and an approval workflow that issues credit, schedules repayments and writes ledger entries in a single transaction. Hardened with fail-closed rate limiting, signed sessions, AES-256-GCM secret encryption and immutable audit logs.",
+      tags: [
+        "Next.js 14",
+        "TypeScript",
+        "PostgreSQL / Prisma",
+        "Docker",
+        "Paystack",
+        "WhatsApp Cloud API",
+        "PWA",
+      ],
+      link: "https://vodiumledger.com",
+      linkLabel: "View live →",
+      live: "Live · PWA",
+      arch: [
+        "Wildcard Subdomains → Tenant Resolver",
+        "Next.js 14 App Router + RBAC",
+        "Prisma → PostgreSQL Ledger",
+        "Paystack + WhatsApp Webhooks",
+        "Docker → GitHub Actions → Vercel",
+      ],
+    },
+    cards: [
+      {
+        id: "[FS_02] · SAAS · TICKETING",
+        name: "Tictify",
+        desc: "Event ticketing & management platform — organizers create events, scan QR tickets, track revenue analytics and withdraw earnings. Paystack payments, JWT auth, email-delivered invites, server-generated QR + client-side PDF tickets, recharts dashboards and push notifications.",
+        tags: [
+          "React (Vite)",
+          "Node.js / Express",
+          "MongoDB",
+          "Paystack",
+          "JWT",
+          "QR + PDF",
+        ],
+        link: "https://www.tictify.ng/",
+        linkLabel: "View live →",
+      },
+      {
+        id: "[FS_03] · COMMUNITY",
+        name: "DU Alumni Platform",
+        desc: "Alumni portal for Dominion University — profile management, discussion forum and admin dashboard on a real-time Firestore backend, with Cloudinary media, responsive UI and secure auth.",
+        tags: ["React", "Firebase / Firestore", "Cloudinary", "Vercel"],
+        link: "https://du-alumni-steel.vercel.app/",
+        linkLabel: "View live →",
+      },
+    ],
+  },
   Mobile: {
     featured: {
-      index: "[RN_01] — FLAGSHIP · MOBILE",
+      index: "[RN_01] — FLAGSHIP · MOBILE · mHEALTH",
       name: "OMI Health",
-      desc: "Full-featured telemedicine React Native app powering appointment scheduling, patient records, and real-time doctor-patient chat — Firebase real-time sync, serverless backend, sub-100ms data delivery. Live on Android.",
+      desc: "Bilingual (English / Yoruba) telemedicine app — real-time chat with text, audio and video, doctor–patient matching, appointment booking and text-to-speech for accessibility. Firebase Auth / Firestore / Storage with Cloudinary media and secure role-based login. Live on Android.",
       tags: [
         "React Native",
         "Expo",
         "Firebase",
         "Firestore",
-        "Node.js",
+        "Cloudinary",
         "EAS Build",
       ],
       link: "https://expo.dev/artifacts/eas/s8LgczG1J7EgAwLrMLdLno.apk",
       linkLabel: "Download APK →",
       live: "Live on Android",
       arch: [
-        "Auth Layer → Firestore DB",
-        "React Native UI Layer",
-        "Serverless Functions",
-        "EAS Build → APK / IPA",
+        "Firebase Auth → Role-Based Access",
+        "React Native (Expo) UI",
+        "Firestore Real-Time Sync",
+        "Cloudinary Media + Text-to-Speech",
+        "EAS Build → APK",
       ],
     },
     cards: [
       {
         id: "[RN_02] · FINTECH",
         name: "VODIUM",
-        desc: "Cross-platform fintech wallet — secure transaction flows, encrypted local state, real-time balance sync, and biometric auth on Android & iOS.",
+        desc: "Cross-platform fintech companion app for the Vodium Ledger platform — secure transaction flows, encrypted local state, real-time balance sync, and biometric auth on Android & iOS.",
         tags: ["React Native", "Secure Storage", "REST API", "Biometrics"],
         link: "https://expo.dev/accounts/olamilekan42424242/projects/vodium/builds/e0c811aa-9c81-4367-ac8e-e174167d0f60",
         linkLabel: "Download APK →",
         live: "Live on Android",
-      },
-      // {
-      //   id: "[RN_03] · AGRITECH",
-      //   name: "FarmPulse",
-      //   desc: "Agritech mobile app enabling farmers to log crop data, view weather insights, and connect with cooperatives — real-time push notifications via FCM.",
-      //   tags: ["React Native", "Expo", "FCM", "Maps"],
-      //   link: "#",
-      //   linkLabel: "Case study coming →",
-      // },
-    ],
-  },
-  Fullstack: {
-    featured: {
-      index: "[FS_01] — FULLSTACK · COMMUNITY",
-      name: "DU Alumni Platform",
-      desc: "Alumni engagement platform with Cloudinary media, event listings, member directories, editorial CMS integration, and a custom Node.js API layer with role-based access.",
-      tags: ["React", "Node.js", "Cloudinary", "CMS", "Vercel"],
-      link: "https://du-alumni-steel.vercel.app/",
-      linkLabel: "View live →",
-      live: "Live",
-      arch: [
-        "CMS Content Layer",
-        "React App Router",
-        "Node.js API + Auth",
-        "Cloudinary CDN → Edge",
-      ],
-    },
-    cards: [
-      {
-        id: "[FS_02] · API",
-        name: "OMI Health API",
-        desc: "Serverless Node.js + Firebase backend powering the OMI Health mobile app — appointment scheduling, patient records, and real-time event streaming.",
-        tags: ["Node.js", "Firebase", "Firestore", "REST", "Serverless"],
-        link: "#",
-        linkLabel: "Private repo →",
-      },
-      {
-        id: "[FS_03] · SAAS",
-        name: "Tictify",
-        desc: "SaaS platform for QR code-based ticketing and event management, dynamic QR generation, secure PDF ticketing, and seamless Paystack payment integration.",
-        tags: [
-          "React (VITE)",
-          "QR code generation",
-          "Paystack",
-          "PDF",
-          "MongoDB",
-          "JWT",
-        ],
-        link: "https://www.tictify.ng/",
-        linkLabel: "View live →",
       },
     ],
   },
@@ -494,103 +497,111 @@ const PROJECTS_BY_TAB = {
 const STACK = [
   {
     layer: "Layer 01 / Frontend",
-    title: "Web UI",
+    title: "Web & Mobile UI",
     items: [
-      "React.js & Next.js 14",
-      "TypeScript",
-      "Tailwind CSS",
-      "Framer Motion",
-      "Chakra UI",
-    ],
-  },
-  {
-    layer: "Layer 02 / Mobile",
-    title: "Native Apps",
-    items: [
+      "React & Next.js 14 (App Router)",
       "React Native (Expo)",
-      "EAS Build & Submit",
-      "Reanimated 3",
-      "Expo Router",
-      "Native Modules",
+      "TypeScript",
+      "Tailwind CSS · Redux",
+      "PWA · Figma → Code",
     ],
   },
   {
-    layer: "Layer 03 / Backend",
-    title: "Server & Data",
+    layer: "Layer 02 / Backend",
+    title: "APIs & Services",
     items: [
-      "Node.js + Express",
+      "Node.js (Express / NestJS)",
+      "Laravel (PHP)",
+      "REST APIs & Webhooks",
+      "Prisma ORM",
+      "RBAC · JWT/HMAC · OTP auth",
+    ],
+  },
+  {
+    layer: "Layer 03 / Data",
+    title: "Databases",
+    items: [
+      "PostgreSQL",
+      "MongoDB",
       "Firebase / Firestore",
-      "Serverless Functions",
-      "REST & GraphQL",
-      "WebSockets",
+      "Redis",
+      "Supabase",
     ],
   },
   {
-    layer: "Layer 04 / Infra",
-    title: "Deploy & Scale",
+    layer: "Layer 04 / DevOps",
+    title: "Ship & Operate",
     items: [
-      "Vercel (Edge / ISR)",
-      "Cloudinary CDN",
-      "GitHub Actions CI",
-      "App & Play Store",
-      "Lighthouse 95+ perf",
+      "Docker",
+      "GitHub Actions CI/CD",
+      "Vercel",
+      "Sentry monitoring",
+      "Cron & background jobs",
     ],
   },
 ];
 const SKILLS = [
-  "React Query",
-  "Zustand",
-  "Redux Toolkit",
-  "Zod",
-  "React Hook Form",
-  "Storybook",
-  "Vitest",
-  "Playwright",
-  "Prisma",
-  "Supabase",
-  "Push Notifications",
-  "Deep Linking",
   "Paystack",
-  "Flutterwave",
-  "Stripe",
-  "Mapbox",
-  "ML Kit",
-  "OpenAI API",
-  "Figma → Code",
-  "WCAG A11y",
+  "Ercaspay",
+  "WhatsApp Cloud API",
+  "Resend / Nodemailer",
+  "Cloudinary",
+  "Signature-Verified Webhooks",
+  "AES-256-GCM Encryption",
+  "Fail-Closed Rate Limiting",
+  "Immutable Audit Logging",
+  "Multi-Tenancy",
+  "QR + PDF Generation",
+  "Recharts",
+  "Push Notifications",
+  "EAS Build",
+  "Git / GitHub",
+  "UI/UX · Figma",
+  "Data Structures & Algorithms",
+  "Application Security",
+  "Python",
 ];
 const EXPERIENCE = [
   {
     date: "2023 — Present",
-    role: "Senior Full Stack Engineer",
-    company: "// FREELANCE & CONTRACT",
-    body: "Delivering 10+ web and mobile solutions for startups and SMEs across health, fintech, agritech, and real estate. Owning architecture decisions, CI/CD pipelines, and App Store releases end-to-end.",
+    role: "Full-Stack Product Engineer",
+    company: "// INDEPENDENT PRODUCTS",
+    body: "Designing, shipping and operating my own production systems — Vodium Ledger (multi-tenant fintech / BNPL SaaS), Tictify (event ticketing) and OMI-Health (bilingual mHealth) — owning architecture, security hardening, CI/CD and cloud deployment end-to-end.",
     current: true,
   },
   {
-    date: "2022 — 2023",
-    role: "React Native Developer",
-    company: "// VODIUM",
-    body: "Built and maintained a cross-platform fintech application. Led mobile architecture, biometric auth, encrypted storage, and Play/App Store release pipelines.",
+    date: "Sep 2025 — Feb 2026",
+    role: "Full-Stack Developer (Contract)",
+    company: "// CYCONET",
+    body: "Solely built a university portal end-to-end on behalf of the company, and served as the full-stack engineer across 10+ client projects — from database schema and APIs to deployed UI.",
   },
   {
-    date: "2021 — 2022",
-    role: "Frontend Developer",
-    company: "// HILLSTAR GROUP",
-    body: "Developed a high-performance real estate platform from scratch. Sub-2s page loads using React + headless CMS + SSG on Vercel Edge.",
+    date: "May 2025 — Aug 2025",
+    role: "Web Design Intern",
+    company: "// FLEXISAF LIMITED · REMOTE",
+    body: "Delivered weekly UI/UX design deliverables in Figma to product specifications, translating requirements into developer-ready interfaces.",
+  },
+  {
+    date: "2023 & 2024",
+    role: "Software Intern (SIWES)",
+    company: "// ROWARE LIMITED",
+    body: "Two placements contributing to frontend development and software support on the company's PQAPI project; built foundations in Git, internal tooling and web architecture in a team.",
   },
 ];
 const LEVELING_UP = [
   "System Design",
-  "Rust",
   "AWS Fundamentals",
+  "Kubernetes",
+  "LLM & AI integrations",
   "tRPC",
-  "Bun.js",
-  "LLM integrations",
-  "Docker",
-  "Kubernetes basics",
+  "Rust",
+  "Event-Driven Architecture",
 ];
 const PHILOSOPHY = [
+  {
+    label: "Security By Default",
+    text: "Fintech taught me to assume hostile input. Fail-closed rate limiting, signed & expiring sessions, AES-256-GCM encrypted secrets, immutable audit logs — standard practice, not afterthoughts.",
+  },
   {
     label: "Performance First",
     text: "Every millisecond counts. I write code with Lighthouse scores, bundle sizes, and real-world network conditions in mind from the first commit.",
@@ -838,7 +849,7 @@ function Terminal() {
           <span className="t-prompt">ade@engine</span> ~ $ whoami
         </div>
         <div className="t-out">
-          <span className="t-acc2">→</span> Senior Software Engineer
+          <span className="t-acc2">→</span> Full-Stack Software Engineer
         </div>
         <br />
         <div>
@@ -846,15 +857,15 @@ function Terminal() {
         </div>
         <div className="t-out">{"{"}</div>
         <div className="t-out">
-          &nbsp;&nbsp;<span className="t-acc">"shipped"</span>: 20,
+          &nbsp;&nbsp;<span className="t-acc">"shipped"</span>: "15+",
         </div>
         <div className="t-out">
           &nbsp;&nbsp;<span className="t-acc">"stack"</span>:
-          ["React","RN","Node","Firebase"],
+          ["Next.js","RN","Node","Laravel"],
         </div>
         <div className="t-out">
-          &nbsp;&nbsp;<span className="t-acc">"platforms"</span>:
-          ["Web","iOS","Android"],
+          &nbsp;&nbsp;<span className="t-acc">"domains"</span>:
+          ["Fintech","Ticketing","mHealth"],
         </div>
         <div className="t-out">
           &nbsp;&nbsp;<span className="t-acc2">"status"</span>:{" "}
@@ -900,16 +911,19 @@ function Hero() {
           <div>
             <div className="availability">
               <span className="status-dot" />
-              Open to senior &amp; lead roles — Lagos / Remote
+              Available for hire — Remote · Onsite · Hybrid
             </div>
-            <div className="hero-eyebrow">Full Stack · Mobile · Systems</div>
+            <div className="hero-eyebrow">
+              Full Stack · Web &amp; Mobile · Fintech SaaS
+            </div>
             <h1 className="hero-name">
               OLAMILEKAN<span className="line2">Ogunyade.</span>
             </h1>
             <p className="hero-desc">
-              I build performant, production-grade web and mobile systems — from
-              zero to scale. 20+ shipped products, clean architecture,
-              relentless attention to craft.
+              I ship production web and mobile systems across the JavaScript /
+              TypeScript ecosystem — most recently architecting a multi-tenant
+              fintech (BNPL) SaaS end-to-end with production-grade security,
+              CI/CD, Docker and cloud deployment.
             </p>
             <div className="hero-ctas">
               <a href="#projects" className="btn-primary">
@@ -927,6 +941,14 @@ function Hero() {
                 View my work
               </a>
               <a
+                href="/resume.html"
+                className="btn-ghost"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Résumé ↗
+              </a>
+              <a
                 href="mailto:adeyanjuolamilekan080@gmail.com"
                 className="btn-ghost"
               >
@@ -935,9 +957,9 @@ function Hero() {
             </div>
             <div className="hero-stats">
               {[
-                ["20+", "Shipped"],
-                ["5yr", "Experience"],
-                ["99%", "Uptime"],
+                ["15+", "Projects shipped"],
+                ["7+", "Live products"],
+                ["10+", "Client builds"],
               ].map(([n, l]) => (
                 <div key={l} className="stat">
                   <div className="stat-num">{n}</div>
@@ -959,7 +981,7 @@ function Hero() {
    PROJECTS (tabbed)
 ───────────────────────────────────────────── */
 function Projects() {
-  const [activeTab, setActiveTab] = useState("Mobile");
+  const [activeTab, setActiveTab] = useState("Fullstack");
   const tabs = Object.keys(PROJECTS_BY_TAB);
   const { featured, cards } = PROJECTS_BY_TAB[activeTab];
 
@@ -976,10 +998,10 @@ function Projects() {
         {/* Metrics */}
         <FadeUp delay={0.05} className="metric-row">
           {[
-            ["20+", "Production apps"],
-            ["100K+", "Lines prod code"],
-            ["4★", "Avg store rating"],
-            ["5ms", "Avg API latency"],
+            ["15+", "Projects shipped"],
+            ["7+", "Live in production"],
+            ["10+", "Client builds delivered"],
+            ["3", "Platforms · Web / Android / iOS"],
           ].map(([v, k]) => (
             <div key={k} className="metric">
               <div className="metric-val">{v}</div>
@@ -1163,18 +1185,25 @@ function Experience() {
           <FadeUp delay={0.2}>
             <div style={{ marginBottom: 48 }}>
               <div className="section-index" style={{ marginBottom: 24 }}>
-                Education
+                Education &amp; Certification
               </div>
               <div className="timeline-role" style={{ marginBottom: 6 }}>
                 B.Sc. Software Engineering
               </div>
               <div className="timeline-company" style={{ marginBottom: 12 }}>
-                // DOMINION UNIVERSITY
+                {"// DOMINION UNIVERSITY, IBADAN"}
               </div>
-              <p className="timeline-body">
-                Algorithms, systems design, and software engineering. Led build
-                sessions, code reviews, and open-source initiatives.
+              <p className="timeline-body" style={{ marginBottom: 28 }}>
+                Software engineering, algorithms and systems design — and built
+                the university's live alumni management platform along the way.
               </p>
+              <div
+                className="timeline-role"
+                style={{ marginBottom: 6, fontSize: 17 }}
+              >
+                ALX AI Starter Certificate
+              </div>
+              <div className="timeline-company">{"// ALX AFRICA · 2025"}</div>
             </div>
             <div>
               <div className="section-index" style={{ marginBottom: 24 }}>
@@ -1213,8 +1242,8 @@ function About() {
             <p className="philosophy-text">
               I believe great software is <em>invisible</em>. The best interface
               is the one users never have to think about. I obsess over the gap
-              between "it works" and "it <em>feels</em> right" — across 20+
-              shipped products.
+              between "it works" and "it <em>feels</em> right" — across 15+
+              shipped products, from fintech ledgers to bilingual healthcare.
             </p>
           </FadeUp>
           <FadeUp delay={0.2}>
@@ -1246,9 +1275,17 @@ const IconLinkedin = () => (
     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
   </svg>
 );
-const IconTwitter = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.74l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+const IconFile = () => (
+  <svg
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+  >
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+    <polyline points="14 2 14 8 20 8" />
   </svg>
 );
 
@@ -1261,9 +1298,13 @@ function Contact() {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
   const submit = (e) => {
     e.preventDefault();
-    alert(
-      "Message received! Wire this to Formspree or your preferred backend.",
+    const subject = encodeURIComponent(
+      `Portfolio inquiry${form.name ? ` from ${form.name}` : ""}`,
     );
+    const body = encodeURIComponent(
+      `${form.message}\n\n— ${form.name}${form.email ? ` (${form.email})` : ""}`,
+    );
+    window.location.href = `mailto:adeyanjuolamilekan080@gmail.com?subject=${subject}&body=${body}`;
   };
   return (
     <section className="section" id="contact">
@@ -1279,8 +1320,12 @@ function Contact() {
             <a
               href="mailto:adeyanjuolamilekan080@gmail.com"
               className="contact-email"
+              style={{ marginBottom: 12 }}
             >
               adeyanjuolamilekan080@gmail.com
+            </a>
+            <a href="tel:+2347019575717" className="contact-email">
+              +234 701 957 5717
             </a>
             <div className="contact-links">
               <a
@@ -1292,7 +1337,7 @@ function Contact() {
                 <IconGithub /> GitHub
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/ogunyade-olamilekan-91807223a"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-link"
@@ -1300,12 +1345,12 @@ function Contact() {
                 <IconLinkedin /> LinkedIn
               </a>
               <a
-                href="https://twitter.com"
+                href="/resume.html"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-link"
               >
-                <IconTwitter /> Twitter / X
+                <IconFile /> Résumé
               </a>
             </div>
           </FadeUp>
