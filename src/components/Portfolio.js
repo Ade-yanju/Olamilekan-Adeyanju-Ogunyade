@@ -738,6 +738,60 @@ footer{background:var(--ink-surface);border-color:rgba(255,250,241,.14);}
 @media(max-width:640px){
   .nav-inner{height:74px;}.section{padding:88px 0;}.hero{padding-top:105px;padding-bottom:65px;}.hero-name{font-size:clamp(51px,15vw,75px);}.line2{font-size:clamp(54px,14vw,72px);}.hero-desc{font-size:17px;}.hero-visual{min-height:390px;}.product-window h3{font-size:29px;}.hero-note{left:0;}.metric-val{font-size:34px;}.metric-key{font-size:11px;}.project-featured-content{padding:32px 24px;}.project-featured-visual{padding:22px;}.project-name{font-size:34px;}.service-card{padding:27px 23px;}.timeline-role{font-size:26px;}.philosophy-text{font-size:29px;}.contact-right{padding:25px 20px;}
 }
+
+/* ── STANDALONE HERO ── */
+#hero{min-height:100vh;min-height:100svh;padding:82px 0 54px;display:flex;align-items:center;}
+#hero .container{width:100%;}
+#hero .hero-grid{grid-template-columns:minmax(0,1.12fr) minmax(360px,.88fr);gap:70px;align-items:center;}
+#hero .availability{display:none;}
+#hero .hero-eyebrow{margin-bottom:28px;}
+#hero .hero-name{font-size:clamp(68px,7.3vw,104px);line-height:.88;max-width:690px;margin-bottom:30px;}
+#hero .hero-line{display:block;}
+#hero .line2{font-size:clamp(70px,7vw,100px);}
+#hero .hero-desc{max-width:515px;margin-bottom:32px;}
+#hero .hero-ctas{margin-bottom:35px;}
+#hero .hero-stats{display:flex;align-items:center;gap:0;width:max-content;max-width:100%;background:transparent;border:0;box-shadow:none;overflow:visible;}
+#hero .stat{display:flex;align-items:baseline;gap:8px;background:transparent;padding:0 18px 0 0;}
+#hero .stat:not(:last-child){margin-right:18px;border-right:1px solid var(--border2);}
+#hero .stat-num{font-family:Arial,"Helvetica Neue",sans-serif;font-size:18px;font-weight:700;color:var(--text);}
+#hero .stat-label{font-size:11px;color:var(--muted);white-space:nowrap;}
+#hero .hero-visual{min-height:500px;}
+#hero .hero-visual::before{width:380px;height:380px;background:rgba(216,167,77,.16);filter:blur(42px);top:62px;right:10px;}
+#hero .hero-card-back,#hero .hero-note{display:none;}
+#hero .product-window{width:min(100%,460px);box-shadow:0 30px 70px rgba(32,27,24,.17);}
+#hero .product-window-top{padding:16px 20px;}
+#hero .product-window-body{padding:31px 28px 29px;}
+#hero .product-window h3{font-size:clamp(32px,3vw,46px);max-width:340px;}
+#hero .mini-kpi-grid{display:none;}
+#hero .whatsapp-card{margin-top:28px;padding:16px;}
+#hero .whatsapp-card strong{font-size:14px;}
+#hero .whatsapp-card span{font-size:11px;}
+#hero .window-logo{width:28px;height:28px;}
+#hero .window-live{font-size:10px;}
+@media(max-width:1024px){
+  #hero{min-height:auto;padding-top:128px;}
+  #hero .hero-grid{grid-template-columns:1fr;gap:36px;}
+  #hero .hero-right{max-width:520px;margin:0 auto;width:100%;}
+}
+@media(max-width:640px){
+  #hero{padding:112px 0 62px;}
+  #hero .hero-eyebrow{font-size:13px;margin-bottom:22px;}
+  #hero .hero-name{font-size:clamp(54px,15.5vw,78px);line-height:.9;margin-bottom:24px;}
+  #hero .line2{font-size:clamp(57px,14.5vw,76px);}
+  #hero .hero-desc{font-size:17px;line-height:1.65;margin-bottom:28px;}
+  #hero .hero-ctas{display:flex;flex-direction:column;align-items:stretch;gap:10px;margin-bottom:31px;}
+  #hero .btn-primary,#hero .btn-ghost{width:100%;justify-content:center;}
+  #hero .hero-stats{width:100%;display:grid;grid-template-columns:repeat(3,1fr);}
+  #hero .stat{display:block;padding:0 10px 0 0;}
+  #hero .stat:not(:last-child){margin-right:8px;}
+  #hero .stat-num{display:block;font-size:17px;margin-bottom:4px;}
+  #hero .stat-label{display:block;white-space:normal;line-height:1.25;}
+  #hero .hero-visual{min-height:360px;}
+  #hero .hero-visual::before{width:285px;height:285px;top:32px;right:8px;}
+  #hero .product-window{width:96%;}
+  #hero .product-window-body{padding:26px 22px 22px;}
+  #hero .product-window h3{font-size:31px;}
+}
 `;
 
 if (!document.getElementById("port-styles")) {
@@ -1219,7 +1273,7 @@ function Nav({ theme, toggleTheme }) {
               onClick={toggleTheme}
               aria-label="Toggle theme"
             >
-              {theme === "dark" ? "☀ Light" : "◑ Dark"}
+              {theme === "dark" ? "Light theme" : "Dark theme"}
             </button>
           </div>
           <button
@@ -1240,7 +1294,7 @@ function Nav({ theme, toggleTheme }) {
           </a>
         ))}
         <button className="theme-btn" onClick={toggleTheme}>
-          {theme === "dark" ? "☀ Light mode" : "◑ Dark mode"}
+          {theme === "dark" ? "Light theme" : "Dark theme"}
         </button>
       </div>
     </>
@@ -1284,12 +1338,11 @@ function SideDots() {
 function HeroVisual() {
   return (
     <div className="hero-visual" aria-label="Preview of a WhatsApp-powered product dashboard">
-      <div className="hero-card-back" />
       <div className="product-window">
         <div className="product-window-top">
           <img className="window-logo" src={vodiumLogo} alt="Vodium" />
-          <span>Vodium Ledger / product preview</span>
-          <span className="window-live">Live</span>
+          <span>A live product I built</span>
+          <span className="window-live">Vodium Ledger</span>
         </div>
         <div className="product-window-body">
           <div className="window-kicker">Credit control, simplified</div>
@@ -1311,8 +1364,8 @@ function HeroVisual() {
           <div className="whatsapp-card">
             <div className="whatsapp-icon">⌁</div>
             <div>
-              <strong>WhatsApp bot · online</strong>
-              <span>ADD → guided credit capture → reminder</span>
+              <strong>Works inside WhatsApp</strong>
+              <span>Add credit → send reminders → get paid</span>
             </div>
           </div>
         </div>
@@ -1363,13 +1416,14 @@ function Hero() {
               Web products, mobile apps &amp; WhatsApp experiences
             </div>
             <h1 className="hero-name">
-              Digital products that feel
-              <span className="line2">clear, useful &amp; human.</span>
+              <span className="hero-line">Complex ideas.</span>
+              <span className="line2">Made simple.</span>
             </h1>
             <p className="hero-desc">
-              I’m Olamilekan, a product engineer who turns complex ideas into
-              simple experiences people enjoy using — from Tictify’s
-              WhatsApp ticket bot to Vodium Ledger’s credit platform.
+              I’m Olamilekan, a product engineer creating clear, useful
+              digital experiences for real people and ambitious businesses —
+              from Tictify’s WhatsApp ticket bot to Vodium Ledger’s credit
+              platform.
             </p>
             <div className="hero-ctas">
               <a href="#projects" className="btn-primary">
@@ -1387,18 +1441,10 @@ function Hero() {
                 View my work
               </a>
               <a
-                href="/resume.html"
-                className="btn-ghost"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Résumé ↗
-              </a>
-              <a
                 href="#contact"
                 className="btn-ghost"
               >
-                Plan a WhatsApp bot →
+                Let’s work together →
               </a>
             </div>
             <div className="hero-stats">
