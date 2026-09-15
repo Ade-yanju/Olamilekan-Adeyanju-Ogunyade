@@ -1898,8 +1898,8 @@ function Contact() {
             >
               adeyanjuolamilekan080@gmail.com
             </a>
-            <a href="tel:+2347019575717" className="contact-email">
-              +234 701 957 5717
+            <a href="tel:+2347036309146" className="contact-email">
+              +234 703 630 9146
             </a>
             <div className="contact-links">
               <a
@@ -1919,7 +1919,7 @@ function Contact() {
                 <IconLinkedin /> LinkedIn
               </a>
               <a
-                href="https://wa.me/2347019575717?text=Hi%20Olamilekan%2C%20I%27d%20like%20to%20discuss%20a%20project."
+                href="https://wa.me/2347036309146?text=Hi%20Olamilekan%2C%20I%27d%20like%20to%20discuss%20a%20project."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-link"
