@@ -1,7 +1,7 @@
 /**
  * Olamilekan Ogunyade — Portfolio 2026
- * Updated: Tabbed projects (Mobile / Fullstack / Frontend), Light/Dark mode,
- * Aceternity-inspired components, everything inline.
+ * Client-first portfolio: clear case studies, WhatsApp products and
+ * responsive light/dark presentation, everything inline.
  */
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
@@ -440,7 +440,9 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);}
 /* ── CLEAN, HUMAN-FIRST UI ── */
 .port::before,.port::after{display:none;}
 .cursor,.cursor-ring{display:none!important;}
+.blob{display:none;}
 body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5;}
+.section{scroll-margin-top:90px;}
 .container{max-width:1180px;}
 .topnav{background:rgba(255,255,255,.9);backdrop-filter:blur(16px);}
 [data-theme="dark"] .topnav{background:rgba(16,25,35,.92);}
@@ -512,6 +514,7 @@ body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,
 .project-featured-content{padding:42px;}
 .project-featured-visual{background:var(--bg2);padding:30px;min-height:300px;}
 .ace-card-wrap,.ace-card-inner,.border-beam-wrap,.border-beam-inner{border-radius:18px;}
+.ace-card-wrap::before{display:none;}
 .border-beam::before{display:none;}
 .project-index{font-family:inherit;font-size:12px;letter-spacing:0;color:var(--accent2);margin-bottom:13px;}
 .project-name{font-family:inherit;font-size:clamp(23px,2.3vw,31px);font-weight:700;letter-spacing:-.055em;}
@@ -543,17 +546,24 @@ body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,
 .philosophy-item-label{font-family:inherit;font-size:12px;letter-spacing:0;text-transform:none;}
 .philosophy-item-text{font-family:inherit;font-size:14px;}
 .contact-email{font-family:inherit;font-size:15px;}
+.contact-intro{max-width:450px;color:var(--subtle);font-size:clamp(17px,1.7vw,21px);line-height:1.6;margin-bottom:28px;}
 .social-link{font-family:inherit;font-size:13px;letter-spacing:0;text-transform:none;border-radius:10px;}
 .contact-right{border-radius:16px;box-shadow:0 8px 24px rgba(13,27,42,.05);}
 .form-label{font-family:inherit;font-size:12px;letter-spacing:0;text-transform:none;}
 .form-input,.form-textarea{font-family:inherit;font-size:14px;border-radius:9px;}
 .footer-copy,.footer-right{font-family:inherit;font-size:12px;}
 .footer-right a{font-family:inherit;}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid rgba(21,94,239,.45);outline-offset:3px;}
 @media(max-width:1024px){
   .hero-grid{gap:40px;}.hero-visual{min-height:430px;}
 }
 @media(max-width:640px){
   .section{padding:76px 0;}.hero{padding-top:92px;}.hero-grid{gap:20px;}.hero-name{font-size:clamp(44px,12vw,61px);}.line2{font-size:clamp(46px,11.5vw,60px);}.hero-desc{font-size:16px;}.hero-visual{min-height:390px;}.product-window{width:94%;}.hero-note{left:0;bottom:5px;}.hero-card-back{width:82%;height:84%;}.project-featured-content{padding:30px 22px;}.project-featured-visual{padding:22px;}.metric{padding:19px 14px;}.metric-val{font-size:27px;}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;}
+  .fade-up{opacity:1;transform:none;}
 }
 `;
 
@@ -875,23 +885,23 @@ const LEVELING_UP = [
 const PHILOSOPHY = [
   {
     label: "Careful by default",
-    text: "Fintech taught me to assume hostile input. Fail-closed rate limiting, signed & expiring sessions, AES-256-GCM encrypted secrets, immutable audit logs — standard practice, not afterthoughts.",
+    text: "People trust products that protect their information and make the next step clear. I build with secure foundations and thoughtful edge cases.",
   },
   {
     label: "Fast where it matters",
-    text: "Every millisecond counts. I write code with Lighthouse scores, bundle sizes, and real-world network conditions in mind from the first commit.",
+    text: "A fast response feels like respect. I keep experiences quick and comfortable, even when the connection or device is not perfect.",
   },
   {
     label: "Built to last",
-    text: "I resist the quick fix. Scalable, readable, maintainable architecture is the product — not just the code that ships it.",
+    text: "Good work should keep helping after launch. I create foundations that are easy to understand, improve and hand over.",
   },
   {
     label: "Design and code together",
-    text: 'I read Figma files fluently and bridge the design-engineering gap with precision. No "close enough" compromises.',
+    text: "I care about how a product looks, how it behaves and how it feels in someone’s hands. The details are part of the experience.",
   },
   {
     label: "I take ownership",
-    text: "I treat every project like my name is on it. Because it is.",
+    text: "From the first conversation to launch, I stay close to the work and communicate clearly so nothing gets lost along the way.",
   },
 ];
 
@@ -1005,14 +1015,6 @@ function Cursor() {
 ───────────────────────────────────────────── */
 function Nav({ theme, toggleTheme }) {
   const [open, setOpen] = useState(false);
-  const [time, setTime] = useState("");
-  useEffect(() => {
-    const tick = () =>
-      setTime(new Date().toLocaleTimeString("en-US", { hour12: false }));
-    tick();
-    const id = setInterval(tick, 1000);
-    return () => clearInterval(id);
-  }, []);
   useEffect(() => {
     const onResize = () => {
       if (window.innerWidth > 1024) setOpen(false);
@@ -1037,7 +1039,7 @@ function Nav({ theme, toggleTheme }) {
           <div className="nav-right">
             <div className="nav-status">
               <span className="status-dot" />
-              Open to select projects &nbsp;·&nbsp; {time}
+              Open to select projects
             </div>
             <button
               className="theme-btn"
@@ -1413,25 +1415,25 @@ function Projects() {
 function Services() {
   const services = [
     {
-      number: "01 / PRODUCT BUILD",
+      number: "01 · Product builds",
       icon: "✦",
       title: "Websites & web apps",
       text: "A sharp public-facing experience or a full product interface that makes your business easier to understand and easier to use.",
-      items: ["Marketing websites", "Customer portals", "Responsive, accessible UI"],
+      items: ["Beautiful public websites", "Simple customer portals", "Works on every screen"],
     },
     {
-      number: "02 / SYSTEMS",
+      number: "02 · Business systems",
       icon: "↗",
       title: "SaaS & dashboards",
       text: "The behind-the-scenes systems that help teams see what is happening, make better decisions and keep work moving.",
-      items: ["Role-based dashboards", "Payments & business workflows", "Secure APIs and data"],
+      items: ["Clear business dashboards", "Payments and everyday workflows", "Secure customer data"],
     },
     {
-      number: "03 / AUTOMATION",
+      number: "03 · WhatsApp automation",
       icon: "⌁",
       title: "WhatsApp bots & automation",
       text: "Helpful conversations for customers and teams — from lead capture and bookings to credit tracking, reminders and support.",
-      items: ["WhatsApp Cloud API flows", "Webhook-powered actions", "Human handoff when needed"],
+      items: ["Guided customer conversations", "Orders, bookings and reminders", "Human support when needed"],
     },
   ];
   return (
@@ -1588,10 +1590,10 @@ function About() {
         <div className="philosophy-grid">
           <FadeUp delay={0.1}>
             <p className="philosophy-text">
-              I believe great software is <em>invisible</em>. The best interface
-              is the one users never have to think about. I obsess over the gap
-              between "it works" and "it <em>feels</em> right" — across 15+
-              shipped products, from fintech ledgers to bilingual healthcare.
+              I care about the moments that make a product feel
+              <em> trustworthy</em>: knowing what to do next, getting a clear
+              response and never feeling lost. That is the standard I bring to
+              every website, app and WhatsApp experience I build.
             </p>
           </FadeUp>
           <FadeUp delay={0.2}>
@@ -1660,11 +1662,16 @@ function Contact() {
         <FadeUp className="section-header">
           <div className="section-index">06 · Let’s talk</div>
           <h2 className="section-title">
-            Build something <em>great</em>
+            Let’s make something people <em>love to use</em>
           </h2>
         </FadeUp>
         <div className="contact-grid">
           <FadeUp delay={0.1}>
+            <p className="contact-intro">
+              Have an idea, a business problem or a product that needs a
+              better experience? Tell me what you’re working on and let’s
+              shape the next step together.
+            </p>
             <a
               href="mailto:adeyanjuolamilekan080@gmail.com"
               className="contact-email"
@@ -1740,13 +1747,13 @@ function Contact() {
                   className="form-textarea"
                   name="message"
                   rows={4}
-                  placeholder="Tell me about your project..."
+                  placeholder="What are you hoping to build or improve?"
                   value={form.message}
                   onChange={change}
                 />
               </div>
               <button type="submit" className="btn-primary btn-full">
-                Send message →
+                Start the conversation →
               </button>
             </form>
           </FadeUp>
@@ -1760,22 +1767,14 @@ function Contact() {
    FOOTER
 ───────────────────────────────────────────── */
 function Footer() {
-  const [time, setTime] = useState("");
-  useEffect(() => {
-    const tick = () =>
-      setTime(new Date().toLocaleTimeString("en-US", { hour12: false }));
-    tick();
-    const id = setInterval(tick, 1000);
-    return () => clearInterval(id);
-  }, []);
   return (
     <footer>
       <div className="footer-inner">
         <div className="footer-copy">
-          © 2026 Olamilekan Ogunyade. Built from scratch.
+          © 2026 Olamilekan Ogunyade. Thoughtful digital work.
         </div>
         <div className="footer-right">
-          <span>{time}</span>
+          <span>Ibadan, Nigeria · Available remotely</span>
           <a
             href="https://github.com/Ade-yanju"
             target="_blank"
