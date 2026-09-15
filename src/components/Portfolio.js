@@ -5,6 +5,8 @@
  */
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import profileImage from "../assets/profile.jpg";
+import vodiumLogo from "../assets/Vodium-logo.png";
 
 /* ─────────────────────────────────────────────
    GLOBAL STYLES
@@ -323,6 +325,128 @@ footer{border-top:1px solid var(--border);padding:28px 0;position:relative;z-ind
   .tab-list{width:100%;}
   .tab-btn{flex:1;text-align:center;}
 }
+
+/* ── CLIENT-FIRST REFRESH ── */
+:root{
+  --bg:#f7f6f2;--bg2:#eeece6;--bg3:#e3e0d9;
+  --border:rgba(13,27,42,.1);--border2:rgba(13,27,42,.18);
+  --text:#0d1b2a;--muted:#7b817f;--subtle:#4f5d68;
+  --accent:#155eef;--accent2:#168a68;--yellow:#e6a533;
+  --radius:14px;--card-bg:#fffefa;
+  --shadow:0 14px 40px rgba(13,27,42,.08),0 2px 8px rgba(13,27,42,.05);
+}
+[data-theme="dark"]{
+  --bg:#0b1118;--bg2:#101923;--bg3:#172330;
+  --border:rgba(241,245,242,.09);--border2:rgba(241,245,242,.17);
+  --text:#f1f5f2;--muted:#82909c;--subtle:#b1bcc2;
+  --accent:#80a8ff;--accent2:#5de0b0;--yellow:#f5c451;--card-bg:#101923;
+  --shadow:0 18px 50px rgba(0,0,0,.25),0 2px 8px rgba(0,0,0,.2);
+}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);}
+.port::after{background-image:linear-gradient(rgba(21,94,239,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(21,94,239,.025) 1px,transparent 1px);background-size:96px 96px;}
+.container{max-width:1240px;}
+.topnav{background:rgba(247,246,242,.82);}
+[data-theme="dark"] .topnav{background:rgba(11,17,24,.84);}
+.nav-inner{height:74px;}
+.mobile-menu{inset:74px 0 0;}
+.nav-logo{font-family:var(--font-display);font-weight:800;font-size:15px;letter-spacing:-.04em;color:var(--text);}
+.nav-logo .acc{color:var(--accent);}
+.nav-links{gap:30px;}
+.nav-links a{font-size:10px;letter-spacing:.1em;}
+.hero{min-height:92vh;padding-top:74px;}
+.hero-grid{grid-template-columns:minmax(0,1fr) minmax(390px,470px);gap:70px;}
+.availability{border-radius:999px;padding:10px 16px;margin-bottom:26px;background:rgba(22,138,104,.08);}
+.hero-eyebrow{font-size:10px;color:var(--accent);margin-bottom:22px;}
+.hero-eyebrow::before{background:var(--accent);}
+.hero-name{font-size:clamp(50px,7.3vw,94px);line-height:.94;letter-spacing:-.07em;margin-bottom:28px;}
+.line2{font-size:clamp(48px,6.4vw,84px);color:var(--accent);letter-spacing:-.055em;}
+.hero-desc{font-size:clamp(16px,1.45vw,19px);line-height:1.65;max-width:590px;color:var(--subtle);border-left:3px solid rgba(21,94,239,.3);padding-left:20px;margin-bottom:34px;}
+.hero-ctas{margin-bottom:40px;}
+.btn-primary{border-radius:999px;padding:15px 24px;box-shadow:0 8px 20px rgba(21,94,239,.16);}
+.btn-ghost{border-radius:999px;padding:15px 24px;}
+.hero-stats{border-radius:16px;overflow:hidden;box-shadow:var(--shadow);}
+.stat{padding:20px 18px;}
+.stat-num{font-size:30px;}
+.hero-visual{position:relative;min-height:505px;display:flex;align-items:center;justify-content:center;}
+.hero-visual::before{content:'';position:absolute;width:360px;height:360px;border-radius:50%;background:rgba(21,94,239,.1);filter:blur(12px);top:55px;right:10px;}
+[data-theme="dark"] .hero-visual::before{background:rgba(128,168,255,.12);}
+.hero-card-back{position:absolute;right:0;top:30px;width:82%;height:88%;border:1px solid var(--border2);border-radius:28px;transform:rotate(5deg);background:var(--bg2);}
+.product-window{position:relative;z-index:1;width:min(100%,430px);background:var(--card-bg);border:1px solid var(--border2);border-radius:22px;box-shadow:0 30px 70px rgba(13,27,42,.18);overflow:hidden;transform:rotate(-2deg);}
+.product-window-top{display:flex;align-items:center;gap:10px;padding:16px 18px;border-bottom:1px solid var(--border);background:var(--bg2);font-family:var(--font-mono);font-size:10px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;}
+.window-logo{width:26px;height:26px;object-fit:contain;border-radius:8px;background:#101923;padding:3px;}
+.window-live{margin-left:auto;color:var(--accent2);display:flex;align-items:center;gap:6px;}
+.window-live::before{content:'';width:7px;height:7px;background:var(--accent2);border-radius:50%;}
+.product-window-body{padding:26px 24px 24px;}
+.window-kicker{font-family:var(--font-mono);font-size:10px;letter-spacing:.11em;color:var(--accent);text-transform:uppercase;margin-bottom:10px;}
+.product-window h3{font-size:30px;line-height:1;letter-spacing:-.055em;max-width:300px;margin-bottom:22px;}
+.mini-kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px;}
+.mini-kpi{padding:12px 10px;border:1px solid var(--border);border-radius:10px;background:var(--bg2);}
+.mini-kpi strong{display:block;font-size:17px;letter-spacing:-.04em;margin-bottom:4px;}
+.mini-kpi span{font-family:var(--font-mono);font-size:8px;color:var(--muted);line-height:1.3;text-transform:uppercase;}
+.whatsapp-card{display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:12px;background:#e8f7f0;border:1px solid rgba(22,138,104,.18);color:#145f4b;}
+[data-theme="dark"] .whatsapp-card{background:rgba(93,224,176,.08);color:var(--accent2);}
+.whatsapp-icon{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#1aa26e;color:white;font-size:16px;font-weight:800;}
+.whatsapp-card strong{display:block;font-size:12px;margin-bottom:2px;}
+.whatsapp-card span{font-family:var(--font-mono);font-size:9px;opacity:.78;}
+.hero-note{position:absolute;z-index:2;bottom:30px;left:-22px;display:flex;align-items:center;gap:12px;padding:12px 15px;background:var(--card-bg);border:1px solid var(--border2);border-radius:14px;box-shadow:var(--shadow);font-size:12px;color:var(--subtle);}
+.hero-avatar{width:34px;height:34px;border-radius:50%;object-fit:cover;object-position:center top;border:2px solid var(--card-bg);}
+.hero-note strong{display:block;color:var(--text);font-size:11px;margin-bottom:2px;}
+.hero-note span{font-family:var(--font-mono);font-size:9px;color:var(--muted);}
+.ticker-wrap{margin:38px 0 96px;background:var(--bg2);}
+.ticker-item{font-size:10px;}
+.section{padding:112px 0;}
+.section-header{max-width:760px;}
+.section-title{letter-spacing:-.06em;}
+.section-title em{color:var(--accent);}
+.metric-row{border-radius:16px;overflow:hidden;box-shadow:var(--shadow);}
+.metric{padding:26px 22px;}
+.metric-val{color:var(--text);}
+.project-tabs-wrap{margin-bottom:34px;}
+.tab-list{border-radius:999px;padding:4px;}
+.tab-btn{border:none;border-radius:999px;padding:11px 22px;}
+.tab-btn.active{background:var(--text);color:var(--bg);}
+.tab-btn.active::after{display:none;}
+.ace-card-wrap,.ace-card-inner,.border-beam-wrap,.border-beam-inner{border-radius:22px;}
+.project-featured-content{padding:48px;}
+.project-featured-visual{background:linear-gradient(145deg,var(--bg2),var(--bg3));padding:32px;min-height:320px;}
+.project-featured:hover .project-featured-content{background:var(--bg2);}
+.project-card{padding:34px;border-radius:0;}
+.project-name{font-size:clamp(22px,2.2vw,30px);}
+.project-desc{font-size:14px;line-height:1.75;}
+.tag{border-radius:999px;padding:5px 10px;}
+.live-badge{border-radius:999px;}
+.arch-box{font-size:11px;max-width:300px;}
+.case-preview{width:100%;max-width:360px;padding:22px;background:var(--card-bg);border:1px solid var(--border2);border-radius:18px;box-shadow:var(--shadow);}
+.case-preview-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;font-family:var(--font-mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;}
+.case-preview-title{font-size:22px;line-height:1.05;letter-spacing:-.05em;margin-bottom:18px;}
+.case-preview-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-top:1px solid var(--border);font-family:var(--font-mono);font-size:10px;color:var(--muted);}
+.case-preview-row strong{font-family:var(--font-display);font-size:13px;color:var(--text);}
+.case-preview-status{color:var(--accent2)!important;}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.service-card{height:100%;padding:28px;background:var(--card-bg);border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow);transition:transform .25s,border-color .25s,background .25s;}
+.service-card:hover{transform:translateY(-5px);border-color:var(--accent);}
+.service-number{font-family:var(--font-mono);font-size:10px;color:var(--accent);letter-spacing:.12em;margin-bottom:28px;}
+.service-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;background:rgba(21,94,239,.1);color:var(--accent);font-size:20px;margin-bottom:20px;}
+.service-card h3{font-size:22px;letter-spacing:-.045em;margin-bottom:12px;}
+.service-card p{font-size:13px;line-height:1.7;color:var(--subtle);margin-bottom:20px;}
+.service-card ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.service-card li{font-family:var(--font-mono);font-size:10px;color:var(--muted);display:flex;gap:8px;align-items:flex-start;line-height:1.4;}
+.service-card li::before{content:'✓';color:var(--accent2);font-weight:700;}
+.stack-grid,.contact-right{border-radius:18px;overflow:hidden;box-shadow:var(--shadow);}
+.stack-cell{padding:32px 26px;}
+.skill-pill{border-radius:999px;}
+.philosophy-text{font-size:clamp(19px,2vw,26px);}
+.contact-right{background:var(--card-bg);padding:36px;}
+.social-link{border-radius:999px;}
+.footer-inner{max-width:1240px;}
+@media(max-width:1024px){
+  .hero-grid{grid-template-columns:1fr;}.hero-right{display:block;max-width:560px;margin:0 auto;width:100%;}
+  .hero-visual{min-height:440px;}.services-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:640px){
+  .section{padding:72px 0;}.hero{padding-top:96px;min-height:auto;}.hero-right{display:block;}.hero-visual{min-height:395px;}.product-window{width:94%;}.hero-note{left:-2px;bottom:8px;}.hero-card-back{width:84%;height:86%;}
+  .mini-kpi strong{font-size:14px;}.product-window h3{font-size:25px;}.services-grid{grid-template-columns:1fr;}.project-featured-content{padding:30px 22px;}.project-featured-visual{padding:22px;}.project-card{padding:28px 20px;}.case-preview{max-width:none;}.ticker-wrap{margin:48px 0;}.contact-right{padding:24px 20px;}.tab-list{overflow-x:auto;}.tab-btn{padding:10px 8px;font-size:9px;letter-spacing:.03em;min-width:0;}
+}
 `;
 
 if (!document.getElementById("port-styles")) {
@@ -337,6 +461,7 @@ if (!document.getElementById("port-styles")) {
 ───────────────────────────────────────────── */
 const NAV_LINKS = [
   { label: "Work", href: "#projects" },
+  { label: "Services", href: "#services" },
   { label: "Stack", href: "#stack" },
   { label: "XP", href: "#experience" },
   { label: "About", href: "#about" },
@@ -345,6 +470,7 @@ const NAV_LINKS = [
 const SECTIONS = [
   "hero",
   "projects",
+  "services",
   "stack",
   "experience",
   "about",
@@ -364,6 +490,10 @@ const TICKER_ITEMS = [
   "GitHub Actions CI/CD",
   "Paystack",
   "WhatsApp Cloud API",
+  "WhatsApp Bots & Automation",
+  "Tictify WhatsApp Ticket Bot",
+  "Credit Workflows",
+  "QR Ticketing",
   "Tailwind CSS",
   "PWA",
 ];
@@ -374,7 +504,7 @@ const PROJECTS_BY_TAB = {
     featured: {
       index: "[FS_01] — FLAGSHIP · FINTECH SAAS",
       name: "Vodium Ledger",
-      desc: "Multi-tenant BNPL & credit-tracking SaaS — organizations, branches and role-based access behind wildcard-subdomain, white-label storefronts. Self-service checkout with WhatsApp-OTP, digital credit agreements, and an approval workflow that issues credit, schedules repayments and writes ledger entries in a single transaction. Hardened with fail-closed rate limiting, signed sessions, AES-256-GCM secret encryption and immutable audit logs.",
+      desc: "A credit infrastructure product for Nigerian vendors. Credit is recorded in seconds through WhatsApp, reminders go out automatically, and a clear dashboard shows who owes, what is overdue and what has been recovered — with isolated vendor records and NDPR-minded data handling.",
       tags: [
         "Next.js 14",
         "TypeScript",
@@ -382,31 +512,32 @@ const PROJECTS_BY_TAB = {
         "Docker",
         "Paystack",
         "WhatsApp Cloud API",
-        "PWA",
+        "NDPR-ready workflows",
       ],
       link: "https://vodiumledger.com",
       linkLabel: "View live →",
       live: "Live · PWA",
       arch: [
-        "Wildcard Subdomains → Tenant Resolver",
-        "Next.js 14 App Router + RBAC",
-        "Prisma → PostgreSQL Ledger",
-        "Paystack + WhatsApp Webhooks",
-        "Docker → GitHub Actions → Vercel",
+        "WhatsApp → Guided credit capture",
+        "Auto-reminders → Customer replies",
+        "Dashboard → Owed · paid · overdue",
+        "Isolated vendor records",
+        "Secure cloud deployment",
       ],
     },
     cards: [
       {
         id: "[FS_02] · SAAS · TICKETING",
         name: "Tictify",
-        desc: "Event ticketing & management platform — organizers create events, scan QR tickets, track revenue analytics and withdraw earnings. Paystack payments, JWT auth, email-delivered invites, server-generated QR + client-side PDF tickets, recharts dashboards and push notifications.",
+        desc: "Event ticketing for Nigeria with a WhatsApp buying flow — organisers create events, sell multiple ticket types, track sales and withdraw earnings while guests can discover events, pay securely and receive a unique QR ticket without leaving WhatsApp.",
         tags: [
           "React (Vite)",
           "Node.js / Express",
           "MongoDB",
           "Paystack",
-          "JWT",
-          "QR + PDF",
+          "QR check-in",
+          "WhatsApp ticket bot",
+          "Sales analytics",
         ],
         link: "https://www.tictify.ng/",
         linkLabel: "View live →",
@@ -418,6 +549,49 @@ const PROJECTS_BY_TAB = {
         tags: ["React", "Firebase / Firestore", "Cloudinary", "Vercel"],
         link: "https://du-alumni-steel.vercel.app/",
         linkLabel: "View live →",
+      },
+    ],
+  },
+  Automation: {
+    featured: {
+      index: "[WA_01] — LIVE PRODUCT · WHATSAPP TICKETING",
+      name: "Tictify WhatsApp Ticket Bot",
+      desc: "A ticket-buying experience inside WhatsApp. Guests can browse live events, type an event name to find it, pay by card, payment link or bank transfer, and receive their QR ticket right in the conversation.",
+      tags: [
+        "WhatsApp Cloud API",
+        "Ticket discovery",
+        "Paystack",
+        "QR tickets",
+        "Node.js",
+        "Webhook security",
+      ],
+      link: "https://www.tictify.ng/",
+      linkLabel: "See Tictify live →",
+      live: "Live · WhatsApp",
+      arch: [
+        "WhatsApp → Browse live events",
+        "Event name → Ticket selection",
+        "Payment → Card · link · transfer",
+        "Confirmation → QR ticket in chat",
+        "QR scan → Fast gate entry",
+      ],
+    },
+    cards: [
+      {
+        id: "[WA_02] · LIVE PRODUCT · CREDIT",
+        name: "Vodium WhatsApp flow",
+        desc: "A real product flow that lets vendors add credit in about 15 seconds, then keeps customers on track with respectful due-date reminders and PAID replies.",
+        tags: ["WhatsApp", "Credit workflows", "Reminders", "Dashboard"],
+        link: "https://www.vodiumledger.com/",
+        linkLabel: "See Vodium live →",
+      },
+      {
+        id: "[WA_03] · FOR YOUR BUSINESS",
+        name: "Custom WhatsApp bot systems",
+        desc: "Lead capture, booking, support, order updates and internal alerts — designed around the way your customers already ask for help.",
+        tags: ["Lead capture", "Support", "Bookings", "Notifications"],
+        link: "#contact",
+        linkLabel: "Start a conversation →",
       },
     ],
   },
@@ -882,6 +1056,53 @@ function Terminal() {
   );
 }
 
+function HeroVisual() {
+  return (
+    <div className="hero-visual" aria-label="Preview of a WhatsApp-powered product dashboard">
+      <div className="hero-card-back" />
+      <div className="product-window">
+        <div className="product-window-top">
+          <img className="window-logo" src={vodiumLogo} alt="Vodium" />
+          <span>Vodium Ledger / product preview</span>
+          <span className="window-live">Live</span>
+        </div>
+        <div className="product-window-body">
+          <div className="window-kicker">Credit control, simplified</div>
+          <h3>Know who owes. Get paid sooner.</h3>
+          <div className="mini-kpi-grid">
+            <div className="mini-kpi">
+              <strong>127+</strong>
+              <span>Active vendors</span>
+            </div>
+            <div className="mini-kpi">
+              <strong>₦47M+</strong>
+              <span>Credit tracked</span>
+            </div>
+            <div className="mini-kpi">
+              <strong>73%</strong>
+              <span>Repayment rate</span>
+            </div>
+          </div>
+          <div className="whatsapp-card">
+            <div className="whatsapp-icon">⌁</div>
+            <div>
+              <strong>WhatsApp bot · online</strong>
+              <span>ADD → guided credit capture → reminder</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="hero-note">
+        <img className="hero-avatar" src={profileImage} alt="Olamilekan Ogunyade" />
+        <div>
+          <strong>Built with care by Olamilekan</strong>
+          <span>Product engineer · Ibadan, Nigeria</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ─────────────────────────────────────────────
    TICKER
 ───────────────────────────────────────────── */
@@ -914,16 +1135,17 @@ function Hero() {
               Available for hire — Remote · Onsite · Hybrid
             </div>
             <div className="hero-eyebrow">
-              Full Stack · Web &amp; Mobile · Fintech SaaS
+              Full-stack product engineer · Web · Mobile · WhatsApp automation
             </div>
             <h1 className="hero-name">
-              OLAMILEKAN<span className="line2">Ogunyade.</span>
+              I build digital products
+              <span className="line2">people can trust.</span>
             </h1>
             <p className="hero-desc">
-              I ship production web and mobile systems across the JavaScript /
-              TypeScript ecosystem — most recently architecting a multi-tenant
-              fintech (BNPL) SaaS end-to-end with production-grade security,
-              CI/CD, Docker and cloud deployment.
+              From Vodium Ledger's WhatsApp-powered credit system to Tictify's
+              secure event ticketing platform, I turn complex business ideas
+              into dependable products that feel clear, useful and ready for
+              real customers.
             </p>
             <div className="hero-ctas">
               <a href="#projects" className="btn-primary">
@@ -949,17 +1171,17 @@ function Hero() {
                 Résumé ↗
               </a>
               <a
-                href="mailto:adeyanjuolamilekan080@gmail.com"
+                href="#contact"
                 className="btn-ghost"
               >
-                Get in touch →
+                Plan a WhatsApp bot →
               </a>
             </div>
             <div className="hero-stats">
               {[
                 ["15+", "Projects shipped"],
-                ["7+", "Live products"],
-                ["10+", "Client builds"],
+                ["2", "Flagship products live"],
+                ["10+", "Client builds delivered"],
               ].map(([n, l]) => (
                 <div key={l} className="stat">
                   <div className="stat-num">{n}</div>
@@ -968,12 +1190,59 @@ function Hero() {
               ))}
             </div>
           </div>
-          <div className="hero-right">
-            <Terminal />
-          </div>
+          <div className="hero-right"><HeroVisual /></div>
         </div>
       </div>
     </section>
+  );
+}
+
+function ProjectPreview({ featured }) {
+  if (featured.name === "Vodium Ledger") {
+    return (
+      <div className="case-preview">
+        <div className="case-preview-top"><span>Vodium / dashboard</span><span className="case-preview-status">● synced</span></div>
+        <div className="case-preview-title">Your whole credit book, live.</div>
+        <div className="case-preview-row"><span>Owed to you</span><strong>₦142,500</strong></div>
+        <div className="case-preview-row"><span>Recovered this month</span><strong>₦38,000</strong></div>
+        <div className="case-preview-row"><span>Recovery rate</span><strong className="case-preview-status">71%</strong></div>
+      </div>
+    );
+  }
+  if (featured.name === "Tictify" || featured.name === "Tictify WhatsApp Ticket Bot") {
+    return (
+      <div className="case-preview">
+        <div className="case-preview-top"><span>Tictify / WhatsApp</span><span className="case-preview-status">● online</span></div>
+        <div className="case-preview-title">Buy tickets without leaving WhatsApp.</div>
+        <div className="case-preview-row"><span>Find an event</span><strong>Type a name</strong></div>
+        <div className="case-preview-row"><span>Payment</span><strong>Card · link · transfer</strong></div>
+        <div className="case-preview-row"><span>Delivery</span><strong className="case-preview-status">QR in chat ✓</strong></div>
+      </div>
+    );
+  }
+  if (featured.name === "WhatsApp Bot Systems" || featured.name === "Custom WhatsApp bot systems") {
+    return (
+      <div className="case-preview">
+        <div className="case-preview-top"><span>Conversation / flow</span><span className="case-preview-status">● online</span></div>
+        <div className="case-preview-title">The interface your customers already know.</div>
+        <div className="case-preview-row"><span>Customer</span><strong>ADD</strong></div>
+        <div className="case-preview-row"><span>Bot response</span><strong>Guided</strong></div>
+        <div className="case-preview-row"><span>Next step</span><strong className="case-preview-status">Saved ✓</strong></div>
+      </div>
+    );
+  }
+  return (
+    <div className="arch-box">
+      <div style={{ color: "var(--accent2)", marginBottom: 10, fontSize: 10 }}>
+        [ APP_ARCHITECTURE ]
+      </div>
+      {featured.arch.map((line, i) => (
+        <div key={i}>
+          {i > 0 && <div style={{ color: "var(--accent)" }}>↓</div>}
+          {line}
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -1021,7 +1290,7 @@ function Projects() {
                 className={`tab-btn${activeTab === tab ? " active" : ""}`}
                 onClick={() => setActiveTab(tab)}
               >
-                {tab === "Mobile" ? "📱 " : tab === "Fullstack" ? "⚡ " : "🎨 "}
+                {tab === "Mobile" ? "📱 " : tab === "Fullstack" ? "⚡ " : tab === "Automation" ? "⌁ " : "🎨 "}
                 {tab}
               </button>
             ))}
@@ -1049,31 +1318,15 @@ function Projects() {
                 <a
                   href={featured.link}
                   className="project-link"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target={featured.link.startsWith("#") ? undefined : "_blank"}
+                  rel={featured.link.startsWith("#") ? undefined : "noopener noreferrer"}
                 >
                   {featured.linkLabel}
                 </a>
               </div>
               <div className="project-featured-visual">
                 <div className="live-badge">{featured.live}</div>
-                <div className="arch-box">
-                  <div
-                    style={{
-                      color: "var(--accent2)",
-                      marginBottom: 10,
-                      fontSize: 10,
-                    }}
-                  >
-                    [ APP_ARCHITECTURE ]
-                  </div>
-                  {featured.arch.map((line, i) => (
-                    <div key={i}>
-                      {i > 0 && <div style={{ color: "var(--accent)" }}>↓</div>}
-                      {line}
-                    </div>
-                  ))}
-                </div>
+                <ProjectPreview featured={featured} />
               </div>
             </div>
           </BorderBeam>
@@ -1098,13 +1351,64 @@ function Projects() {
                   <a
                     href={p.link}
                     className="project-link"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    target={p.link.startsWith("#") ? undefined : "_blank"}
+                    rel={p.link.startsWith("#") ? undefined : "noopener noreferrer"}
                   >
                     {p.linkLabel}
                   </a>
                 </div>
               </SpotlightCard>
+            </FadeUp>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Services() {
+  const services = [
+    {
+      number: "01 / PRODUCT BUILD",
+      icon: "✦",
+      title: "Websites & web apps",
+      text: "A sharp public-facing experience or a full product interface that makes your business easier to understand and easier to use.",
+      items: ["Marketing websites", "Customer portals", "Responsive, accessible UI"],
+    },
+    {
+      number: "02 / SYSTEMS",
+      icon: "↗",
+      title: "SaaS & dashboards",
+      text: "The behind-the-scenes systems that help teams see what is happening, make better decisions and keep work moving.",
+      items: ["Role-based dashboards", "Payments & business workflows", "Secure APIs and data"],
+    },
+    {
+      number: "03 / AUTOMATION",
+      icon: "⌁",
+      title: "WhatsApp bots & automation",
+      text: "Helpful conversations for customers and teams — from lead capture and bookings to credit tracking, reminders and support.",
+      items: ["WhatsApp Cloud API flows", "Webhook-powered actions", "Human handoff when needed"],
+    },
+  ];
+  return (
+    <section className="section bg2 bordered" id="services">
+      <div className="container">
+        <FadeUp className="section-header">
+          <div className="section-index">02 — What I help with</div>
+          <h2 className="section-title">From idea to product <em>people use</em></h2>
+        </FadeUp>
+        <div className="services-grid">
+          {services.map((service, index) => (
+            <FadeUp key={service.title} delay={index * 0.08}>
+              <article className="service-card">
+                <div className="service-number">{service.number}</div>
+                <div className="service-icon" aria-hidden="true">{service.icon}</div>
+                <h3>{service.title}</h3>
+                <p>{service.text}</p>
+                <ul>
+                  {service.items.map((item) => <li key={item}>{item}</li>)}
+                </ul>
+              </article>
             </FadeUp>
           ))}
         </div>
@@ -1121,7 +1425,7 @@ function Stack() {
     <section className="section bg2 bordered" id="stack">
       <div className="container">
         <FadeUp className="section-header">
-          <div className="section-index">02 — Technologies</div>
+          <div className="section-index">03 — Technologies</div>
           <h2 className="section-title">
             The <em>arsenal</em>
           </h2>
@@ -1161,7 +1465,7 @@ function Experience() {
     <section className="section" id="experience">
       <div className="container">
         <FadeUp className="section-header">
-          <div className="section-index">03 — Experience</div>
+          <div className="section-index">04 — Experience</div>
           <h2 className="section-title">
             Where I've <em>built</em>
           </h2>
@@ -1232,7 +1536,7 @@ function About() {
     <section className="section bg2 bordered" id="about">
       <div className="container">
         <FadeUp className="section-header">
-          <div className="section-index">04 — Philosophy</div>
+          <div className="section-index">05 — Philosophy</div>
           <h2 className="section-title">
             How I <em>think</em>
           </h2>
@@ -1310,7 +1614,7 @@ function Contact() {
     <section className="section" id="contact">
       <div className="container">
         <FadeUp className="section-header">
-          <div className="section-index">05 — Let's Talk</div>
+          <div className="section-index">06 — Let's Talk</div>
           <h2 className="section-title">
             Build something <em>great</em>
           </h2>
@@ -1343,6 +1647,14 @@ function Contact() {
                 className="social-link"
               >
                 <IconLinkedin /> LinkedIn
+              </a>
+              <a
+                href="https://wa.me/2347019575717?text=Hi%20Olamilekan%2C%20I%27d%20like%20to%20discuss%20a%20project."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-link"
+              >
+                <span aria-hidden="true">◌</span> WhatsApp
               </a>
               <a
                 href="/resume.html"
@@ -1470,6 +1782,7 @@ export default function Portfolio() {
       <Hero />
       <Ticker />
       <Projects />
+      <Services />
       <Stack />
       <Experience />
       <About />
