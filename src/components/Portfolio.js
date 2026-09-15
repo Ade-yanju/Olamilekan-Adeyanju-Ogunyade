@@ -134,17 +134,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-display);over
 .stat-num{font-size:clamp(26px,3vw,36px);font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:6px;}
 .stat-label{font-family:var(--font-mono);font-size:9px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;}
 
-/* terminal */
-.terminal-card{background:var(--bg2);border:1px solid var(--border2);border-radius:4px;overflow:hidden;box-shadow:var(--shadow);}
-.terminal-bar{background:var(--bg3);padding:12px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border);}
-.dot{width:12px;height:12px;border-radius:50%;}
-.dot-r{background:#ff5f57;}.dot-y{background:#febc2e;}.dot-g{background:#28c840;}
-.term-title{font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-left:auto;}
-.terminal-body{padding:22px;font-family:var(--font-mono);font-size:12px;line-height:1.8;}
-.t-prompt{color:var(--accent2);}.t-out{color:var(--muted);}.t-acc{color:var(--accent);}.t-acc2{color:var(--accent2);}.t-warn{color:var(--yellow);}
-.t-cursor{display:inline-block;width:8px;height:14px;background:var(--accent);vertical-align:middle;animation:blink 1s step-end infinite;}
-@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
-
 /* buttons */
 .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;font-family:var(--font-mono);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;padding:15px 28px;border:none;border-radius:var(--radius);cursor:pointer;transition:all .2s;}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(91,79,255,.3);}
@@ -447,6 +436,125 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);}
   .section{padding:72px 0;}.hero{padding-top:96px;min-height:auto;}.hero-right{display:block;}.hero-visual{min-height:395px;}.product-window{width:94%;}.hero-note{left:-2px;bottom:8px;}.hero-card-back{width:84%;height:86%;}
   .mini-kpi strong{font-size:14px;}.product-window h3{font-size:25px;}.services-grid{grid-template-columns:1fr;}.project-featured-content{padding:30px 22px;}.project-featured-visual{padding:22px;}.project-card{padding:28px 20px;}.case-preview{max-width:none;}.ticker-wrap{margin:48px 0;}.contact-right{padding:24px 20px;}.tab-list{overflow-x:auto;}.tab-btn{padding:10px 8px;font-size:9px;letter-spacing:.03em;min-width:0;}
 }
+
+/* ── CLEAN, HUMAN-FIRST UI ── */
+.port::before,.port::after{display:none;}
+.cursor,.cursor-ring{display:none!important;}
+body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5;}
+.container{max-width:1180px;}
+.topnav{background:rgba(255,255,255,.9);backdrop-filter:blur(16px);}
+[data-theme="dark"] .topnav{background:rgba(16,25,35,.92);}
+.nav-inner{height:70px;}
+.mobile-menu{inset:70px 0 0;}
+.nav-logo{font-family:inherit;font-weight:700;letter-spacing:-.04em;font-size:16px;}
+.nav-logo .acc{color:var(--accent2);}
+.side-nav{display:none;}
+.nav-links{gap:28px;}
+.nav-links a{font-family:inherit;font-size:13px;letter-spacing:0;text-transform:none;color:var(--subtle);}
+.nav-links a:hover{color:var(--accent);}
+.nav-status{font-family:inherit;font-size:12px;}
+.status-dot{width:7px;height:7px;}
+.theme-btn{font-family:inherit;font-size:12px;letter-spacing:0;padding:8px 13px;border-radius:10px;}
+.section{padding:104px 0;}
+.section-index{font-family:inherit;font-size:13px;letter-spacing:0;text-transform:none;color:var(--accent2);margin-bottom:14px;}
+.section-index::after{display:none;}
+.section-title{font-size:clamp(34px,4.4vw,58px);font-weight:700;letter-spacing:-.065em;line-height:1.04;}
+.section-title em{font-family:var(--font-serif);font-style:italic;font-weight:400;color:var(--accent);}
+.hero{min-height:88vh;padding-top:70px;}
+.hero-grid{grid-template-columns:minmax(0,1.05fr) minmax(370px,.85fr);gap:78px;}
+.availability{font-family:inherit;font-size:12px;letter-spacing:0;text-transform:none;color:var(--accent2);border:1px solid rgba(22,138,104,.18);padding:9px 14px;margin-bottom:25px;background:rgba(22,138,104,.06);}
+.hero-eyebrow{font-family:inherit;font-size:14px;letter-spacing:0;text-transform:none;color:var(--subtle);margin-bottom:18px;}
+.hero-eyebrow::before{width:28px;background:var(--accent2);}
+.hero-name{font-family:inherit;font-size:clamp(48px,6.7vw,86px);font-weight:700;line-height:.98;letter-spacing:-.075em;margin-bottom:25px;max-width:800px;}
+.line2{font-family:var(--font-serif);font-style:italic;font-size:clamp(50px,6.3vw,82px);font-weight:400;line-height:1.02;letter-spacing:-.045em;color:var(--accent);}
+.hero-desc{font-family:inherit;font-size:clamp(16px,1.35vw,18px);line-height:1.7;max-width:570px;color:var(--subtle);border:0;padding:0;margin-bottom:33px;}
+.hero-ctas{gap:11px;margin-bottom:38px;}
+.btn-primary,.btn-ghost{font-family:inherit;font-size:14px;font-weight:600;letter-spacing:0;text-transform:none;border-radius:10px;padding:14px 20px;}
+.btn-primary{box-shadow:0 8px 24px rgba(21,94,239,.16);}
+.btn-ghost{color:var(--text);background:var(--card-bg);}
+.btn-ghost:hover{background:var(--bg2);}
+.hero-stats{border-radius:14px;box-shadow:0 8px 24px rgba(13,27,42,.06);}
+.stat{padding:18px 16px;}
+.stat-num{font-size:26px;}
+.stat-label{font-family:inherit;font-size:11px;letter-spacing:0;text-transform:none;color:var(--muted);line-height:1.3;}
+.hero-visual{min-height:490px;}
+.hero-visual::before{width:330px;height:330px;background:rgba(22,138,104,.1);filter:blur(28px);top:68px;right:25px;}
+[data-theme="dark"] .hero-visual::before{background:rgba(93,224,176,.1);}
+.hero-card-back{right:2%;top:42px;width:79%;height:82%;border-radius:24px;transform:rotate(3deg);background:var(--bg2);}
+.product-window{width:min(100%,420px);border-radius:18px;box-shadow:0 24px 55px rgba(13,27,42,.14);transform:none;}
+.product-window-top{padding:14px 17px;font-family:inherit;font-size:11px;letter-spacing:0;text-transform:none;}
+.window-logo{border-radius:7px;}
+.window-live{font-family:inherit;font-size:11px;}
+.product-window-body{padding:24px 22px 22px;}
+.window-kicker{font-family:inherit;font-size:12px;letter-spacing:0;text-transform:none;margin-bottom:9px;}
+.product-window h3{font-family:inherit;font-size:29px;line-height:1.02;letter-spacing:-.06em;}
+.mini-kpi{border-radius:9px;}
+.mini-kpi strong{font-size:16px;}
+.mini-kpi span{font-family:inherit;font-size:10px;letter-spacing:0;text-transform:none;}
+.whatsapp-card{border-radius:10px;}
+.whatsapp-card strong{font-size:13px;}
+.whatsapp-card span{font-family:inherit;font-size:10px;}
+.hero-note{font-family:inherit;border-radius:12px;}
+.hero-note strong{font-size:12px;}
+.hero-note span{font-family:inherit;font-size:10px;}
+.ticker-wrap{margin:26px 0 0;background:transparent;border-color:var(--border);}
+.ticker-track{animation:none;width:100%;justify-content:center;flex-wrap:wrap;gap:10px 34px;}
+.ticker-item{font-family:inherit;font-size:13px;letter-spacing:0;text-transform:none;color:var(--subtle);}
+.ticker-item::before{font-size:8px;color:var(--accent2);}
+.metric-row{border-radius:14px;box-shadow:0 8px 24px rgba(13,27,42,.05);}
+.metric{padding:24px 20px;}
+.metric-val{font-size:32px;}
+.metric-key{font-family:inherit;font-size:11px;letter-spacing:0;text-transform:none;line-height:1.3;}
+.project-tabs-wrap{margin-bottom:30px;}
+.tab-list{border:0;border-radius:10px;padding:4px;background:var(--bg2);}
+.tab-btn{font-family:inherit;font-size:13px;letter-spacing:0;text-transform:none;border-radius:8px;padding:10px 16px;}
+.tab-btn.active{background:var(--card-bg);color:var(--text);box-shadow:0 2px 8px rgba(13,27,42,.08);}
+.project-featured-content{padding:42px;}
+.project-featured-visual{background:var(--bg2);padding:30px;min-height:300px;}
+.ace-card-wrap,.ace-card-inner,.border-beam-wrap,.border-beam-inner{border-radius:18px;}
+.border-beam::before{display:none;}
+.project-index{font-family:inherit;font-size:12px;letter-spacing:0;color:var(--accent2);margin-bottom:13px;}
+.project-name{font-family:inherit;font-size:clamp(23px,2.3vw,31px);font-weight:700;letter-spacing:-.055em;}
+.project-desc{font-family:inherit;font-size:14px;line-height:1.75;}
+.project-tags{gap:7px;}
+.tag{font-family:inherit;font-size:11px;letter-spacing:0;text-transform:none;padding:5px 10px;background:var(--bg2);}
+.project-link{font-family:inherit;font-size:13px;letter-spacing:0;text-transform:none;}
+.live-badge{font-family:inherit;font-size:10px;letter-spacing:0;text-transform:none;padding:5px 10px;}
+.case-preview{border-radius:15px;box-shadow:0 15px 30px rgba(13,27,42,.09);}
+.case-preview-top,.case-preview-row{font-family:inherit;font-size:11px;letter-spacing:0;text-transform:none;}
+.case-preview-title{font-family:inherit;font-size:23px;letter-spacing:-.06em;}
+.case-preview-row strong{font-family:inherit;font-size:13px;}
+.service-card{border-radius:16px;box-shadow:0 8px 24px rgba(13,27,42,.05);}
+.service-number{font-family:inherit;font-size:12px;letter-spacing:0;margin-bottom:25px;}
+.service-icon{border-radius:10px;}
+.service-card h3{font-family:inherit;font-size:23px;letter-spacing:-.055em;}
+.service-card p{font-family:inherit;font-size:14px;line-height:1.7;}
+.service-card li{font-family:inherit;font-size:12px;}
+.stack-grid{border-radius:16px;box-shadow:0 8px 24px rgba(13,27,42,.05);}
+.stack-layer{font-family:inherit;font-size:12px;letter-spacing:0;text-transform:none;}
+.stack-cell-title{font-family:inherit;font-size:19px;}
+.stack-item-row{font-family:inherit;font-size:12px;}
+.skill-pill{font-family:inherit;font-size:12px;letter-spacing:0;padding:7px 13px;}
+.timeline-date,.timeline-company{font-family:inherit;font-size:12px;letter-spacing:0;}
+.timeline-company{color:var(--accent2);}
+.timeline-role{font-family:inherit;letter-spacing:-.04em;}
+.timeline-body{font-family:inherit;font-size:14px;line-height:1.75;}
+.philosophy-text{font-family:inherit;font-size:clamp(19px,2vw,26px);line-height:1.5;}
+.philosophy-item-label{font-family:inherit;font-size:12px;letter-spacing:0;text-transform:none;}
+.philosophy-item-text{font-family:inherit;font-size:14px;}
+.contact-email{font-family:inherit;font-size:15px;}
+.social-link{font-family:inherit;font-size:13px;letter-spacing:0;text-transform:none;border-radius:10px;}
+.contact-right{border-radius:16px;box-shadow:0 8px 24px rgba(13,27,42,.05);}
+.form-label{font-family:inherit;font-size:12px;letter-spacing:0;text-transform:none;}
+.form-input,.form-textarea{font-family:inherit;font-size:14px;border-radius:9px;}
+.footer-copy,.footer-right{font-family:inherit;font-size:12px;}
+.footer-right a{font-family:inherit;}
+@media(max-width:1024px){
+  .hero-grid{gap:40px;}.hero-visual{min-height:430px;}
+}
+@media(max-width:640px){
+  .section{padding:76px 0;}.hero{padding-top:92px;}.hero-grid{gap:20px;}.hero-name{font-size:clamp(44px,12vw,61px);}.line2{font-size:clamp(46px,11.5vw,60px);}.hero-desc{font-size:16px;}.hero-visual{min-height:390px;}.product-window{width:94%;}.hero-note{left:0;bottom:5px;}.hero-card-back{width:82%;height:84%;}.project-featured-content{padding:30px 22px;}.project-featured-visual{padding:22px;}.metric{padding:19px 14px;}.metric-val{font-size:27px;}
+}
 `;
 
 if (!document.getElementById("port-styles")) {
@@ -462,8 +570,7 @@ if (!document.getElementById("port-styles")) {
 const NAV_LINKS = [
   { label: "Work", href: "#projects" },
   { label: "Services", href: "#services" },
-  { label: "Stack", href: "#stack" },
-  { label: "XP", href: "#experience" },
+  { label: "Experience", href: "#experience" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ];
@@ -477,32 +584,19 @@ const SECTIONS = [
   "contact",
 ];
 const TICKER_ITEMS = [
-  "Next.js 14",
-  "TypeScript",
-  "React Native",
-  "Node.js",
-  "NestJS",
-  "Laravel",
-  "PostgreSQL · Prisma",
-  "MongoDB",
-  "Redis",
-  "Docker",
-  "GitHub Actions CI/CD",
-  "Paystack",
-  "WhatsApp Cloud API",
-  "WhatsApp Bots & Automation",
-  "Tictify WhatsApp Ticket Bot",
-  "Credit Workflows",
-  "QR Ticketing",
-  "Tailwind CSS",
-  "PWA",
+  "Thoughtful product design",
+  "Reliable systems",
+  "Simple customer journeys",
+  "Built for real people",
+  "Web · mobile · WhatsApp",
+  "From idea to launch",
 ];
 
 /* ── PROJECT TABS ── */
 const PROJECTS_BY_TAB = {
   Fullstack: {
     featured: {
-      index: "[FS_01] — FLAGSHIP · FINTECH SAAS",
+      index: "Featured product · Credit platform",
       name: "Vodium Ledger",
       desc: "A credit infrastructure product for Nigerian vendors. Credit is recorded in seconds through WhatsApp, reminders go out automatically, and a clear dashboard shows who owes, what is overdue and what has been recovered — with isolated vendor records and NDPR-minded data handling.",
       tags: [
@@ -527,7 +621,7 @@ const PROJECTS_BY_TAB = {
     },
     cards: [
       {
-        id: "[FS_02] · SAAS · TICKETING",
+        id: "Live product · Event ticketing",
         name: "Tictify",
         desc: "Event ticketing for Nigeria with a WhatsApp buying flow — organisers create events, sell multiple ticket types, track sales and withdraw earnings while guests can discover events, pay securely and receive a unique QR ticket without leaving WhatsApp.",
         tags: [
@@ -543,7 +637,7 @@ const PROJECTS_BY_TAB = {
         linkLabel: "View live →",
       },
       {
-        id: "[FS_03] · COMMUNITY",
+        id: "University platform",
         name: "DU Alumni Platform",
         desc: "Alumni portal for Dominion University — profile management, discussion forum and admin dashboard on a real-time Firestore backend, with Cloudinary media, responsive UI and secure auth.",
         tags: ["React", "Firebase / Firestore", "Cloudinary", "Vercel"],
@@ -554,7 +648,7 @@ const PROJECTS_BY_TAB = {
   },
   Automation: {
     featured: {
-      index: "[WA_01] — LIVE PRODUCT · WHATSAPP TICKETING",
+      index: "Featured product · WhatsApp ticketing",
       name: "Tictify WhatsApp Ticket Bot",
       desc: "A ticket-buying experience inside WhatsApp. Guests can browse live events, type an event name to find it, pay by card, payment link or bank transfer, and receive their QR ticket right in the conversation.",
       tags: [
@@ -578,7 +672,7 @@ const PROJECTS_BY_TAB = {
     },
     cards: [
       {
-        id: "[WA_02] · LIVE PRODUCT · CREDIT",
+        id: "Live product · Credit workflows",
         name: "Vodium WhatsApp flow",
         desc: "A real product flow that lets vendors add credit in about 15 seconds, then keeps customers on track with respectful due-date reminders and PAID replies.",
         tags: ["WhatsApp", "Credit workflows", "Reminders", "Dashboard"],
@@ -586,7 +680,7 @@ const PROJECTS_BY_TAB = {
         linkLabel: "See Vodium live →",
       },
       {
-        id: "[WA_03] · FOR YOUR BUSINESS",
+        id: "For your business",
         name: "Custom WhatsApp bot systems",
         desc: "Lead capture, booking, support, order updates and internal alerts — designed around the way your customers already ask for help.",
         tags: ["Lead capture", "Support", "Bookings", "Notifications"],
@@ -597,7 +691,7 @@ const PROJECTS_BY_TAB = {
   },
   Mobile: {
     featured: {
-      index: "[RN_01] — FLAGSHIP · MOBILE · mHEALTH",
+      index: "Featured product · Mobile healthcare",
       name: "OMI Health",
       desc: "Bilingual (English / Yoruba) telemedicine app — real-time chat with text, audio and video, doctor–patient matching, appointment booking and text-to-speech for accessibility. Firebase Auth / Firestore / Storage with Cloudinary media and secure role-based login. Live on Android.",
       tags: [
@@ -621,7 +715,7 @@ const PROJECTS_BY_TAB = {
     },
     cards: [
       {
-        id: "[RN_02] · FINTECH",
+        id: "Mobile product · Fintech",
         name: "VODIUM",
         desc: "Cross-platform fintech companion app for the Vodium Ledger platform — secure transaction flows, encrypted local state, real-time balance sync, and biometric auth on Android & iOS.",
         tags: ["React Native", "Secure Storage", "REST API", "Biometrics"],
@@ -633,7 +727,7 @@ const PROJECTS_BY_TAB = {
   },
   Frontend: {
     featured: {
-      index: "[FE_01] — FRONTEND · REAL ESTATE",
+      index: "Featured website · Real estate",
       name: "Hillstar",
       desc: "Premium property listing platform — headless CMS, virtual tour embeds, lead capture, and SSG on Vercel Edge for sub-2s loads. Lighthouse 97 performance score.",
       tags: ["React", "Headless CMS", "SSG", "Vercel Edge", "Framer Motion"],
@@ -649,7 +743,7 @@ const PROJECTS_BY_TAB = {
     },
     cards: [
       {
-        id: "[FE_02] · FRONTEND · NOVEL ",
+        id: "Website · Publishing",
         name: "Next to the Mulatto",
         desc: "A novel about discovering who you are and what purpose God has for your life, Written by Gbemisola Akinsipe.",
         tags: ["Next.js", "Paystack", "TypeScript", "Resend", "Stripe"],
@@ -657,7 +751,7 @@ const PROJECTS_BY_TAB = {
         linkLabel: "View live →",
       },
       {
-        id: "[FE_03] · LANDING",
+        id: "Website · Event landing page",
         name: "Brownroof Tech Summit",
         desc: "Tech summit landing page with animated hero, event schedule, speaker bios, and registration form — optimized for performance and accessibility.",
         tags: ["Next.js", "Framer Motion", "Tailwind", "SEO"],
@@ -668,10 +762,17 @@ const PROJECTS_BY_TAB = {
   },
 };
 
+const PROJECT_TAB_LABELS = {
+  Fullstack: "Web products",
+  Automation: "WhatsApp bots",
+  Mobile: "Mobile apps",
+  Frontend: "Websites",
+};
+
 const STACK = [
   {
-    layer: "Layer 01 / Frontend",
-    title: "Web & Mobile UI",
+    layer: "The experience",
+    title: "Web & mobile interfaces",
     items: [
       "React & Next.js 14 (App Router)",
       "React Native (Expo)",
@@ -681,8 +782,8 @@ const STACK = [
     ],
   },
   {
-    layer: "Layer 02 / Backend",
-    title: "APIs & Services",
+    layer: "The engine",
+    title: "Business logic & APIs",
     items: [
       "Node.js (Express / NestJS)",
       "Laravel (PHP)",
@@ -692,8 +793,8 @@ const STACK = [
     ],
   },
   {
-    layer: "Layer 03 / Data",
-    title: "Databases",
+    layer: "The foundation",
+    title: "Data that stays organised",
     items: [
       "PostgreSQL",
       "MongoDB",
@@ -703,8 +804,8 @@ const STACK = [
     ],
   },
   {
-    layer: "Layer 04 / DevOps",
-    title: "Ship & Operate",
+    layer: "The follow-through",
+    title: "Launch & ongoing care",
     items: [
       "Docker",
       "GitHub Actions CI/CD",
@@ -739,26 +840,26 @@ const EXPERIENCE = [
   {
     date: "2023 — Present",
     role: "Full-Stack Product Engineer",
-    company: "// INDEPENDENT PRODUCTS",
+    company: "Independent products",
     body: "Designing, shipping and operating my own production systems — Vodium Ledger (multi-tenant fintech / BNPL SaaS), Tictify (event ticketing) and OMI-Health (bilingual mHealth) — owning architecture, security hardening, CI/CD and cloud deployment end-to-end.",
     current: true,
   },
   {
     date: "Sep 2025 — Feb 2026",
     role: "Full-Stack Developer (Contract)",
-    company: "// CYCONET",
+    company: "Cyconet",
     body: "Solely built a university portal end-to-end on behalf of the company, and served as the full-stack engineer across 10+ client projects — from database schema and APIs to deployed UI.",
   },
   {
     date: "May 2025 — Aug 2025",
     role: "Web Design Intern",
-    company: "// FLEXISAF LIMITED · REMOTE",
+    company: "FlexiSAF Limited · Remote",
     body: "Delivered weekly UI/UX design deliverables in Figma to product specifications, translating requirements into developer-ready interfaces.",
   },
   {
     date: "2023 & 2024",
     role: "Software Intern (SIWES)",
-    company: "// ROWARE LIMITED",
+    company: "Roware Limited",
     body: "Two placements contributing to frontend development and software support on the company's PQAPI project; built foundations in Git, internal tooling and web architecture in a team.",
   },
 ];
@@ -773,23 +874,23 @@ const LEVELING_UP = [
 ];
 const PHILOSOPHY = [
   {
-    label: "Security By Default",
+    label: "Careful by default",
     text: "Fintech taught me to assume hostile input. Fail-closed rate limiting, signed & expiring sessions, AES-256-GCM encrypted secrets, immutable audit logs — standard practice, not afterthoughts.",
   },
   {
-    label: "Performance First",
+    label: "Fast where it matters",
     text: "Every millisecond counts. I write code with Lighthouse scores, bundle sizes, and real-world network conditions in mind from the first commit.",
   },
   {
-    label: "Architecture Over Hacks",
+    label: "Built to last",
     text: "I resist the quick fix. Scalable, readable, maintainable architecture is the product — not just the code that ships it.",
   },
   {
-    label: "Design Literacy",
+    label: "Design and code together",
     text: 'I read Figma files fluently and bridge the design-engineering gap with precision. No "close enough" compromises.',
   },
   {
-    label: "Ownership Mentality",
+    label: "I take ownership",
     text: "I treat every project like my name is on it. Because it is.",
   },
 ];
@@ -924,8 +1025,7 @@ function Nav({ theme, toggleTheme }) {
       <nav className="topnav">
         <div className="nav-inner">
           <a href="#hero" className="nav-logo">
-            <span className="acc">❯</span> ade_engine
-            <span className="acc">.sh</span>
+            Olamilekan<span className="acc">.</span>
           </a>
           <ul className="nav-links">
             {NAV_LINKS.map((l) => (
@@ -937,7 +1037,7 @@ function Nav({ theme, toggleTheme }) {
           <div className="nav-right">
             <div className="nav-status">
               <span className="status-dot" />
-              Available for hire &nbsp;·&nbsp; {time}
+              Open to select projects &nbsp;·&nbsp; {time}
             </div>
             <button
               className="theme-btn"
@@ -1006,56 +1106,6 @@ function SideDots() {
   );
 }
 
-/* ─────────────────────────────────────────────
-   TERMINAL
-───────────────────────────────────────────── */
-function Terminal() {
-  return (
-    <div className="terminal-card">
-      <div className="terminal-bar">
-        <span className="dot dot-r" />
-        <span className="dot dot-y" />
-        <span className="dot dot-g" />
-        <span className="term-title">~/portfolio — zsh</span>
-      </div>
-      <div className="terminal-body">
-        <div>
-          <span className="t-prompt">ade@engine</span> ~ $ whoami
-        </div>
-        <div className="t-out">
-          <span className="t-acc2">→</span> Full-Stack Software Engineer
-        </div>
-        <br />
-        <div>
-          <span className="t-prompt">ade@engine</span> ~ $ cat stats.json
-        </div>
-        <div className="t-out">{"{"}</div>
-        <div className="t-out">
-          &nbsp;&nbsp;<span className="t-acc">"shipped"</span>: "15+",
-        </div>
-        <div className="t-out">
-          &nbsp;&nbsp;<span className="t-acc">"stack"</span>:
-          ["Next.js","RN","Node","Laravel"],
-        </div>
-        <div className="t-out">
-          &nbsp;&nbsp;<span className="t-acc">"domains"</span>:
-          ["Fintech","Ticketing","mHealth"],
-        </div>
-        <div className="t-out">
-          &nbsp;&nbsp;<span className="t-acc2">"status"</span>:{" "}
-          <span className="t-warn">"AVAILABLE"</span>
-        </div>
-        <div className="t-out">{"}"}</div>
-        <br />
-        <div>
-          <span className="t-prompt">ade@engine</span> ~ ${" "}
-          <span className="t-cursor" />
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function HeroVisual() {
   return (
     <div className="hero-visual" aria-label="Preview of a WhatsApp-powered product dashboard">
@@ -1107,7 +1157,7 @@ function HeroVisual() {
    TICKER
 ───────────────────────────────────────────── */
 function Ticker() {
-  const doubled = [...TICKER_ITEMS, ...TICKER_ITEMS];
+  const doubled = TICKER_ITEMS;
   return (
     <div className="ticker-wrap" aria-hidden="true">
       <div className="ticker-track">
@@ -1132,20 +1182,19 @@ function Hero() {
           <div>
             <div className="availability">
               <span className="status-dot" />
-              Available for hire — Remote · Onsite · Hybrid
+              Currently available for select projects
             </div>
             <div className="hero-eyebrow">
-              Full-stack product engineer · Web · Mobile · WhatsApp automation
+              Web products, mobile apps &amp; WhatsApp experiences
             </div>
             <h1 className="hero-name">
-              I build digital products
-              <span className="line2">people can trust.</span>
+              Digital products that feel
+              <span className="line2">clear, useful &amp; human.</span>
             </h1>
             <p className="hero-desc">
-              From Vodium Ledger's WhatsApp-powered credit system to Tictify's
-              secure event ticketing platform, I turn complex business ideas
-              into dependable products that feel clear, useful and ready for
-              real customers.
+              I’m Olamilekan, a product engineer who turns complex ideas into
+              simple experiences people enjoy using — from Tictify’s
+              WhatsApp ticket bot to Vodium Ledger’s credit platform.
             </p>
             <div className="hero-ctas">
               <a href="#projects" className="btn-primary">
@@ -1232,16 +1281,12 @@ function ProjectPreview({ featured }) {
     );
   }
   return (
-    <div className="arch-box">
-      <div style={{ color: "var(--accent2)", marginBottom: 10, fontSize: 10 }}>
-        [ APP_ARCHITECTURE ]
-      </div>
-      {featured.arch.map((line, i) => (
-        <div key={i}>
-          {i > 0 && <div style={{ color: "var(--accent)" }}>↓</div>}
-          {line}
-        </div>
-      ))}
+    <div className="case-preview">
+      <div className="case-preview-top"><span>Product snapshot</span><span className="case-preview-status">● ready</span></div>
+      <div className="case-preview-title">Made to be understood at a glance.</div>
+      <div className="case-preview-row"><span>Experience</span><strong>Clear</strong></div>
+      <div className="case-preview-row"><span>For teams</span><strong>Practical</strong></div>
+      <div className="case-preview-row"><span>Next step</span><strong className="case-preview-status">Ready to use ✓</strong></div>
     </div>
   );
 }
@@ -1258,19 +1303,19 @@ function Projects() {
     <section className="section" id="projects">
       <div className="container">
         <FadeUp className="section-header">
-          <div className="section-index">01 — Selected Work</div>
+          <div className="section-index">01 · A few things I’ve made</div>
           <h2 className="section-title">
-            Things I've <em>shipped</em>
+            Work that makes a <em>difference</em>
           </h2>
         </FadeUp>
 
         {/* Metrics */}
         <FadeUp delay={0.05} className="metric-row">
           {[
-            ["15+", "Projects shipped"],
-            ["7+", "Live in production"],
+            ["15+", "Projects brought to life"],
+            ["7+", "Products live"],
             ["10+", "Client builds delivered"],
-            ["3", "Platforms · Web / Android / iOS"],
+            ["3", "Web, mobile & WhatsApp"],
           ].map(([v, k]) => (
             <div key={k} className="metric">
               <div className="metric-val">{v}</div>
@@ -1290,8 +1335,7 @@ function Projects() {
                 className={`tab-btn${activeTab === tab ? " active" : ""}`}
                 onClick={() => setActiveTab(tab)}
               >
-                {tab === "Mobile" ? "📱 " : tab === "Fullstack" ? "⚡ " : tab === "Automation" ? "⌁ " : "🎨 "}
-                {tab}
+                {PROJECT_TAB_LABELS[tab]}
               </button>
             ))}
           </div>
@@ -1425,9 +1469,9 @@ function Stack() {
     <section className="section bg2 bordered" id="stack">
       <div className="container">
         <FadeUp className="section-header">
-          <div className="section-index">03 — Technologies</div>
+          <div className="section-index">03 · The way I work</div>
           <h2 className="section-title">
-            The <em>arsenal</em>
+            The tools behind the <em>work</em>
           </h2>
         </FadeUp>
         <FadeUp delay={0.1} className="stack-grid">
@@ -1465,9 +1509,9 @@ function Experience() {
     <section className="section" id="experience">
       <div className="container">
         <FadeUp className="section-header">
-          <div className="section-index">04 — Experience</div>
+          <div className="section-index">04 · A little background</div>
           <h2 className="section-title">
-            Where I've <em>built</em>
+            Experience you can <em>count on</em>
           </h2>
         </FadeUp>
         <div className="exp-grid">
@@ -1489,13 +1533,13 @@ function Experience() {
           <FadeUp delay={0.2}>
             <div style={{ marginBottom: 48 }}>
               <div className="section-index" style={{ marginBottom: 24 }}>
-                Education &amp; Certification
+                Education &amp; certification
               </div>
               <div className="timeline-role" style={{ marginBottom: 6 }}>
                 B.Sc. Software Engineering
               </div>
               <div className="timeline-company" style={{ marginBottom: 12 }}>
-                {"// DOMINION UNIVERSITY, IBADAN"}
+                DOMINION UNIVERSITY, IBADAN
               </div>
               <p className="timeline-body" style={{ marginBottom: 28 }}>
                 Software engineering, algorithms and systems design — and built
@@ -1507,11 +1551,11 @@ function Experience() {
               >
                 ALX AI Starter Certificate
               </div>
-              <div className="timeline-company">{"// ALX AFRICA · 2025"}</div>
+              <div className="timeline-company">ALX AFRICA · 2025</div>
             </div>
             <div>
               <div className="section-index" style={{ marginBottom: 24 }}>
-                Currently leveling up
+                Learning and growing
               </div>
               <div className="skills-flow" style={{ marginTop: 0 }}>
                 {LEVELING_UP.map((s) => (
@@ -1536,9 +1580,9 @@ function About() {
     <section className="section bg2 bordered" id="about">
       <div className="container">
         <FadeUp className="section-header">
-          <div className="section-index">05 — Philosophy</div>
+          <div className="section-index">05 · What matters to me</div>
           <h2 className="section-title">
-            How I <em>think</em>
+            How I make things <em>feel right</em>
           </h2>
         </FadeUp>
         <div className="philosophy-grid">
@@ -1614,7 +1658,7 @@ function Contact() {
     <section className="section" id="contact">
       <div className="container">
         <FadeUp className="section-header">
-          <div className="section-index">06 — Let's Talk</div>
+          <div className="section-index">06 · Let’s talk</div>
           <h2 className="section-title">
             Build something <em>great</em>
           </h2>
@@ -1737,9 +1781,9 @@ function Footer() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            /github
+            GitHub
           </a>
-          <a href="mailto:adeyanjuolamilekan080@gmail.com">/mail</a>
+          <a href="mailto:adeyanjuolamilekan080@gmail.com">Email</a>
         </div>
       </div>
     </footer>
@@ -1753,20 +1797,18 @@ export default function Portfolio() {
   const [theme, setTheme] = useState(() => {
     const saved =
       typeof localStorage !== "undefined"
-        ? localStorage.getItem("portfolio-theme")
+        ? localStorage.getItem("portfolio-theme-v2")
         : null;
     return (
       saved ||
-      (window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light")
+      "light"
     );
   });
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     if (typeof localStorage !== "undefined")
-      localStorage.setItem("portfolio-theme", theme);
+      localStorage.setItem("portfolio-theme-v2", theme);
   }, [theme]);
 
   const toggleTheme = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
