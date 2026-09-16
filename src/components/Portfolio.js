@@ -948,6 +948,71 @@ footer{background:#0d0f11;border-color:rgba(242,243,238,.16);}
 @media(max-width:640px){
   #hero{padding:112px 0 70px;}.hero-grid{gap:34px;}.hero-name{font-size:clamp(56px,15vw,80px);}.line2{font-size:clamp(60px,14vw,78px);}.hero-profile-card{width:calc(100% - 30px);height:390px;margin-right:0;}.hero-product-chip{left:0;bottom:0;width:205px;}.hero-visual-index{right:10px;}.ticker-track{justify-content:flex-start;gap:10px 24px;}.ticker-item{font-size:11px;}.project-featured-content{padding:30px 24px;}.project-featured-visual{min-height:285px;}.section{padding:92px 0;}
 }
+
+/* ── REFERENCE HERO / SPLIT SCREEN ── */
+.topnav{height:46px;}
+.nav-inner{height:46px;padding-left:28px;padding-right:28px;}
+.nav-logo{font-size:12px;}
+.nav-links{gap:25px;}
+.nav-links a{font-size:10px;}
+.nav-status{font-size:10px;}
+.theme-btn{font-size:10px;padding:5px 10px;}
+#hero{padding:46px 0 0;background:#d9d9d9;color:#0d0f11;min-height:100svh;}
+#hero .container{max-width:1320px;padding:0 3px;}
+#hero .hero-grid{grid-template-columns:42% 58%;gap:0;min-height:calc(100svh - 172px);align-items:stretch;}
+#hero .hero-intro{display:flex;flex-direction:column;justify-content:center;position:relative;padding:74px clamp(34px,7vw,110px) 74px clamp(32px,7vw,105px);background:#d9d9d9;color:#0d0f11;}
+#hero .hero-eyebrow{display:flex;align-items:center;gap:10px;font-size:11px;color:#303333;margin-bottom:42px;}
+#hero .hero-eyebrow::before{display:none;}
+#hero .hero-mark{display:grid;place-items:center;width:25px;height:25px;border:2px solid #0d0f11;border-radius:50%;font-family:Arial,"Helvetica Neue",sans-serif;font-size:8px;font-weight:800;letter-spacing:-.08em;}
+#hero .hero-name{display:flex;flex-direction:column;gap:0;font-family:Arial,"Helvetica Neue",sans-serif;font-size:clamp(46px,5.6vw,78px);font-weight:800;letter-spacing:-.08em;line-height:.9;color:#0d0f11;margin-bottom:9px;}
+#hero .hero-greeting{font-family:Arial,"Helvetica Neue",sans-serif;font-size:clamp(18px,1.7vw,24px);font-weight:700;letter-spacing:-.04em;line-height:1.1;margin-bottom:23px;}
+#hero .hero-line{display:block;color:#0d0f11;}
+#hero .line2{display:block;font-family:Arial,"Helvetica Neue",sans-serif;font-size:inherit;font-style:normal;color:#0d0f11;letter-spacing:inherit;line-height:inherit;}
+#hero .hero-role{font-family:Arial,"Helvetica Neue",sans-serif;font-size:11px;color:#666a69;margin-bottom:25px;}
+#hero .hero-desc{max-width:410px;font-family:Arial,"Helvetica Neue",sans-serif;font-size:13px;line-height:1.65;color:#454948;margin:0 0 28px;}
+#hero .hero-ctas{display:flex;gap:10px;margin:0 0 34px;}
+#hero .btn-primary,#hero .btn-ghost{font-size:10px;font-weight:800;padding:10px 17px;border-radius:999px;}
+#hero .btn-primary{background:#0d0f11;color:#f2f3ee;}
+#hero .btn-primary:hover{background:#2d3030;color:#fff;}
+#hero .btn-ghost{color:#0d0f11;border-color:rgba(13,15,17,.36);}
+#hero .btn-ghost:hover{background:#0d0f11;color:#f2f3ee;border-color:#0d0f11;}
+#hero .hero-socials{display:flex;gap:9px;}
+#hero .hero-socials a{display:grid;place-items:center;width:27px;height:27px;background:#c5c5c5;color:#0d0f11;text-decoration:none;font-family:Arial,"Helvetica Neue",sans-serif;font-size:10px;font-weight:800;transition:background .2s,color .2s;}
+#hero .hero-socials a:hover{background:#0d0f11;color:#f2f3ee;}
+#hero .hero-right{display:block;position:relative;min-height:100%;background:#0d0f11;overflow:hidden;}
+#hero .hero-visual{height:100%;min-height:100%;display:block;position:relative;padding:0;}
+#hero .hero-visual::before{display:none;}
+#hero .hero-local-nav{position:absolute;z-index:4;top:26px;right:34px;display:flex;align-items:center;gap:27px;}
+#hero .hero-local-nav a{font-family:Arial,"Helvetica Neue",sans-serif;font-size:9px;font-weight:700;color:#f2f3ee;text-decoration:none;}
+#hero .hero-local-nav a:hover{color:var(--yellow);}
+#hero .hero-local-nav .hero-local-cta{padding:8px 13px;border-radius:999px;background:#f2f3ee;color:#0d0f11;}
+#hero .hero-visual-index{display:none;}
+#hero .hero-profile-card{position:absolute;bottom:0;right:7%;width:68%;height:calc(100% - 72px);margin:0;background:transparent;border:0;overflow:hidden;}
+#hero .hero-profile-card::after{background:linear-gradient(180deg,transparent 60%,rgba(13,15,17,.62));}
+#hero .hero-profile-card img{object-position:center 18%;filter:grayscale(.82) contrast(1.06) brightness(1.04);}
+#hero .hero-profile-caption{bottom:24px;left:25px;}
+#hero .hero-profile-caption strong{font-family:Arial,"Helvetica Neue",sans-serif;font-size:11px;font-weight:700;letter-spacing:0;}
+#hero .hero-profile-caption span{font-family:Arial,"Helvetica Neue",sans-serif;font-size:9px;}
+#hero .hero-product-chip{display:none;}
+#hero .hero-about-strip{display:grid;grid-template-columns:160px 1fr auto;align-items:start;gap:28px;min-height:126px;padding:25px 36px 24px;background:#17191b;color:#f2f3ee;}
+#hero .hero-about-index{font-family:Arial,"Helvetica Neue",sans-serif;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--yellow);}
+#hero .hero-about-strip p{max-width:720px;margin:0;font-family:Arial,"Helvetica Neue",sans-serif;font-size:11px;line-height:1.65;color:rgba(242,243,238,.68);}
+#hero .hero-about-strip a{font-family:Arial,"Helvetica Neue",sans-serif;font-size:9px;font-weight:800;color:#f2f3ee;text-decoration:none;border-bottom:1px solid rgba(242,243,238,.55);padding-bottom:3px;white-space:nowrap;}
+#hero .hero-about-strip a:hover{color:var(--yellow);border-color:var(--yellow);}
+#hero .hero-stats{display:none;}
+.ticker-wrap{display:none;}
+.fade-up{opacity:1;transform:none;transition:none;}
+.ace-card-wrap::before,.border-beam,.border-beam::before{display:none!important;}
+.border-beam-inner{margin:0;}
+@media(max-width:760px){
+  .topnav{height:54px;}.nav-inner{height:54px;padding:0 20px;}.nav-links,.nav-status{display:none;}.nav-right{margin-left:auto;}.theme-btn{font-size:10px;}
+  #hero{padding-top:54px;}.container{padding-left:20px;padding-right:20px;}
+  #hero .container{padding:0;}.hero-grid{grid-template-columns:1fr!important;min-height:0!important;}
+  #hero .hero-intro{min-height:540px;padding:62px 25px 46px;}.hero-eyebrow{margin-bottom:32px!important;}
+  #hero .hero-name{font-size:clamp(47px,14vw,72px);}.hero-greeting{font-size:19px!important;}
+  #hero .hero-right{min-height:470px;height:470px;}.hero-local-nav{right:20px!important;gap:15px!important;}.hero-local-nav a{font-size:8px!important;}.hero-local-nav .hero-local-cta{padding:7px 10px!important;}
+  #hero .hero-profile-card{width:78%;height:calc(100% - 58px);right:3%;}.hero-about-strip{grid-template-columns:1fr!important;gap:13px!important;padding:24px 25px 27px!important;min-height:0!important;}.hero-about-strip p{font-size:12px!important;}.hero-about-strip a{justify-self:start;}
+}
 `;
 
 if (!document.getElementById("port-styles")) {
@@ -961,11 +1026,10 @@ if (!document.getElementById("port-styles")) {
    DATA
 ───────────────────────────────────────────── */
 const NAV_LINKS = [
-  { label: "Work", href: "#projects" },
-  { label: "Services", href: "#services" },
-  { label: "Experience", href: "#experience" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "About me", href: "#about" },
+  { label: "Skills", href: "#stack" },
+  { label: "Portfolio", href: "#projects" },
+  { label: "Contact me", href: "#contact" },
 ];
 const SECTIONS = [
   "hero",
@@ -1494,6 +1558,12 @@ function SideDots() {
 function HeroVisual() {
   return (
     <div className="hero-visual" aria-label="Portrait of Olamilekan Ogunyade, product engineer">
+      <div className="hero-local-nav">
+        <a href="#about">About me</a>
+        <a href="#stack">Skills</a>
+        <a href="#projects">Portfolio</a>
+        <a href="#contact" className="hero-local-cta">Contact me</a>
+      </div>
       <div className="hero-visual-index">01 / 06</div>
       <div className="hero-profile-card">
         <img src={profileImage} alt="Olamilekan Ogunyade" />
@@ -1503,9 +1573,9 @@ function HeroVisual() {
         </div>
       </div>
       <div className="hero-product-chip">
-        <span className="chip-label">Selected work</span>
-        <strong>Tictify · Vodium Ledger</strong>
-        <span>Web · mobile · WhatsApp</span>
+        <span className="chip-label">Currently building</span>
+        <strong>Web · mobile · WhatsApp</strong>
+        <span>Products for real people</span>
       </div>
     </div>
   );
@@ -1537,60 +1607,38 @@ function Hero() {
     <section className="hero" id="hero">
       <div className="container">
         <div className="hero-grid">
-          <div>
-            <div className="availability">
-              <span className="status-dot" />
-              Currently available for select projects
-            </div>
+          <div className="hero-intro">
             <div className="hero-eyebrow">
-              Web products, mobile apps &amp; WhatsApp experiences
+              <span className="hero-mark" aria-hidden="true">OG</span>
+              Full-stack product engineer
             </div>
             <h1 className="hero-name">
-              <span className="hero-line">Complex ideas.</span>
-              <span className="line2">Made simple.</span>
+              <span className="hero-greeting">Hi, I am</span>
+              <span className="hero-line">Olamilekan</span>
+              <span className="line2">Ogunyade.</span>
             </h1>
+            <div className="hero-role">Web · Mobile · WhatsApp automation</div>
             <p className="hero-desc">
-              I’m Olamilekan, a product engineer creating clear, useful
-              digital experiences for real people and ambitious businesses —
-              from Tictify’s WhatsApp ticket bot to Vodium Ledger’s credit
-              platform.
+              I build dependable digital products with clear interfaces,
+              thoughtful flows and the security people expect when something
+              matters.
             </p>
             <div className="hero-ctas">
-              <a href="#projects" className="btn-primary">
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <polyline points="5 12 12 5 19 12" />
-                  <polyline points="5 19 12 12 19 19" />
-                </svg>
-                View my work
-              </a>
-              <a
-                href="#contact"
-                className="btn-ghost"
-              >
-                Let’s work together →
-              </a>
+              <a href="#contact" className="btn-primary">Contact me</a>
+              <a href="#projects" className="btn-ghost">View portfolio</a>
             </div>
-            <div className="hero-stats">
-              {[
-                ["15+", "Projects shipped"],
-                ["2", "Flagship products live"],
-                ["10+", "Client builds delivered"],
-              ].map(([n, l]) => (
-                <div key={l} className="stat">
-                  <div className="stat-num">{n}</div>
-                  <div className="stat-label">{l}</div>
-                </div>
-              ))}
+            <div className="hero-socials">
+              <a href="mailto:adeyanjuolamilekan080@gmail.com">@</a>
+              <a href="https://github.com/Ade-yanju" target="_blank" rel="noopener noreferrer">gh</a>
+              <a href="https://www.linkedin.com/in/ogunyade-olamilekan-91807223a" target="_blank" rel="noopener noreferrer">in</a>
             </div>
           </div>
           <div className="hero-right"><HeroVisual /></div>
+        </div>
+        <div className="hero-about-strip">
+          <span className="hero-about-index">01 / About me</span>
+          <p>From event ticketing to fintech and WhatsApp automation, I make complex services easier to understand, use and trust.</p>
+          <a href="#about">Read more <span aria-hidden="true">↗</span></a>
         </div>
       </div>
     </section>
