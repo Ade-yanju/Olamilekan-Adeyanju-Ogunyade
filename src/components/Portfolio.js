@@ -1013,6 +1013,122 @@ footer{background:#0d0f11;border-color:rgba(242,243,238,.16);}
   #hero .hero-right{min-height:470px;height:470px;}.hero-local-nav{right:20px!important;gap:15px!important;}.hero-local-nav a{font-size:8px!important;}.hero-local-nav .hero-local-cta{padding:7px 10px!important;}
   #hero .hero-profile-card{width:78%;height:calc(100% - 58px);right:3%;}.hero-about-strip{grid-template-columns:1fr!important;gap:13px!important;padding:24px 25px 27px!important;min-height:0!important;}.hero-about-strip p{font-size:12px!important;}.hero-about-strip a{justify-self:start;}
 }
+
+/* ── PROJECTS / CURATED CASE-STUDY GALLERY ── */
+#projects{position:relative;isolation:isolate;overflow:hidden;padding:148px 0 156px;}
+#projects::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 86% 9%,rgba(197,255,88,.08),transparent 24%),radial-gradient(circle at 4% 82%,rgba(240,100,73,.07),transparent 26%);}
+#projects::after{content:'';position:absolute;inset:0;pointer-events:none;opacity:.42;background-image:linear-gradient(rgba(242,243,238,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(242,243,238,.035) 1px,transparent 1px);background-size:96px 96px;mask-image:linear-gradient(to bottom,black,transparent 72%);}
+#projects .container{z-index:1;}
+#projects .project-section-header{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(260px,.52fr);align-items:end;gap:72px;margin-bottom:62px;}
+#projects .project-section-header .section-index{margin-bottom:22px;}
+#projects .projects-lede{max-width:420px;margin:0 0 5px;border-left:2px solid rgba(197,255,88,.7);padding-left:20px;color:#aeb6b1;font-size:15px;line-height:1.75;}
+#projects .metric-row{position:relative;grid-template-columns:repeat(4,1fr);margin-bottom:54px;border:1px solid rgba(242,243,238,.14);border-radius:20px;overflow:hidden;background:rgba(242,243,238,.09);box-shadow:0 24px 60px rgba(0,0,0,.16);}
+#projects .metric{min-height:126px;display:flex;flex-direction:column;justify-content:center;padding:28px 25px;background:rgba(23,26,28,.78);}
+#projects .metric + .metric{border-left:1px solid rgba(242,243,238,.1);}
+#projects .metric-val{font-size:46px;line-height:.9;}
+#projects .metric-key{max-width:130px;margin-top:12px;line-height:1.35;}
+#projects .project-tabs-wrap{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:30px;margin-bottom:24px;}
+#projects .project-tabs-heading{display:flex;align-items:center;gap:12px;min-width:198px;}
+#projects .project-tabs-label,.projects-lede,.featured-build-label,.featured-footer-note{font-family:Arial,"Helvetica Neue",sans-serif;}
+#projects .project-tabs-label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8d9691;white-space:nowrap;}
+#projects .project-tabs-rule{width:28px;height:1px;background:rgba(242,243,238,.25);}
+#projects .project-tabs-count{font-family:Arial,"Helvetica Neue",sans-serif;font-size:11px;color:#c5ff58;white-space:nowrap;}
+#projects .tab-list{justify-self:end;display:flex;width:max-content;max-width:100%;border:1px solid rgba(242,243,238,.15);border-radius:13px;padding:4px;background:#171a1c;}
+#projects .tab-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:0;border-radius:9px;padding:11px 17px;white-space:nowrap;}
+#projects .tab-btn small{font-family:Arial,"Helvetica Neue",sans-serif;font-size:10px;font-weight:700;color:#77817c;}
+#projects .tab-btn.active small{color:#2e3431;}
+#projects .project-featured-shell{position:relative;margin-bottom:18px;border:1px solid rgba(242,243,238,.17);border-radius:28px;overflow:hidden;background:#171a1c;box-shadow:0 30px 80px rgba(0,0,0,.22);}
+#projects .project-featured-shell .border-beam-inner{background:transparent;border-radius:inherit;}
+#projects .project-featured{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(320px,.96fr);min-height:540px;overflow:hidden;border-radius:inherit;}
+#projects .project-featured-content{display:flex;flex-direction:column;padding:52px 52px 44px;background:#171a1c;border-right:1px solid rgba(242,243,238,.1);}
+#projects .featured-topline{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:54px;}
+#projects .featured-label{font-family:Arial,"Helvetica Neue",sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#f2f3ee;}
+#projects .featured-status{display:inline-flex;align-items:center;gap:8px;font-family:Arial,"Helvetica Neue",sans-serif;font-size:10px;color:#9ee3bc;white-space:nowrap;}
+#projects .featured-status i,#projects .project-card-live i,#projects .live-badge i{display:inline-block;width:6px;height:6px;border-radius:50%;background:#9ee3bc;box-shadow:0 0 0 4px rgba(158,227,188,.1);}
+#projects .project-featured-content .project-index{margin-bottom:17px;}
+#projects .project-featured-content .project-name{max-width:550px;font-size:clamp(42px,4.8vw,72px);line-height:.92;}
+#projects .project-featured-content .project-desc{max-width:600px;margin-bottom:25px;font-size:15px;line-height:1.75;}
+#projects .project-featured-content .project-tags{max-width:600px;margin-bottom:0;}
+#projects .featured-build{margin-top:auto;padding-top:26px;border-top:1px solid rgba(242,243,238,.12);}
+#projects .featured-build-label{display:block;margin-bottom:12px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#858e89;}
+#projects .featured-build ul{display:grid;grid-template-columns:repeat(3,1fr);gap:8px 18px;list-style:none;}
+#projects .featured-build li{font-family:Arial,"Helvetica Neue",sans-serif;font-size:11px;line-height:1.35;color:#d0d5d1;}
+#projects .featured-build li::before{content:'↗';margin-right:7px;color:#c5ff58;}
+#projects .featured-footer{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:27px;}
+#projects .featured-footer-note{font-size:10px;color:#737d78;white-space:nowrap;}
+#projects .project-featured-content .project-link{display:inline-flex;align-items:center;gap:11px;padding-bottom:5px;border-bottom:1px solid rgba(197,255,88,.45);}
+#projects .project-featured-content .project-link:hover{gap:16px;border-color:#c5ff58;}
+#projects .project-featured-visual{position:relative;isolation:isolate;display:flex;align-items:center;justify-content:center;min-height:540px;padding:74px 48px 48px;overflow:hidden;background:#202426;}
+#projects .project-featured-visual::before{content:'';position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 50% 44%,rgba(197,255,88,.12),transparent 35%),linear-gradient(135deg,transparent 0 46%,rgba(242,243,238,.04) 46% 46.2%,transparent 46.2% 100%);}
+#projects .project-featured-visual::after{content:'LIVE PRODUCT';position:absolute;right:24px;bottom:23px;font-family:Arial,"Helvetica Neue",sans-serif;font-size:9px;font-weight:700;letter-spacing:.16em;color:rgba(242,243,238,.34);}
+#projects .project-featured-visual .live-badge{top:24px;right:24px;display:inline-flex;align-items:center;gap:8px;z-index:2;border:0;padding:0;color:#9ee3bc;}
+#projects .project-featured-visual .case-preview{position:relative;z-index:1;width:min(100%,430px);max-width:430px;padding:27px;background:#f2f3ee;border:0;border-radius:18px;box-shadow:0 26px 70px rgba(0,0,0,.34);transform:rotate(2deg);transition:transform .45s ease,box-shadow .45s ease;}
+#projects .project-featured-shell:hover .case-preview{transform:rotate(0) translateY(-7px);box-shadow:0 34px 84px rgba(0,0,0,.42);}
+#projects .projects-grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:18px;}
+#projects .projects-grid-2.project-grid-count-3{grid-template-columns:repeat(3,minmax(0,1fr));}
+#projects .projects-grid-2 > .fade-up{height:100%;}
+#projects .projects-grid-2 .ace-card-wrap,#projects .projects-grid-2 .ace-card-inner,#projects .projects-grid-2 .project-card{height:100%;}
+#projects .projects-grid-2 .ace-card-wrap{padding:0;border-radius:20px;}
+#projects .projects-grid-2 .ace-card-inner{border:1px solid rgba(242,243,238,.13);border-radius:20px;background:#171a1c;overflow:hidden;transition:border-color .3s,transform .3s,box-shadow .3s;}
+#projects .projects-grid-2 .ace-card-wrap:hover .ace-card-inner{border-color:rgba(197,255,88,.58);box-shadow:0 18px 48px rgba(0,0,0,.2);transform:translateY(-5px);}
+#projects .project-card{display:flex;flex-direction:column;padding:30px 30px 27px;background:#171a1c;}
+#projects .project-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:25px;}
+#projects .project-card-top .project-index{margin-bottom:0;}
+#projects .project-card-arrow{display:grid;place-items:center;width:30px;height:30px;border:1px solid rgba(242,243,238,.18);border-radius:50%;font-size:15px;color:#c5ff58;transition:background .25s,color .25s,transform .25s;}
+#projects .project-card:hover .project-card-arrow{background:#c5ff58;color:#0d0f11;transform:rotate(45deg);}
+#projects .project-card .project-name{font-size:clamp(26px,2.8vw,38px);line-height:.98;margin-bottom:15px;}
+#projects .project-card .project-desc{min-height:94px;margin-bottom:22px;line-height:1.7;}
+#projects .project-card .project-tags{margin-bottom:29px;}
+#projects .project-card .tag{background:#202426;}
+#projects .project-card-footer{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:auto;padding-top:18px;border-top:1px solid rgba(242,243,238,.11);}
+#projects .project-card-live{display:inline-flex;align-items:center;gap:8px;font-family:Arial,"Helvetica Neue",sans-serif;font-size:10px;color:#858e89;white-space:nowrap;}
+#projects .project-card-live.is-available i{background:#c5ff58;box-shadow:0 0 0 4px rgba(197,255,88,.1);}
+#projects .project-card-footer .project-link{display:inline-flex;align-items:center;gap:9px;white-space:nowrap;}
+
+@media(max-width:1024px){
+  #projects{padding:112px 0 120px;}
+  #projects .project-section-header{grid-template-columns:1fr;gap:26px;margin-bottom:48px;}
+  #projects .projects-lede{max-width:580px;}
+  #projects .project-featured{grid-template-columns:1fr;}
+  #projects .project-featured-content{border-right:0;border-bottom:1px solid rgba(242,243,238,.1);}
+  #projects .project-featured-visual{min-height:390px;}
+  #projects .projects-grid-2.project-grid-count-3{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+@media(max-width:640px){
+  #projects{padding:88px 0 96px;}
+  #projects .project-section-header{gap:24px;margin-bottom:38px;}
+  #projects .projects-lede{font-size:14px;line-height:1.7;}
+  #projects .metric-row{grid-template-columns:repeat(2,1fr);margin-bottom:38px;border-radius:16px;}
+  #projects .metric{min-height:104px;padding:20px 17px;}
+  #projects .metric + .metric{border-left:0;}
+  #projects .metric:nth-child(odd){border-right:1px solid rgba(242,243,238,.1);}
+  #projects .metric:nth-child(-n+2){border-bottom:1px solid rgba(242,243,238,.1);}
+  #projects .metric-val{font-size:37px;}
+  #projects .project-tabs-wrap{display:block;margin-bottom:20px;}
+  #projects .project-tabs-heading{margin-bottom:14px;}
+  #projects .tab-list{width:100%;overflow:visible;}
+  #projects .tab-btn{flex:1;min-width:0;padding:11px 6px;font-size:10px;gap:5px;}
+  #projects .tab-btn small{font-size:9px;}
+  #projects .project-featured-shell{border-radius:20px;}
+  #projects .project-featured-content{padding:30px 22px 27px;}
+  #projects .featured-topline{align-items:flex-start;flex-direction:column;gap:10px;margin-bottom:40px;}
+  #projects .project-featured-content .project-name{font-size:clamp(38px,12vw,56px);}
+  #projects .project-featured-content .project-desc{font-size:14px;}
+  #projects .featured-build ul{grid-template-columns:1fr;gap:8px;}
+  #projects .featured-footer{align-items:flex-start;flex-direction:column;gap:14px;}
+  #projects .featured-footer-note{font-size:9px;}
+  #projects .project-featured-visual{min-height:320px;padding:68px 20px 38px;}
+  #projects .project-featured-visual .live-badge{top:22px;right:20px;}
+  #projects .project-featured-visual .case-preview{padding:22px;transform:rotate(1deg);}
+  #projects .projects-grid-2,#projects .projects-grid-2.project-grid-count-3{grid-template-columns:1fr;gap:14px;margin-top:14px;}
+  #projects .project-card{padding:25px 21px 22px;}
+  #projects .project-card .project-name{font-size:32px;}
+  #projects .project-card .project-desc{min-height:0;}
+  #projects .project-card-footer{align-items:flex-start;flex-direction:column;gap:13px;}
+}
+@media(prefers-reduced-motion:reduce){
+  #projects .project-featured-visual .case-preview,#projects .projects-grid-2 .ace-card-inner,#projects .project-card-arrow{transition:none;}
+}
 `;
 
 if (!document.getElementById("port-styles")) {
@@ -1213,6 +1329,14 @@ const PROJECTS_BY_TAB = {
         desc: "Tech summit landing page with animated hero, event schedule, speaker bios, and registration form — optimized for performance and accessibility.",
         tags: ["Next.js", "Framer Motion", "Tailwind", "SEO"],
         link: "https://brownrooftechsummit.vercel.app/",
+        linkLabel: "View live →",
+      },
+      {
+        id: "Website · Football academy",
+        name: "Moyours Football Club Academy",
+        desc: "A youth football academy website that brings programs, squads, coaches, fixtures, results, news and enrollment into one clear experience for players and families in Abuja.",
+        tags: ["Next.js", "Responsive Design", "SEO", "Content Design"],
+        link: "https://www.moyoursacademy.com/",
         linkLabel: "View live →",
       },
     ],
@@ -1699,13 +1823,20 @@ function Projects() {
   const { featured, cards } = PROJECTS_BY_TAB[activeTab];
 
   return (
-    <section className="section" id="projects">
-      <div className="container">
-        <FadeUp className="section-header">
-          <div className="section-index">01 · A few things I’ve made</div>
-          <h2 className="section-title">
-            Work that makes a <em>difference</em>
-          </h2>
+      <section className="section" id="projects">
+        <div className="container">
+        <FadeUp className="section-header project-section-header">
+          <div>
+            <div className="section-index">01 · Selected work</div>
+            <h2 className="section-title">
+              Work that makes a <em>difference</em>
+            </h2>
+          </div>
+          <p className="projects-lede">
+            A selection of digital products, platforms and customer journeys
+            built with care — from the first interaction to the moment they
+            become part of someone’s everyday life.
+          </p>
         </FadeUp>
 
         {/* Metrics */}
@@ -1725,29 +1856,47 @@ function Projects() {
 
         {/* ── Tabs ── */}
         <FadeUp delay={0.1} className="project-tabs-wrap">
-          <div className="tab-list" role="tablist">
+          <div className="project-tabs-heading">
+            <span className="project-tabs-label">Browse by discipline</span>
+            <span className="project-tabs-rule" aria-hidden="true" />
+            <span className="project-tabs-count">
+              {cards.length + 1} projects
+            </span>
+          </div>
+          <div className="tab-list" role="tablist" aria-label="Project disciplines">
             {tabs.map((tab) => (
               <button
                 key={tab}
+                type="button"
                 role="tab"
                 aria-selected={activeTab === tab}
+                aria-controls="project-panel"
+                id={`project-tab-${tab.toLowerCase()}`}
                 className={`tab-btn${activeTab === tab ? " active" : ""}`}
                 onClick={() => setActiveTab(tab)}
               >
-                {PROJECT_TAB_LABELS[tab]}
+                <span>{PROJECT_TAB_LABELS[tab]}</span>
+                <small>{PROJECTS_BY_TAB[tab].cards.length + 1}</small>
               </button>
             ))}
           </div>
         </FadeUp>
 
-        {/* ── Featured (border beam) ── */}
-        <FadeUp delay={0.15}>
-          <BorderBeam
-            className="project-featured"
-            style={{ marginBottom: "16px" }}
-          >
-            <div className="project-featured" style={{ border: "none" }}>
+        <div
+          id="project-panel"
+          role="tabpanel"
+          tabIndex="0"
+          aria-labelledby={`project-tab-${activeTab.toLowerCase()}`}
+        >
+          {/* ── Featured (border beam) ── */}
+          <FadeUp delay={0.15}>
+            <BorderBeam className="project-featured-shell">
+              <div className="project-featured">
               <div className="project-featured-content">
+                <div className="featured-topline">
+                  <span className="featured-label">Featured case study</span>
+                  <span className="featured-status"><i /> {featured.live}</span>
+                </div>
                 <div className="project-index">{featured.index}</div>
                 <h3 className="project-name">{featured.name}</h3>
                 <p className="project-desc">{featured.desc}</p>
@@ -1758,51 +1907,73 @@ function Projects() {
                     </span>
                   ))}
                 </div>
-                <a
-                  href={featured.link}
-                  className="project-link"
-                  target={featured.link.startsWith("#") ? undefined : "_blank"}
-                  rel={featured.link.startsWith("#") ? undefined : "noopener noreferrer"}
-                >
-                  {featured.linkLabel}
-                </a>
+                <div className="featured-build">
+                  <span className="featured-build-label">Built around</span>
+                  <ul>
+                    {featured.arch.slice(0, 3).map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="featured-footer">
+                  <a
+                    href={featured.link}
+                    className="project-link"
+                    target={featured.link.startsWith("#") ? undefined : "_blank"}
+                    rel={featured.link.startsWith("#") ? undefined : "noopener noreferrer"}
+                  >
+                    <span>{featured.linkLabel.replace(" →", "")}</span>
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                  <span className="featured-footer-note">Designed · built · shipped</span>
+                </div>
               </div>
               <div className="project-featured-visual">
-                <div className="live-badge">{featured.live}</div>
+                <div className="live-badge"><i /> Live preview</div>
                 <ProjectPreview featured={featured} />
               </div>
-            </div>
-          </BorderBeam>
-        </FadeUp>
+              </div>
+            </BorderBeam>
+          </FadeUp>
 
-        {/* ── Project cards (spotlight hover) ── */}
-        <div className="projects-grid-2">
-          {cards.map((p, i) => (
-            <FadeUp key={p.name} delay={i * 0.08}>
-              <SpotlightCard>
-                <div className="project-card" style={{ border: "none" }}>
-                  <div className="project-index">{p.id}</div>
-                  <h3 className="project-name">{p.name}</h3>
-                  <p className="project-desc">{p.desc}</p>
-                  <div className="project-tags">
-                    {p.tags.map((t) => (
-                      <span key={t} className="tag">
-                        {t}
+          {/* ── Project cards (spotlight hover) ── */}
+          <div className={`projects-grid-2 project-grid-count-${cards.length}`}>
+            {cards.map((p, i) => (
+              <FadeUp key={p.name} delay={i * 0.08}>
+                <SpotlightCard>
+                  <article className="project-card">
+                    <div className="project-card-top">
+                      <div className="project-index">{p.id}</div>
+                      <span className="project-card-arrow" aria-hidden="true">↗</span>
+                    </div>
+                    <h3 className="project-name">{p.name}</h3>
+                    <p className="project-desc">{p.desc}</p>
+                    <div className="project-tags">
+                      {p.tags.map((t) => (
+                        <span key={t} className="tag">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="project-card-footer">
+                      <span className={`project-card-live${p.link.startsWith("#") ? " is-available" : ""}`}>
+                        <i /> {p.link.startsWith("#") ? "Available to build" : "Live project"}
                       </span>
-                    ))}
-                  </div>
-                  <a
-                    href={p.link}
-                    className="project-link"
-                    target={p.link.startsWith("#") ? undefined : "_blank"}
-                    rel={p.link.startsWith("#") ? undefined : "noopener noreferrer"}
-                  >
-                    {p.linkLabel}
-                  </a>
-                </div>
-              </SpotlightCard>
-            </FadeUp>
-          ))}
+                      <a
+                        href={p.link}
+                        className="project-link"
+                        target={p.link.startsWith("#") ? undefined : "_blank"}
+                        rel={p.link.startsWith("#") ? undefined : "noopener noreferrer"}
+                      >
+                        <span>{p.linkLabel.replace(" →", "")}</span>
+                        <span aria-hidden="true">↗</span>
+                      </a>
+                    </div>
+                  </article>
+                </SpotlightCard>
+              </FadeUp>
+            ))}
+          </div>
         </div>
       </div>
     </section>
